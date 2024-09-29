@@ -101,6 +101,41 @@ margin-right: 5px;
     --ripple-color: transparent; /* Remove ripple effect */
   }
 
-  ion-menu{
-    ---background:white;
+  ion-header {
+    --background: #ffffff; /* Set background of the header to white */
   }
+  
+  ion-toolbar {
+    --background: #ffffff; /* Set background of the toolbar to white */
+  }
+  
+  ion-menu-button {
+    --color: #F8C71E;
+  }
+ion-item {
+    --background: #ffffff; /* Set the background to white */
+    color: #000;
+  }
+  /* Ensure the menu has a flexbox layout */
+/* Ensure the menu has a flexbox layout */
+.menu-content {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Arrange children vertically */
+  height: 100%; /* Full height of the menu */
+  justify-content: space-between; /* Space items between each other */
+}
+
+/* Style for the logout button to be red and positioned at the bottom */
+.logout-button {
+  color: red; /* Red text color */
+}
+
+/* Make the icon inside the logout button red as well */
+.logout-button ion-icon {
+  color: red; /* Red icon color */
+}
+
+/* Use margin-top to push the logout button to the bottom */
+.bottom-list {
+  margin-top: auto; /* Automatically occupy the remaining space */
+}

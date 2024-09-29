@@ -122,17 +122,18 @@
   </ion-card>
 </ion-content> -->
 
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content class="ion-padding">
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
+  
+    <ion-back-button text="" defaultHref="/login"></ion-back-button>
+    <img src="assets/LOGO.png" height="300" width="300">
 
     <!-- Username Input -->
-    <ion-item fill="solid" class="ion-margin-bottom">
+    <ion-card dir="rtl">
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="register()" >
+    <ion-item fill="solid" class="ion-margin-bottom" >
       <ion-label position="floating">اسم المستخدم</ion-label>
       <ion-input formControlName="username" type="text" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
@@ -188,7 +189,7 @@
     <!-- Relationship Dropdown -->
     <ion-item fill="solid" class="ion-margin-bottom">
       <ion-label position="floating">صلة القرابة</ion-label>
-      <ion-select formControlName="relationship" required>
+      <ion-select   dir="ltr" formControlName="relationship" required>
         <ion-select-option value="father">أب</ion-select-option>
         <ion-select-option value="mother">أم</ion-select-option>
         <ion-select-option value="sibling">أخ/أخت</ion-select-option>
@@ -200,13 +201,16 @@
     </ion-item>
 
     <!-- Submit Button -->
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">
-      Register
+    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid" (click)="addAccount()">
+      تسجيل
     </ion-button>
 
     <!-- Navigate to Login -->
     <ion-button expand="full" type="button" (click)="goToLogin()">
-      Go to Login
+     العودة لتسجيل الدخول
     </ion-button>
   </form>
+
+</ion-card-content>
+</ion-card>
 </ion-content>

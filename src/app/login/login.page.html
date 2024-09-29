@@ -60,37 +60,47 @@
 </ion-content>
 -->
 
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Login</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding"  [fullscreen]="true"  dir="rtl">
+  <img src="assets/LOGO.png" height="300" width="300" />
+
+  <ion-card>
+    <ion-card-content>
   <form [formGroup]="credentials" (ngSubmit)="login()">
     
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email" required></ion-input>
+      <ion-label position="stacked">الايميل</ion-label>
+      <ion-input type="email" formControlName="email" placeholder="Name@example.com" required></ion-input>
       <ion-note color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-        Email is invalid!
+     <small>ادخل الايميل بالصيغة الصحيحة</small>
       </ion-note>
     </ion-item>
 
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password" required></ion-input>
+      <ion-label position="stacked">كلمة المرور</ion-label>
+      <ion-input type="password" formControlName="password" required  placeholder="********"></ion-input>
       <ion-note color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-        Password must be at least 8 characters long.
+        <small>كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل</small>
       </ion-note>
     </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="!credentials.valid">
-      Login
+    <ion-button expand="block" type="submit" [disabled]="!credentials.valid">
+      تسجيل الدخول
     </ion-button>
 
-    <ion-button expand="full" type="button" (click)="goToSignUp()">
-      Create Account
+    <ion-button expand="block" type="button" (click)="goToSignUp()">
+      تسجيل حساب جديد
     </ion-button>
+    <!-- Forgot Password Button -->
+      <ion-button class="forgetPassword" fill="clear" type="submit">
+        هل نسيت كلمة المرور؟
+      </ion-button>
   </form>
+</ion-card-content>
+</ion-card>
 </ion-content>

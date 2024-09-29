@@ -65,10 +65,13 @@ ion-item {
     font-weight: bold; /* Bold font */
     font-size:100% ;
 }
-.names{
+.names, .datename{
     color: #000000; /* Font color */
     font-weight: bold; /* Bold font */
     font-size:100% ;
+}
+.datename{
+margin-right: 5%;
 }
 ion-datetime {
     --background: rgb(255, 255, 255);
