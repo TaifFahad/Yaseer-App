@@ -129,10 +129,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" >
 
     <!-- Username Input -->
-    <ion-item fill="solid" class="ion-margin-bottom">
+    <ion-item fill="solid" class="ion-margin-bottom" >
       <ion-label position="floating">اسم المستخدم</ion-label>
       <ion-input formControlName="username" type="text" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
@@ -200,7 +200,7 @@
     </ion-item>
 
     <!-- Submit Button -->
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">
+    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid" (click)="addAccount()">
       Register
     </ion-button>
 
