@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddstudentPageRoutingModule } from './addstudent-routing.module';
 
 import { AddstudentPage } from './addstudent.page';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -14,8 +15,11 @@ import { AddstudentPage } from './addstudent.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AddstudentPageRoutingModule
+    AddstudentPageRoutingModule,
+    MapComponent,
+    
+
   ],
-  declarations: [AddstudentPage]
+  declarations: [AddstudentPage],
 })
 export class AddstudentPageModule {}

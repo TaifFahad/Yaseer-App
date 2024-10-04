@@ -55,10 +55,18 @@
       </ion-item>
 
       <!-- Address Input -->
-      <ion-item>
-        <ion-label class="names" position="stacked">العنوان <span class="required-star">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="address" placeholder="أدخل العنوان" required></ion-input>
-      </ion-item>
+      <ion-label class="datename" position="stacked">العنوان <span class="required-star">*</span></ion-label>
+   
+      <div class="map-container">
+        
+        <div #map id="map" style="width: 100%; height: 100%;"> 
+          <app-map></app-map>
+        </div>
+      </div>
+       
+    
+     
+    
 
       <!-- Gender Selection (Radio Buttons) -->
       <ion-item dir="rtl">
