@@ -52,13 +52,12 @@ ion-content {
   }
   /* Style the login button */
   ion-button {
-    --background: #F8C71E; /* Adjusted color */
-    --border-radius: 25%; 
-    margin-top: 16px; /* Adjust margin for spacing */
-    width: 100%;
-    max-width: 330px; /* Match the card width */
-    font-weight: bolder;
-    margin-right: 5%;
+      --background: #F8C71E; /* Button color */
+      --border-radius: 30px; /* Button shape */
+      margin-top: 16px; /* Spacing */
+      width: 100%; /* Full width */
+      max-width: 330px; /* Match card width */
+      font-weight: bold; /* Button font */
   }
   
   .forgetPassword{

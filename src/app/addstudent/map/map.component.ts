@@ -1,6 +1,7 @@
 import { animation } from '@angular/animations';
 import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { MapAdvancedMarker } from '@angular/google-maps';
+import{Geolocation} from '@ionic-native/geolocation/ngx'
 
 declare var google: any;
 
@@ -11,93 +12,95 @@ declare var google: any;
   styleUrls: ['./map.component.scss'],
 
 })
-export class MapComponent implements AfterViewInit  {
+
+export class MapComponent implements AfterViewInit {
   @ViewChild('map', { static: true }) mapElementRef!: ElementRef;
-
-  // center = { lat: 28.0649944693035188, lng: 77.23961776224988 }; // Fixed 'lang' to 'lng'
-  // center = { lat: 21.2854, lng: 39.2376 }; // Coordinates for Jeddah, Saudi Arabia
-  center = { lat: 21.5774, lng: 39.1790 }; // Coordinates for Jeddah 
-
-  
+  lat!: number;
+  lng!: number;
   googleMaps: any;
   map: any;
   marker: any;
   mapListener: any;
   markerListener: any;
   IntersectionObserver: any;
-  private renderer=inject(Renderer2);
+  private renderer = inject(Renderer2);
   
-  constructor() {}
-
-
+  constructor(private geo: Geolocation) {
+    // Initialize default coordinates
+    this.lat = 0; 
+    this.lng = 0; 
+  }
 
   ngAfterViewInit() {
-    this.loadMap();
-    this.IntersectionObserver = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-        for (const entry of entries) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('drop');
-                this.IntersectionObserver.unobserve(entry.target);
-            }
-        }
+    this.whereami(); // Get current position
+  }
+
+  whereami() {
+    this.geo.getCurrentPosition({
+      enableHighAccuracy: true,  // Request high accuracy
+      timeout: 10000,
+    })
+    .then(res => {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+      this.loadMap(); // Load the map after getting the position
+    })
+    .catch(err => {
+      console.log(err);
     });
-}
-
-
-
+  }
+  
   async loadMap() {
     if (!google || !google.maps) {
       console.error('Google Maps API not loaded!');
       return;
-   }
-   const {Map} = await google.maps.importLibrary("maps");
-   const mapEl=this.mapElementRef.nativeElement;
-   const location=new google.maps.LatLng(this.center.lat,this.center.lng);
+    }
+    const { Map } = await google.maps.importLibrary("maps");
+    const mapEl = this.mapElementRef.nativeElement;
+    const location = new google.maps.LatLng(this.lat, this.lng);
  
+    this.map = new Map(mapEl, {
+      center: location,
+      zoom: 14,
+      mapId: "7455c16ab5d13ba5",
+      draggable: true,              // Ensure the map is draggable
+      gestureHandling: 'auto',      // Allow for gestures to move the map
+    });
+    
  
-   this.map=new Map(mapEl, {
-    center: location,
-    zoom:14,
-    mapId:"7455c16ab5d13ba5"
+    this.renderer.addClass(mapEl, "visible");
+    this.addMarker(location);
+  }
 
-  });
-  this.renderer.addClass(mapEl,"visible");
-  this.addMarker(location);
+  async addMarker(location: any) {
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+    const markerPin = new PinElement({
+      background: "#76ba1b",
+      scale: 2,
+      borderColor: "#137333",
+      glyphColor: "#137333",
+    });
+    this.marker = new AdvancedMarkerElement({
+      map: this.map,
+      position: location,
+      gmpDraggable: true,
+    });
+
+    // listeners
+    this.markerListener = this.marker.addListener("dragend", (event: any) => {
+      const position = this.marker.position(); // Use getPosition() to get the marker's position
+      console.log(position.lat()); // Log the latitude
+      this.marker.position = position;
+      this.marker.map = this.map;
+      this.map.panTo(position); // Pan to the new position
+    });
+
+    this.mapListener = this.map.addListener("click", (event: any) => {
+      const latLng = event.latLng; // Use event.latLng for the click event
+      console.log(latLng.lat()); // Log the latitude
+      this.marker.position = latLng;
+      this.marker.map = this.map;
+      this.map.panTo(latLng); // Pan to the clicked location
+    });
+  }
 }
-   async addMarker(location: any) {
-   const {AdvancedMarkerElement, PinElement} =await google.maps.importLibrary("marker");
-   const markerPin=new PinElement({
-    background:"#76ba1b",
-    scale:2,
-    borderColor:"#137333",
-    glyphColor:"#137333",
-   });
-   this.marker= new AdvancedMarkerElement({
-  map:this.map,
-  position:location,
-  gmpDraggable:true,
-  // animation: google.maps.Animation.DROP,
-  //contact: markerPin.element
-});
-
-//listeners
-this.markerListener = this.marker.addListener("dragend", (event: any) => {
-  const position = this.marker.position(); // Use getPosition() to get the marker's position
-  console.log(position.lat()); // Log the latitude
-
-  // Update the marker's position
-  this.marker.position = position;
-  this.marker.map = this.map;
-  this.map.panTo(position); // Pan to the new position
-});
-
-this.mapListener = this.map.addListener("click", (event: any) => {
-  const latLng = event.latLng; // Use event.latLng for the click event
-  console.log(latLng.lat()); // Log the latitude
-
-  // Set marker's position to clicked location
-  this.marker.position = latLng;
-  this.marker.map = this.map;
-  this.map.panTo(latLng); // Pan to the clicked location
-});
-   }}

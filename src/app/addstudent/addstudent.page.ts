@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @Component({
   selector: 'app-addstudent',
@@ -7,6 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./addstudent.page.scss'],
 })
 export class AddstudentPage {
+  lat!: number;
+  lng!: number;
+  
+  constructor(private geo: Geolocation, private router: Router) {}
+  
+  whereami() {
+    this.geo.getCurrentPosition({
+      timeout: 10000,
+    })
+    .then(res => { // Change this line
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
+  }
+  
   studentname: string = '';
   idNumber: string = '';
   birthDate: string = '';
@@ -22,7 +42,7 @@ export class AddstudentPage {
   selectedImage: File | null = null;
   imagePreview: string | null = null;
 
-  constructor(private router: Router) {}
+
 
   // Validation methods
   validateStudentname() {
@@ -99,3 +119,5 @@ export class AddstudentPage {
     }
   }
 }
+
+

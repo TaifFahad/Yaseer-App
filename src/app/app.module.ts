@@ -11,6 +11,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+ import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,9 @@ import { environment } from '../environments/environment';
   provideFirebaseApp(() => initializeApp(environment.firebase)),
   provideAuth(() => getAuth()),
   provideFirestore(() => getFirestore()), 
-  provideStorage(() => getStorage())],
+  provideStorage(() => getStorage()),
+  Geolocation
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -59,20 +59,12 @@ ion-content {
   
   /* Style the submit button */
   ion-button {
-    --background: #F8C71E; /* Adjusted color */
-    --border-radius: 30px; /* Reduce border radius for better fit */
-    margin-top: 16px; /* Adjust margin for spacing */
-    width: 100%;
-    max-width: 330px; /* Match the card width */
-    font-weight: bolder;
-  }
-  
-  /* Style the forgot password button */
-  .forgetPassword {
-    --background: #ffffff; 
-    font-size: smaller;
-    color: #9E9E9E;
-    text-decoration: underline;
+    --background: #F8C71E;
+    --border-radius: 30px ; /* Ensure this takes precedence */
     margin-top: 16px;
-  }
+    width: 100%;
+    max-width: 330px;
+    font-weight: bolder;
+}
+
   
