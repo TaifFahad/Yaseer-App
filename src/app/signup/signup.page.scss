@@ -1,0 +1,68 @@
+/* Style the entire ion-content to center the card and logo */
+ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Optional: change background color */
+    height: 100%;
+    padding: 16px;
+    margin: auto;
+    --background: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  /* Back button styling */
+  ion-back-button {
+    margin-right: 10%;
+    margin-top: 5%;
+    color: #F8C71E;
+  }
+  
+  /* Adjust image styling */
+  img {
+    align-items: center;
+    margin-top: 20%; /* Adjust to better fit the screen */
+    margin-left: 20%;
+    width: 60%; /* Adjusted for screen width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  /* Style the ion-card */
+  ion-card {
+    width: 100%;
+    max-width: 330px; /* Adjusted to better fit iPhone screen */
+    padding: 16px;
+    padding-right: 5%; /* Reduce padding to make space */
+    --background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+  }
+  
+  /* Style the ion-items (input fields) */
+  ion-item {
+    margin-bottom: 22px; /* Slightly reduce margin */
+    padding: auto;
+    --background: #ffffff;
+    color: #000000;
+    font-weight: bolder;
+  }
+  
+  /* Style the login button */
+  ion-button {
+    --background: #F8C71E; /* Button background color */
+    --border-radius: 30px; /* Reduce border radius for better fit */
+    margin-top: 16px; /* Adjust margin for spacing */
+    width: 100%;
+    max-width: 330px; /* Match the card width */
+    font-weight: bolder;
+  
+    /* Change text color to white when pressed (active state) */
+    --color-activa5ted: #ffffff; /* Text color when button is pressed */
+  }
+  
+  ion-back-button{
+    margin-top: 7%;
+    margin-right:80% ;
+  }

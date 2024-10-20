@@ -1,0 +1,97 @@
+<!-- Menu on the left -->
+<ion-menu side="start" content-id="main-content" class="custom-menu">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" dir="rtl">
+    <!-- List of menu items -->
+    <ion-list>
+      
+      <!-- Settings -->
+      <ion-item button routerLink="/settings">
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+        <ion-label>الإعدادات</ion-label>
+      </ion-item>
+
+      <!-- Log Out -->
+      <ion-item button button class="logout-button">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label> تسجيل الخروج</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Main content -->
+<div class="ion-page" id="main-content">
+  <!-- Header with Menu button -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Page content -->
+  <ion-content [fullscreen]="true" dir="rtl" class="white-background">
+    <ion-row class="coustom">
+      <ion-col class="col1" size="7">
+        <ion-row><ion-text class="t1">مرحبًا</ion-text></ion-row>
+        <ion-row><ion-text class="t3">نتمنى لك يوم سعيد</ion-text></ion-row>
+      </ion-col>
+
+      <ion-col class="col2" size="5">
+        <img src="assets/DriverPhoto.png" alt="My Image" class="rounded-image">
+      </ion-col>
+    </ion-row>
+
+     <!-- Optimazepath card -->
+    <ion-button color="white" class="custom-button">
+      <div class="custom-content">
+        <img src="assets/image 13.jpg" alt="Card Image">
+        <ion-text id="te">نظام تحديد المواقع</ion-text>
+      </div>
+    </ion-button>
+
+<!-- Attendance card -->
+    <ion-button color="white" class="custom-button">
+      <div class="custom-content">
+        <img src="assets/image 14.jpg" alt="Card Image">
+        <ion-text id="te">الحضور</ion-text>
+      </div>
+    </ion-button>
+<!-- Emergency card -->
+<ion-button color="white" class="custom-button" (click)="goToEmergency()">
+  <div class="custom-content">
+    <img src="assets/emrgency.png" alt="Card Image">
+    <ion-text id="te">الطوارئ</ion-text>
+  </div>
+</ion-button>
+
+   
+    
+  </ion-content>
+
+  <!-- Tabs bar with only icons -->
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" class="custom-tab-bar">
+      <!-- Home Tab -->
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-tab-button>
+
+      <!-- Messages Tab with Envelope Icon -->
+      <ion-tab-button tab="messages">
+        <ion-icon name="mail-outline"></ion-icon>
+      </ion-tab-button>
+
+      <!-- Account Tab -->
+      <ion-tab-button tab="account">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>

@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true" >
+  <ion-back-button text="" defaultHref="/login"></ion-back-button>
+  <img src="assets/LOGO.png" height="300" width="300">
+
+  <ion-card dir="rtl">
+    <ion-card-content>
+      <!-- City Dropdown -->
+      <ion-item>
+        <ion-label position="stacked">المدينة</ion-label>
+        <ion-select [(ngModel)]="selectedCity" (ionChange)="onCityChange($event)">
+          <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- School Dropdown - appears after a city is selected -->
+      <ion-item *ngIf="selectedCity">
+        <ion-label position="stacked">اسم المدرسة</ion-label>
+        <ion-select [(ngModel)]="selectedSchool">
+          <ion-select-option *ngFor="let school of filteredSchools" [value]="school">{{ school }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Continue Button -->
+      <ion-button expand="block" type="submit" (click)="goToNewaccount()" [disabled]="!selectedSchool" >متابعة</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- الصورة واسم ولي الأمر -->
+  <div class="profile-section">
+    <ion-avatar class="custom-avatar">
+      <img src="assets/Read.JPG" alt="صورة ولي الأمر">
+    </ion-avatar>
+    <p class="parent-name">ولي امر رائد الشهري</p>
+  </div>
+
+  <!-- الرسائل المرسلة -->
+  <div class="messages-section">
+    <div *ngFor="let message of messages" class="message">
+      <p>{{ message.text }}</p>
+      <small>{{ message.time }}</small>
+    </div>
+  </div>
+</ion-content>
+
+<!-- صندوق إدخال الرسالة -->
+<ion-footer class="ion-no-border message-footer">
+  <ion-toolbar>
+    <div class="message-box">
+      <ion-buttons slot="start">
+        <ion-button class="inside-icon" (click)="triggerFileInput()">
+          <ion-icon name="attach-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-input placeholder="...اكتب رسالة" [(ngModel)]="newMessage" class="message-input" (ionInput)="checkInput()"></ion-input>
+      <ion-buttons slot="end">
+        <ion-button class="inside-icon" [disabled]="!canSendMessage" (click)="sendMessage()">
+          <ion-icon name="send-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+    <!-- عنصر اختيار الملفات مخفي -->
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
+  </ion-toolbar>
+</ion-footer>
+
+<!-- شريط القوائم السفلي (menu bar) -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notifications">
+      <ion-icon name="notifications-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="messages">
+      <ion-icon name="mail-outline" class="active-message-icon"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

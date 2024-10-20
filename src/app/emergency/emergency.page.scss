@@ -1,0 +1,112 @@
+ion-header {
+    --background: #ffffff; /* Set background of the header to white */
+  }
+  
+  ion-toolbar {
+    --background: #ffffff; /* Set background of the toolbar to white */
+  }
+  
+  ion-menu-button {
+    --color: #000;
+  }
+ion-item {
+    --background: #ffffff; /* Set the background to white */
+    color: #000;
+  }
+  /* Ensure the menu has a flexbox layout */
+/* Ensure the menu has a flexbox layout */
+.menu-content {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Arrange children vertically */
+  height: 100%; /* Full height of the menu */
+  justify-content: space-between; /* Space items between each other */
+}
+
+/* Style for the logout button to be red and positioned at the bottom */
+.logout-button {
+  color: red; /* Red text color */
+}
+
+/* Make the icon inside the logout button red as well */
+.logout-button ion-icon {
+  color: red; /* Red icon color */
+}
+
+ion-button {
+    --background: #F8C71E; /* Adjusted color */
+    --border-radius: 25%; 
+    // margin-top: 16px; /* Adjust margin for spacing */
+    width: 100%;
+    max-width: 330px; /* Match the card width */
+    font-weight: bolder;
+    margin-right: 5%;
+  }
+  
+  ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Optional: change background color */
+    height: 100%; /* Ensure this is set correctly */
+    padding: 16px;
+    --background: #ffffff; /* Set default background */
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+
+  .t1{
+    
+    font-size: 25px;
+    font-weight: bold;
+    color:#000000;
+    text-align: right;
+
+  }
+
+  .white-background {
+    --background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30%; /* Adjust based on vertical positioning */
+  }
+
+  .background-image {
+    opacity: 0.3;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .overlay-text {
+    text-align: center;
+    font-size: 20px;
+    color: grey;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+
+  .button-container {
+    padding: 10px;
+    margin-bottom: 20px; /* Ensure some space from the bottom */
+  }
+
+  ion-button {
+    margin-top: 10px;
+  }
+
+ 
+
+
+
+  

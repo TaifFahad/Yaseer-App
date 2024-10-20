@@ -1,0 +1,78 @@
+/* Style the entire ion-content to center the card and logo */
+ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Optional: change background color */
+    height: 100%;
+    padding: 16px;
+    margin: auto;
+    --background: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative; /* Add this to allow absolute positioning of the back button */
+  }
+  
+  /* Position the back button above the image */
+  ion-back-button {
+    position: absolute; /* Positioning the back button at the top */
+    top: 20px; /* Adjust as needed to control the vertical position */
+    left: 20px; /* Adjust as needed for horizontal positioning */
+    color: #F8C71E;
+    z-index: 10; /* Ensures it stays above other elements */
+  }
+  
+  /* Adjust image styling */
+  img {
+    align-items: center;
+    margin-top: 10%; /* Adjust to better fit the screen */
+    width: 60%; /* Adjusted for a smaller image size */
+    height:auto; /* Maintain aspect ratio */
+    margin-left: 20%;
+  }
+  
+  /* Style the ion-card */
+  ion-card {
+    width: 100%;
+    max-width: 330px; /* Adjusted to better fit iPhone screen */
+    padding: 16px;
+    padding-right: 5%; /* Reduce padding to make space */
+    --background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+  }
+  
+  /* Style the ion-items (input fields) */
+  ion-item {
+    margin-bottom: 22px; /* Slightly reduce margin */
+    padding: auto;
+    --background: #ffffff;
+    color: #000000;
+    font-weight: bolder;
+  }
+  
+  /* Style the placeholder text */
+  ion-input {
+    color: rgb(171, 170, 170);
+  }
+  
+  /* Style the submit button */
+  ion-button {
+    --background: #F8C71E; /* Adjusted color */
+    --border-radius: 30px; /* Reduce border radius for better fit */
+    margin-top: 16px; /* Adjust margin for spacing */
+    width: 100%;
+    max-width: 330px; /* Match the card width */
+    font-weight: bolder;
+  }
+  
+  /* Style the forgot password button */
+  .forgetPassword {
+    --background: #ffffff; 
+    font-size: smaller;
+    color: #9E9E9E;
+    text-decoration: underline;
+    margin-top: 16px;
+  }
+  

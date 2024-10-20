@@ -1,0 +1,106 @@
+<!--
+<ion-content [fullscreen]="true" dir="rtl">
+  <img src="assets/LOGO.png" height="300" width="300" />
+
+  <ion-card>
+    <ion-card-content>
+      <!-- Phone Number Input --
+      <ion-item>
+        <ion-label position="stacked">رقم الهاتف<span class="required-star">*</span></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="phoneNumber"
+          #phone="ngModel"
+          placeholder="0500000000"
+          required
+          (ionBlur)="validatePhone()"
+        ></ion-input>
+        <ion-note *ngIf="phoneError" color="danger">
+          <small>رقم الهاتف يجب أن يتكون من 10 أرقام</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Password Input --
+      <ion-item>
+        <ion-label position="stacked">كلمة المرور<span class="required-star">*</span></ion-label>
+        <ion-input
+          [type]="passwordFieldType"
+          [(ngModel)]="password"
+          #passwordField="ngModel"
+          placeholder="********"
+          required
+          (ionBlur)="validatePassword()"
+        ></ion-input>
+        <ion-icon
+          slot="end"
+          [name]="passwordFieldType === 'password' ? 'eye-off' : 'eye'"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
+        <ion-note *ngIf="passwordError" color="danger">
+          <small>كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Submit Button --
+      <ion-button expand="block" (click)="onSubmit()" [disabled]="phoneError || passwordError">
+        تسجيل الدخول
+      </ion-button>
+
+      <!-- Sign-Up Button --
+      <ion-button expand="block" (click)="goToSignUp()">
+        تسجيل حساب جديد
+      </ion-button>
+
+      <!-- Forgot Password Button --
+      <ion-button class="forgetPassword" fill="clear" type="submit">
+        هل نسيت كلمة المرور؟
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+-->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding"  [fullscreen]="true"  dir="rtl">
+  <img src="assets/LOGO.png" height="300" width="300" />
+
+  <ion-card>
+    <ion-card-content>
+  <form [formGroup]="credentials" (ngSubmit)="login()">
+    
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="stacked">الايميل</ion-label>
+      <ion-input type="email" formControlName="email" placeholder="Name@example.com" required></ion-input>
+      <ion-note color="danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+     <small>ادخل الايميل بالصيغة الصحيحة</small>
+      </ion-note>
+    </ion-item>
+
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="stacked">كلمة المرور</ion-label>
+      <ion-input type="password" formControlName="password" required  placeholder="********"></ion-input>
+      <ion-note color="danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+        <small>كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل</small>
+      </ion-note>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!credentials.valid">
+      تسجيل الدخول
+    </ion-button>
+
+    <ion-button expand="block" type="button" (click)="goToSignUp()">
+      تسجيل حساب جديد
+    </ion-button>
+    <!-- Forgot Password Button -->
+      <ion-button class="forgetPassword" fill="clear" type="submit">
+        هل نسيت كلمة المرور؟
+      </ion-button>
+  </form>
+</ion-card-content>
+</ion-card>
+</ion-content>

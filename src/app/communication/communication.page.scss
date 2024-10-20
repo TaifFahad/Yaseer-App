@@ -1,0 +1,98 @@
+/* تعيين خلفية بيضاء لجميع العناصر */
+ion-content {
+    --background: white;
+  }
+  
+  /* تصحيح وضع الصورة الرمزية والاسم في المنتصف */
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .custom-avatar {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .parent-name {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+  }
+  
+  /* تصميم الرسائل */
+  .messages-section {
+    padding: 15px;
+  }
+  
+  .message {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .message p {
+    margin: 0;
+    font-size: 14px;
+    color: black;
+  }
+  
+  .message small {
+    color: black;
+    font-size: 10px;
+    text-align: right;
+  }
+  
+  /* صندوق إدخال الرسالة */
+  .message-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 5px 10px;
+    background-color: white;
+    margin: 10px;
+  }
+  
+  .message-input {
+    --background: white;
+    --color: black;
+    --placeholder-color: #666;
+    flex-grow: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
+  }
+  
+  .inside-icon {
+    color: black;
+    font-size: 20px;
+    padding: 0 5px;
+  }
+  
+  ion-footer {
+    --background: white;
+  }
+  
+  ion-tab-bar {
+    --background: white; /* تأكد من أن خلفية شريط القائمة بيضاء */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* استبدال الخط الأسود بخط رمادي شفاف */
+    box-shadow: none; /* إزالة أي ظل قد يكون مضافاً */
+  }
+  .active-message-icon {
+    color: black;
+  }
+  /* تعيين خلفية بيضاء لصندوق الرسالة */
+  .message-footer ion-toolbar {
+    --background: white !important;  /* تأكيد أن الخلفية بيضاء */
+  }

@@ -1,0 +1,203 @@
+<!-- <ion-content [fullscreen]="true" >
+  
+  <ion-back-button text="" defaultHref="/login"></ion-back-button>
+  <img src="assets/LOGO.png" height="300" width="300">
+<!----
+  <ion-card dir="rtl">
+    <ion-card-content>
+
+      <!-- Username Input --
+      <ion-item>
+        <ion-label position="stacked">اسم المستخدم<span class="required-star">*</span></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          #usernameField="ngModel"
+          placeholder="أدخل اسم المستخدم"
+          required
+          (ionBlur)="validateUsername()"
+        ></ion-input>
+        <ion-note *ngIf="usernameError" color="danger">
+          <small>اسم المستخدم يجب أن يحتوي على أحرف فقط</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- ID Number Input --
+      <ion-item>
+        <ion-label position="stacked">رقم الهوية<span class="required-star">*</span></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="idNumber"
+          name="idNumber"
+          #idNumberField="ngModel"
+          placeholder="أدخل رقم الهوية"
+          required
+          (ionBlur)="validateIdNumber()"
+        ></ion-input>
+        <ion-note *ngIf="idNumberError" color="danger">
+          <small>رقم الهوية يجب أن يتكون من 10 أرقام على الأقل ويكون رقمي فقط</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Phone Number Input --
+      <ion-item>
+        <ion-label position="stacked">رقم الهاتف<span class="required-star">*</span></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="phoneNumber"
+          name="phoneNumber"
+          #phone="ngModel"
+          placeholder="0500000000"
+          required
+          (ionBlur)="validatePhone()"
+        ></ion-input>
+        <ion-note *ngIf="phoneError" color="danger">
+          <small>رقم الهاتف يجب أن يتكون من 10 أرقام</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Password Input with Show/Hide Toggle --
+      <ion-item>
+        <ion-label position="stacked">كلمة المرور<span class="required-star">*</span></ion-label>
+        <ion-input
+          [type]="passwordFieldType"
+          [(ngModel)]="password"
+          name="password"
+          #passwordField="ngModel"
+          placeholder="********"
+          required
+          (ionBlur)="validatePassword()"
+        ></ion-input>
+        <ion-icon 
+          slot="end" 
+          [name]="passwordFieldType === 'password' ? 'eye-off' : 'eye'" 
+          (click)="togglePasswordVisibility()">
+        </ion-icon>
+        <ion-note *ngIf="passwordError" color="danger">
+          <small>كلمة المرور يجب أن تحتوي على 8 أحرف وأرقام على الأقل</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Confirm Password Input with Show/Hide Toggle --
+      <ion-item>
+        <ion-label position="stacked">تأكيد كلمة المرور<span class="required-star">*</span></ion-label>
+        <ion-input
+          [type]="confirmPasswordFieldType"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          #confirmPasswordField="ngModel"
+          placeholder="********"
+          required
+          (ionBlur)="validateConfirmPassword()"
+        ></ion-input>
+        <ion-icon 
+          slot="end" 
+          [name]="confirmPasswordFieldType === 'password' ? 'eye-off' : 'eye'" 
+          (click)="toggleConfirmPasswordVisibility()">
+        </ion-icon>
+        <ion-note *ngIf="confirmPasswordError" color="danger">
+          <small>كلمة المرور وتأكيدها يجب أن تكون متطابقتين</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Relationship Dropdown --
+      <ion-item>
+        <ion-label position="stacked">صلة القرابة<span class="required-star">*</span></ion-label>
+        <ion-select [(ngModel)]="relationship" name="relationship" required>
+          <ion-select-option value="father">أب</ion-select-option>
+          <ion-select-option value="mother">أم</ion-select-option>
+          <ion-select-option value="sibling">أخ/أخت</ion-select-option>
+          <ion-select-option value="other">أخرى</ion-select-option>
+        </ion-select>
+        <ion-note *ngIf="relationshipError" color="danger">
+          <small>يجب اختيار صلة القرابة</small>
+        </ion-note>
+      </ion-item>
+
+      <!-- Submit Button --
+      <ion-button expand="block" [disabled]="phoneError || passwordError || confirmPasswordError || idNumberError || usernameError" (click)="goToAddStudent()" >تسجيل</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->
+
+
+
+<ion-content class="ion-padding">
+  
+    <ion-back-button text="" defaultHref="/login"></ion-back-button>
+    <img src="assets/LOGO.png" height="300" width="300">
+
+    <!-- Username Input -->
+    <ion-card dir="rtl">
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="register()" >
+    <ion-item fill="solid" class="ion-margin-bottom" >
+      <ion-label position="floating">اسم المستخدم</ion-label>
+      <ion-input formControlName="username" type="text" required></ion-input>
+      <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
+        اسم المستخدم يجب أن يحتوي على أحرف فقط.
+      </ion-note>
+    </ion-item>
+
+    <!-- ID Number Input -->
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="floating">رقم الهوية</ion-label>
+      <ion-input formControlName="idNumber" type="text" required></ion-input>
+      <ion-note color="danger" *ngIf="registerForm.get('idNumber')?.invalid && (registerForm.get('idNumber')?.dirty || registerForm.get('idNumber')?.touched)">
+        رقم الهوية يجب أن يتكون من 10 أرقام.
+      </ion-note>
+    </ion-item>
+
+    <!-- Phone Number Input -->
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="floating">رقم الهاتف</ion-label>
+      <ion-input formControlName="phoneNumber" type="text" required></ion-input>
+      <ion-note color="danger" *ngIf="registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)">
+        رقم الهاتف يجب أن يتكون من 10 أرقام.
+      </ion-note>
+    </ion-item>
+    
+    <!-- Email Input -->
+<ion-item fill="solid" class="ion-margin-bottom">
+  <ion-label position="floating">البريد الإلكتروني</ion-label>
+  <ion-input formControlName="email" type="email" required></ion-input>
+  <ion-note color="danger" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+    البريد الإلكتروني غير صالح. يرجى إدخال بريد إلكتروني صحيح.
+  </ion-note>
+</ion-item>
+
+    <!-- Password Input -->
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="floating">كلمة المرور</ion-label>
+      <ion-input formControlName="password" type="password" required></ion-input>
+      <ion-note color="danger" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+        كلمة المرور يجب أن تحتوي على 8 أحرف وأرقام على الأقل.
+      </ion-note>
+    </ion-item>
+
+    <!-- Confirm Password Input -->
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-label position="floating">تأكيد كلمة المرور</ion-label>
+      <ion-input formControlName="confirmPassword" type="password" required></ion-input>
+      <ion-note color="danger" *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
+        كلمة المرور وتأكيدها يجب أن تكون متطابقتين.
+      </ion-note>
+    </ion-item>
+
+
+    <!-- Submit Button -->
+    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid" (click)="addAccount()">
+     تسجيل 
+    </ion-button>
+
+    <!-- Navigate to Login -->
+    <ion-button expand="full" type="button" (click)="goToLogin()">
+        العودة لتسجيل الدخول
+    </ion-button>
+  </form>
+
+</ion-card-content>
+</ion-card>
+</ion-content>

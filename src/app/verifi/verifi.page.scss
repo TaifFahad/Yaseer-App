@@ -1,0 +1,89 @@
+ion-content {
+    --background: #FFFFFF; /* الخلفية الرئيسية */
+  
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      padding: 1rem;
+      background: transparent; /* إزالة اللون الأسود */
+    }
+  
+    .back-button {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #000;
+    }
+  
+    .verification-section {
+      text-align: center;
+  
+      h2 {
+        color: #000;
+        margin-bottom: 0.5rem;
+      }
+  
+      p {
+        color: #7A7A7A;
+      }
+  
+      .code-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+  
+      .code-input {
+        text-align: center;
+        font-size: 20px;
+        color: black; /* اللون الأسود */
+        background-color: white; /* الخلفية بيضاء */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+      }
+  
+      .resend-container {
+        margin: 10px 0; /* مسافة أعلى وأسفل الزر */
+        text-align: center; /* محاذاة النص في المنتصف */
+      }
+  
+      .resend-button {
+        background: transparent; /* اجعل الخلفية شفافة */
+        border: none; /* إزالة الحدود */
+        color: red; /* لون النص أحمر */
+        text-decoration: underline; /* جعل النص تحت الخط */
+        cursor: pointer; /* جعل المؤشر يتغير عند المرور فوقه */
+        font-size: 1rem;
+      }
+  
+      .verify-button {
+        width: 200px;
+        height: 50px;
+        background-color: #FFC107; /* اللون الأصفر */
+        color: #000;
+        border-radius: 25px; /* جعل الزر بيضاوي */
+        font-size: 1.2rem;
+        margin-top: 20px;
+        border: none;
+      }
+    }
+  
+    .keypad {
+        margin-top: 60px; /* زيادة المسافة من 40px إلى 60px أو قيمة أكبر حسب الحاجة */
+      
+        .keypad-button {
+          width: 100%;
+          height: 70px;
+          background-color: #E0E0E0;
+          border: none;
+          font-size: 1.5rem;
+          color: #000; /* جعل الأرقام باللون الأسود */
+        }
+      }
+      
+  }
+  

@@ -1,0 +1,54 @@
+<ion-content class="ion-padding" style="--background: #F7F7F7;">
+  <div class="header">
+    <button class="back-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div class="verification-section">
+    <h2>رمز التحقق</h2>
+    <p>أدخل رمز التحقق الذي أرسلناه إلى رقم الهاتف الخاص بك</p>
+
+    <div class="code-inputs">
+      <ion-input type="text" maxlength="1" [(ngModel)]="code1" class="code-input"></ion-input>
+      <ion-input type="text" maxlength="1" [(ngModel)]="code2" class="code-input"></ion-input>
+      <ion-input type="text" maxlength="1" [(ngModel)]="code3" class="code-input"></ion-input>
+      <ion-input type="text" maxlength="1" [(ngModel)]="code4" class="code-input"></ion-input>
+    </div>
+
+    <!-- إضافة حاوية لزر إعادة الإرسال -->
+    <div class="resend-container">
+      <button class="resend-button" (click)="resendCode()">
+        <span>إعادة الإرسال</span>
+      </button>
+    </div>
+    
+    <!-- زر تحقق -->
+    <button (click)="verifyCode()" class="verify-button">تحقق</button>
+  </div>
+
+  <div class="keypad">
+    <ion-grid>
+      <ion-row>
+        <ion-col><button class="keypad-button" (click)="addNumber(1)">1</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(2)">2</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(3)">3</button></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><button class="keypad-button" (click)="addNumber(4)">4</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(5)">5</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(6)">6</button></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><button class="keypad-button" (click)="addNumber(7)">7</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(8)">8</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(9)">9</button></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><button class="keypad-button" (click)="addNumber('.')">.</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="addNumber(0)">0</button></ion-col>
+        <ion-col><button class="keypad-button" (click)="deleteNumber()">⌫</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
