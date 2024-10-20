@@ -27,11 +27,11 @@ export class HomePage {
   constructor(private router: Router) { }
 
   goToEmergency() {
-    this.router.navigate(['/Emergency']); // Navigate to the 'emergency' route
+    this.router.navigate(['/emergency']); // Navigate to the 'emergency' route
 
   }
   gotocommunicate(){
-    this.router.navigate(['/communication'])
+    this.router.navigate(['/coummunication'])
   }
 }
 

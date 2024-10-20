@@ -24,24 +24,29 @@ const routes: Routes = [
     path: 'newaccount',
     loadChildren: () => import('./newaccount/newaccount.module').then(m => m.NewaccountPageModule)
   },
-  {
-    path: 'home', // Add a route for 'home' page
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [redirectUnauthorizedToLogin], // Corrected usage of canActivate
-      },
+  // {
+  //   path: 'home', // Add a route for 'home' page
+  //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+  //   canActivate: [redirectUnauthorizedToLogin], // Corrected usage of canActivate
+  //     },
   {
     path: 'emergency',
     loadChildren: () => import('./emergency/emergency.module').then( m => m.EmergencyPageModule),
     
   },
-  {
-    path: 'communication',
-    loadChildren: () => import('./communication/communication.module').then( m => m.CommunicationPageModule)
-  },
+  // {
+  //   path: 'communication',
+  //   loadChildren: () => import('./communication/communication.module').then( m => m.CommunicationPageModule)
+  // },
   {
     path: 'verifi',
     loadChildren: () => import('./verifi/verifi.module').then( m => m.VerifiPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   }
+
 ];
 
 @NgModule({

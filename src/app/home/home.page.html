@@ -38,6 +38,7 @@
 
   <!-- Page content -->
   <ion-content [fullscreen]="true" dir="rtl" class="white-background">
+
     <ion-row class="coustom">
       <ion-col class="col1" size="7">
         <ion-row><ion-text class="t1">مرحبًا</ion-text></ion-row>
@@ -65,33 +66,12 @@
       </div>
     </ion-button>
 <!-- Emergency card -->
-<ion-button color="white" class="custom-button" (click)="goToEmergency()">
+<ion-button type="submit" color="white" class="custom-button" (click)="goToEmergency()">
   <div class="custom-content">
     <img src="assets/emrgency.png" alt="Card Image">
     <ion-text id="te">الطوارئ</ion-text>
   </div>
 </ion-button>
 
-   
-    
+
   </ion-content>
-
-  <!-- Tabs bar with only icons -->
-  <ion-tabs>
-    <ion-tab-bar slot="bottom" class="custom-tab-bar">
-      <!-- Home Tab -->
-      <ion-tab-button tab="home">
-        <ion-icon name="home-outline"></ion-icon>
-      </ion-tab-button>
-
-      <!-- Messages Tab with Envelope Icon -->
-      <ion-tab-button tab="messages">
-        <ion-icon name="mail-outline"></ion-icon>
-      </ion-tab-button>
-
-      <!-- Account Tab -->
-      <ion-tab-button tab="account">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>

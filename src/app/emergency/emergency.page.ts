@@ -36,7 +36,7 @@ export class EmergencyPage implements OnInit {
 
   // Function to navigate back to the homepage
   goToHomePage() {
-    this.router.navigate(['/home']); // Adjust the route if your homepage is different
+    this.router.navigate(['/tabs']); // Adjust the route if your homepage is different
   }
 
   // Placeholder for handling emergency notification logic

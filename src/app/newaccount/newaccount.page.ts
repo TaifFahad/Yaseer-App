@@ -163,7 +163,7 @@ async register() {
     const user = await this.authService.register({ username, idNumber, phoneNumber, email, password });
     await loading.dismiss();
     if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
     }
   } catch (error: any) { // Use 'any' to specify the type of error
     await loading.dismiss();
