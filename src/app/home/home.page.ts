@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -11,6 +14,10 @@ export class HomePage  {
 
   
   navigateToNotification() {
-    this.router.navigate(['/notification']); // Navigate to the 'notification' route
+    this.router.navigate(['/login']); // Navigate to the 'notification' route
   }
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
 }

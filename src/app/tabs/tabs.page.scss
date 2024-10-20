@@ -1,0 +1,13 @@
+/* global.scss */
+ion-tab-bar {
+    background-color: white; /* Set default background color to white */
+  }
+  
+  ion-tab-button {
+    --background: white; /* Default background color for tab buttons */
+    --color-selected:#F8C71E; /* Color of the icon and label when selected */
+    --color: rgb(0, 0, 0); /* Color of the icon and label when not selected */
+  }
+  
+
+  

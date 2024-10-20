@@ -29,11 +29,15 @@ const routes: Routes = [
     path: 'addstudent',
     loadChildren: () => import('./addstudent/addstudent.module').then(m => m.AddstudentPageModule)
   },
+  //{
+    // path: 'home', // Add a route for 'home' page
+    // loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    // canActivate: [redirectUnauthorizedToLogin], // Corrected usage of canActivate
+    //   },
   {
-    path: 'home', // Add a route for 'home' page
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [redirectUnauthorizedToLogin], // Corrected usage of canActivate
-      }
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
 ];
 
 @NgModule({

@@ -227,7 +227,7 @@ export class LoginPage implements OnInit {
     
     await loading.dismiss();
     if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
     } else {
       this.showAlert('Login failed', 'Please try again');
     }
