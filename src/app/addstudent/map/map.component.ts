@@ -44,7 +44,7 @@ export class MapComponent implements AfterViewInit {
       this.lat = res.coords.latitude;
       this.lng = res.coords.longitude;
       this.loadMap(); // Load the map after getting the position
-    })
+     })
     .catch(err => {
       console.log(err);
     });
@@ -98,6 +98,7 @@ export class MapComponent implements AfterViewInit {
     this.mapListener = this.map.addListener("click", (event: any) => {
       const latLng = event.latLng; // Use event.latLng for the click event
       console.log(latLng.lat()); // Log the latitude
+      console.log(latLng.lng());
       this.marker.position = latLng;
       this.marker.map = this.map;
       this.map.panTo(latLng); // Pan to the clicked location

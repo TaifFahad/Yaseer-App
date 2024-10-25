@@ -7,20 +7,12 @@
 
   <ion-card dir="rtl">
     <ion-card-content>
-
-      <!-- Username Input -->
+      <form [formGroup]="studentForm" (ngSubmit)="goToAddStudent()">  <!-- Username Input -->
       <ion-item>
         <ion-label class="names" position="stacked">اسم الطالب<span class="required-star">*</span></ion-label>
-        <ion-input
-          type="text"
-          [(ngModel)]="studentname"
-          name="studentname"
-          #usernameField="ngModel"
-          placeholder="أدخل اسم الطالب"
-          required
-          (ionBlur)="validateStudentname()"
-        ></ion-input>
-        <ion-note *ngIf="studentnameError" color="danger">
+        <ion-input formControlName="studentname" type="text"   placeholder="أدخل  اسم الطالب" required></ion-input>
+
+        <ion-note *ngIf="studentForm.get('studentname')?.invalid && (studentForm.get('studentname')?.dirty || studentForm.get('studentname')?.touched)" color="danger">
           <small>اسم الطالب يجب أن يحتوي على أحرف فقط</small>
         </ion-note>
       </ion-item>
@@ -30,41 +22,53 @@
         <ion-label class="names" position="stacked">رقم الهوية<span class="required-star">*</span></ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="idNumber"
-          name="idNumber"
-          #idNumberField="ngModel"
+          formControlName="studentID"
           placeholder="أدخل رقم الهوية"
           required
-          (ionBlur)="validateIdNumber()"
         ></ion-input>
-        <ion-note *ngIf="idNumberError" color="danger">
-          <small>رقم الهوية يجب أن يتكون من 10 أرقام على الأقل ويكون رقمي فقط</small>
+        <ion-note *ngIf="studentForm.get('studentID')?.invalid && (studentForm.get('studentID')?.dirty || studentForm.get('studentID')?.touched)" color="danger">
+          <small>رقم الهوية يجب أن يتكون من 10 أرقام</small>
         </ion-note>
       </ion-item>
 
       <!-- Birth Date Input -->
      
         <ion-label class="datename" position="stacked">تاريخ الميلاد <span class="required-star">*</span></ion-label>
-        <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="birthDate" required></ion-datetime>
-      
+        <ion-note *ngIf="studentForm.get('birthDate')?.invalid && (studentForm.get('birthDate')?.dirty || studentForm.get('birthDate')?.touched)" color="danger">
+          <small>حدد تاريخ الميلاد</small>
+        </ion-note>
+        <ion-datetime presentation="date" [preferWheel]="true" formControlName="birthDate" required></ion-datetime>
+     
+
+       
 
       <!-- Class Input -->
       <ion-item>
         <ion-label class="names" position="stacked">الصف<span class="required-star">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="studentClass" placeholder="أدخل الصف" required></ion-input>
+        <ion-input type="text" formControlName="studentClass" placeholder="أدخل الصف" required></ion-input>
+        <ion-note *ngIf="studentForm.get('studentClass')?.invalid && (studentForm.get('studentClass')?.dirty || studentForm.get('studentClass')?.touched)" color="danger">
+          <small>ادخل الصف</small>
+        </ion-note>
       </ion-item>
 
       <!-- Address Input -->
-      <div class="map-container">
-        <ion-label class="datename" position="stacked">العنوان <span class="required-star">*</span></ion-label>
-   
-        <div #map id="map" style="width: 100%; height: 100%;">
-          <app-map></app-map> 
-         <!-- / <ion-button (click)="whereami()">here</ion-button> -->
-     
-        </div>
-      </div>
-       
+   <!-- Address Input -->
+<div class="map-container">
+  <ion-label class="datename" position="stacked">العنوان <span class="required-star">*</span></ion-label>
+  
+  <div #map id="map" style="width: 100%; height: 100%;">
+    <app-map></app-map> 
+  </div>
+  
+  <ion-note *ngIf="studentForm.get('address')?.invalid && (studentForm.get('address')?.dirty || studentForm.get('address')?.touched)" color="danger">
+    <small> يجب تحديد الموقع</small>
+  </ion-note>
+
+</div>
+
+  <!-- Button to Get Current Location -->
+<ion-button class="location" (click)="whereami()">حدد موقعي الحالي</ion-button>
+
     
      
     
@@ -72,15 +76,18 @@
       <!-- Gender Selection (Radio Buttons) -->
       <ion-item dir="rtl">
         <ion-label class="names" position="stacked">الجنس <span class="required-star">*</span></ion-label>
-        <ion-radio-group [(ngModel)]="gender" required>
+        <ion-radio-group formControlName="gender" required>
             <ion-radio slot="start" value="male" aria-label="Male option">ذكر</ion-radio>
             <ion-radio slot="start" value="female" aria-label="Female option">أنثى</ion-radio>
         </ion-radio-group>
+        <ion-note *ngIf="studentForm.get('gender')?.invalid && (studentForm.get('gender')?.dirty || studentForm.get('gender')?.touched)" color="danger">
+          <small>يجب الاختيار</small>
+        </ion-note>
       </ion-item>
 
       <!-- Subscription Type (Toggle Buttons) -->
       <ion-label class="names" position="stacked">نوع الاشتراك <span class="required-star">*</span></ion-label>
-      <ion-segment [(ngModel)]="subscriptionType" required>
+      <ion-segment formControlName="subscriptionType" required>
         <ion-segment-button value="both">
           <ion-label> ذهاب و اياب</ion-label>
         </ion-segment-button>
@@ -90,34 +97,41 @@
         <ion-segment-button value="noonRide">
           <ion-label> اياب فقط</ion-label>
         </ion-segment-button>
+        <ion-note *ngIf="studentForm.get('subscriptionType')?.invalid && (studentForm.get('subscriptionType')?.dirty || studentForm.get('subscriptionType')?.touched)" color="danger">
+          <small>يجب الاختيار</small>
+        </ion-note>
       </ion-segment>
 
-      <!-- Profile Image Upload -->
+      <!-- Profile Image Upload-->
       <div class="profile-img-container">
         <ion-label class="names" position="stacked">صورة الطالب <span class="required-star">*</span></ion-label>
              <!-- Image Preview -->
           <div *ngIf="imagePreview" class="image-preview">
-         <img [src]="imagePreview" alt="Uploaded Image" class="uploaded-image" />
+         <img [src]="imagePreview" alt="Uploaded Image" class="uploaded-image"  />
          <p>تم تحميل الصورة بنجاح!</p>
            <!-- Delete Button -->
     <ion-button color="danger" (click)="removeImage()">
       حذف الصورة
     </ion-button>
         </div>
-        <ion-button fill="clear" class="add-photo-button" (click)="chooseImage()">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-button>
-      
-      </div>
-  
+
+      <!-- Add Photo Button (Hidden After Image Upload) -->
+  <ion-button *ngIf="!imagePreview" fill="clear" class="add-photo-button" (click)="chooseImage()">
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-button>
+        <!-- Validation Note -->
+  <ion-note *ngIf="studentForm.get('profileImage')?.invalid && (studentForm.get('profileImage')?.dirty || studentForm.get('profileImage')?.touched)" color="danger">
+    <small>يجب تحميل صورة صحيحة بتنسيق JPEG أو PNG</small>
+  </ion-note>
+</div>
   
   
  
 
 
       <!-- Submit Button -->
-      <ion-button expand="block" [disabled]="!isFormValid()" (click)="goToAddStudent()">تسجيل</ion-button>
-
+      <ion-button expand="block" (click)="goToAddStudent()" [disabled]="!studentForm.valid || selectedImage === null">تسجيل</ion-button>
+    </form>
     </ion-card-content>
   </ion-card>
 </ion-content>

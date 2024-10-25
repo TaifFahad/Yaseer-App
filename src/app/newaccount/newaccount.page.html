@@ -134,7 +134,7 @@
     <ion-card-content>
       <form [formGroup]="registerForm" (ngSubmit)="register()" >
     <ion-item fill="solid" class="ion-margin-bottom" >
-      <ion-label position="floating">اسم المستخدم</ion-label>
+      <ion-label position="stacked">اسم المستخدم <span class="required-star">*</span></ion-label>
       <ion-input formControlName="username" type="text" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
         اسم المستخدم يجب أن يحتوي على أحرف فقط.
@@ -143,7 +143,7 @@
 
     <!-- ID Number Input -->
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">رقم الهوية</ion-label>
+      <ion-label position="stacked">رقم الهوية <span class="required-star">*</span></ion-label>
       <ion-input formControlName="idNumber" type="text" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('idNumber')?.invalid && (registerForm.get('idNumber')?.dirty || registerForm.get('idNumber')?.touched)">
         رقم الهوية يجب أن يتكون من 10 أرقام.
@@ -152,7 +152,7 @@
 
     <!-- Phone Number Input -->
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">رقم الهاتف</ion-label>
+      <ion-label position="stacked">رقم الهاتف<span class="required-star">*</span></ion-label>
       <ion-input formControlName="phoneNumber" type="text" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)">
         رقم الهاتف يجب أن يتكون من 10 أرقام.
@@ -161,7 +161,7 @@
     
     <!-- Email Input -->
 <ion-item fill="solid" class="ion-margin-bottom">
-  <ion-label position="floating">البريد الإلكتروني</ion-label>
+  <ion-label position="stacked">البريد الإلكتروني<span class="required-star">*</span></ion-label>
   <ion-input formControlName="email" type="email" required></ion-input>
   <ion-note color="danger" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
     البريد الإلكتروني غير صالح. يرجى إدخال بريد إلكتروني صحيح.
@@ -170,7 +170,7 @@
 
     <!-- Password Input -->
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">كلمة المرور</ion-label>
+      <ion-label position="stacked">كلمة المرور<span class="required-star">*</span></ion-label>
       <ion-input formControlName="password" type="password" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
         كلمة المرور يجب أن تحتوي على 8 أحرف وأرقام على الأقل.
@@ -179,7 +179,7 @@
 
     <!-- Confirm Password Input -->
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">تأكيد كلمة المرور</ion-label>
+      <ion-label position="stacked">تأكيد كلمة المرور<span class="required-star">*</span></ion-label>
       <ion-input formControlName="confirmPassword" type="password" required></ion-input>
       <ion-note color="danger" *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
         كلمة المرور وتأكيدها يجب أن تكون متطابقتين.
@@ -188,7 +188,7 @@
 
     <!-- Relationship Dropdown -->
     <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-label position="floating">صلة القرابة</ion-label>
+      <ion-label position="stacked">صلة القرابة<span class="required-star">*</span></ion-label>
       <ion-select   dir="ltr" formControlName="relationship" required>
         <ion-select-option value="father">أب</ion-select-option>
         <ion-select-option value="mother">أم</ion-select-option>

@@ -136,7 +136,7 @@ export class NewaccountPage implements OnInit {
   ngOnInit(): void {
     
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], // Only alphabets
+      username: ['', [Validators.required, Validators.pattern('/^[a-zA-Zأ-ي\s]*$/;')]], // Only alphabets
       idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit phone 'number'
       email: ['', [Validators.required, Validators.email]], // Email validation

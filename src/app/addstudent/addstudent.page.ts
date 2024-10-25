@@ -1,8 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { DataService } from '../services/data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
+ interface Student {
+  id?: string;
+  name: string;
+  studentID: string;
+  birthDate: string;
+  studentClass: string;
+  address: string;
+  gender: string;
+  subscriptionType: string;
+  profileImageUrl: string; // Add field for image upload URL
+}
 @Component({
   selector: 'app-addstudent',
   templateUrl: './addstudent.page.html',
@@ -11,64 +23,69 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class AddstudentPage {
   lat!: number;
   lng!: number;
-  
-  constructor(private geo: Geolocation, private router: Router) {}
-  
-  whereami() {
-    this.geo.getCurrentPosition({
-      timeout: 10000,
-    })
-    .then(res => { // Change this line
-      this.lat = res.coords.latitude;
-      this.lng = res.coords.longitude;
-    })
-    .catch((err: any) => {
-      console.log(err);
-    });
-  }
-  
-  studentname: string = '';
-  idNumber: string = '';
-  birthDate: string = '';
-  studentClass: string = '';
-  address: string = '';
-  gender: string = '';
-  subscriptionType: string = '';
-
-  idNumberError: boolean = false;
-  studentnameError: boolean = false;
+  studentForm!: FormGroup;
+  students: Student[] = [];
 
   // Profile image upload
   selectedImage: File | null = null;
   imagePreview: string | null = null;
 
+  constructor(
+    private geo: Geolocation, 
+    private router: Router,
+    private dataService: DataService,
+    private fb: FormBuilder
+  ) 
+  {
+    // {
+    //   this.dataService.addChild().subscribe(res =>{
+    //     console.log(res);
+    //     this.students = res;
+    //   });
+    // }
+    // Initialize the form group
+    
+    this.studentForm = this.fb.group({
+      studentname: ['', [Validators.required, Validators.pattern('^[a-zA-Zأ-ي\s]*$')]], // Arabic and English letters
+      studentID: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
+      birthDate: ['', Validators.required],
+      studentClass: ['', Validators.required],
+      address: ['', Validators.required],
+      gender: ['', Validators.required],
+      subscriptionType: ['', Validators.required],
+      profileImage: [null, Validators.required] , // Ensure this is included for form validation
+    latitude: ['', Validators.required],  // New field for latitude
+    longitude: ['', Validators.required], // New field for longitude
+});
+   
+  }
+  
+  whereami() {
+    this.geo.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 10000,
+    })
+    .then(res => {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
 
+      // Set latitude and longitude in the form
+      this.studentForm.get('latitude')?.setValue(this.lat);
+      this.studentForm.get('longitude')?.setValue(this.lng);
 
-  // Validation methods
-  validateStudentname() {
-    const studentnamePattern = /^[a-zA-Zأ-ي\s]*$/; // Arabic and English letters
-    this.studentnameError = !studentnamePattern.test(this.studentname.trim());
+      // Set a simple address in the form for now, or leave it to be handled by your map component
+      this.studentForm.get('address')?.setValue('موقع حالي'); // Placeholder; modify as needed
+
+      // Print latitude and longitude to the console
+      console.log(`Latitude: ${this.lat}, Longitude: ${this.lng}`);
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
   }
 
-  validateIdNumber() {
-    const idPattern = /^[0-9]{10,}$/; // At least 10 digits
-    this.idNumberError = !idPattern.test(this.idNumber);
-  }
+ 
 
-  isFormValid(): boolean {
-    return (
-      this.studentname.trim() !== '' && // Ensure it's not empty
-      this.idNumber.trim() !== '' && // Ensure it's not empty
-      this.birthDate !== '' && // Ensure a birth date is selected
-      this.studentClass.trim() !== '' && // Ensure it's not empty
-      this.address.trim() !== '' && // Ensure it's not empty
-      this.gender !== '' && // Ensure gender is selected
-      this.subscriptionType !== '' && // Ensure subscription type is selected
-      !this.studentnameError && // Check for student name error
-      !this.idNumberError && // Check for ID number error
-      this.selectedImage !== null // Ensure image is selected
-    );
-  }
 
   // Choose image handler
   chooseImage() {
@@ -78,7 +95,7 @@ export class AddstudentPage {
     input.onchange = (event: any) => {
       this.onImageChange(event);
     };
-    input.click(); // Simulate a click to open the file selector
+    input.click();
   }
 
   // Image upload handler
@@ -89,34 +106,60 @@ export class AddstudentPage {
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview = reader.result as string;
+        // Set the profileImage control value
+        this.studentForm.get('profileImage')?.setValue(file);
       };
       reader.readAsDataURL(file);
     }
   }
+
   removeImage() {
     this.selectedImage = null;
     this.imagePreview = null;
+    // Clear the profileImage control value
+    this.studentForm.get('profileImage')?.setValue(null);
   }
+
   // Form submission
-  goToAddStudent() {
-    this.validateStudentname();
-    this.validateIdNumber();
-
-    if (this.isFormValid()) {
-      console.log('Student Name:', this.studentname);
-      console.log('ID Number:', this.idNumber);
-      console.log('Birth Date:', this.birthDate);
-      console.log('Class:', this.studentClass);
-      console.log('Address:', this.address);
-      console.log('Gender:', this.gender);
-      console.log('Subscription Type:', this.subscriptionType);
-      console.log('Selected Image:', this.selectedImage);
-
-      // Navigate to another page if needed
-      this.router.navigate(['/home']); 
-    } else {
-      console.log('Validation failed. Please check your inputs.');
+  async goToAddStudent() {
+    if (!this.studentForm.valid || this.selectedImage === null) {
+        console.error('Form is invalid.');
+        this.studentForm.markAllAsTouched(); // Mark all controls as touched for error highlighting
+        console.log('Form Values:');
+        console.log('Name:', this.studentForm.get('studentname')?.value);
+        console.log('Student ID:', this.studentForm.get('studentID')?.value);
+        console.log('Birth Date:', this.studentForm.get('birthDate')?.value);
+        console.log('Student Class:', this.studentForm.get('studentClass')?.value);
+        console.log('Address:', this.studentForm.get('address')?.value);
+        console.log('Gender:', this.studentForm.get('gender')?.value);
+        console.log('Subscription Type:', this.studentForm.get('subscriptionType')?.value);
+        console.log('Profile Image URL:', this.imagePreview || 'No image selected');
+    
+        return; // Prevent submission if the form is invalid
     }
-  }
-}
+    this.router.navigate(['/tabs']); // Redirect or handle success
 
+    // // Create a new student object using form data
+    // const newStudent: Student = {
+    //     name: this.studentForm.get('studentname')?.value,
+    //     studentID: this.studentForm.get('studentID')?.value,
+    //     birthDate: this.studentForm.get('birthDate')?.value,
+    //     studentClass: this.studentForm.get('studentClass')?.value,
+    //     address: this.studentForm.get('address')?.value,
+    //     gender: this.studentForm.get('gender')?.value,
+    //     subscriptionType: this.studentForm.get('subscriptionType')?.value,
+    //     profileImageUrl: this.imagePreview || ''
+    // };
+
+    // // Assume parentId is retrieved dynamically (e.g., logged-in parent's ID)
+    // const parentId = 'a1HQGUuQv5pWoBUx2i1M'; // Replace this with dynamic parent ID
+
+    // try {
+    //     // Call the dataService to add a student under the parent
+    //     const res = await this.dataService.addChild(parentId, newStudent);
+    //     console.log('Student added successfully:', res);
+    //     this.router.navigate(['/tabs']); // Redirect or handle success
+    // } catch (error) {
+    //     console.error('Error adding student:', error);
+    }
+}

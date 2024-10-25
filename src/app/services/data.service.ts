@@ -17,7 +17,7 @@ export interface account{
 export interface Student {
   id?: string;
   name: string;
-  idNumber: string;
+  studentID: string;
   birthDate: string;
   studentClass: string;
   address: string;
@@ -99,4 +99,9 @@ export class DataService {
 //   }
 // }
 
+  // Method to add a child to the parent's document
+  addChild(parentId: string, childData: Student) {
+    const childRef = collection(this.firestore, `1/${parentId}/children`);
+    return addDoc(childRef, childData);
+  }
 }
