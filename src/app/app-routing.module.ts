@@ -29,11 +29,11 @@ const routes: Routes = [
   //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
   //   canActivate: [redirectUnauthorizedToLogin], // Corrected usage of canActivate
   //     },
-  {
-    path: 'emergency',
-    loadChildren: () => import('./emergency/emergency.module').then( m => m.EmergencyPageModule),
+  // {
+  //   path: 'emergency',
+  //   loadChildren: () => import('./emergency/emergency.module').then( m => m.EmergencyPageModule),
     
-  },
+  // },
   // {
   //   path: 'communication',
   //   loadChildren: () => import('./communication/communication.module').then( m => m.CommunicationPageModule)
@@ -45,7 +45,24 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'attendance',
+    loadChildren: () => import('./attendance/attendance.module').then( m => m.AttendancePageModule)
+  },
+  // {
+  //   path: 'account',
+  //   loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  // },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },  {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   }
+
+
 
 ];
 

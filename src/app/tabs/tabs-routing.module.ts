@@ -20,10 +20,15 @@ const routes: Routes = [
       //   path: 'messages',
       //   loadChildren: () => import('../messages/messages.module').then(m => m.MessagesPageModule)
       // },
-      // {
-      //   path: 'account',
-      //   loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
-      // },
+      {
+        path: 'account',
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+      },
+      {
+        path: 'emergency',
+        loadChildren: () => import('../emergency/emergency.module').then( m => m.EmergencyPageModule),
+        
+      },
       {
         path: '',
         redirectTo: 'home',

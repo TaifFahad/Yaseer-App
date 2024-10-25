@@ -57,15 +57,18 @@ ion-content {
     color: rgb(171, 170, 170);
   }
   
-  /* Style the submit button */
-  ion-button {
-    --background: #F8C71E; /* Adjusted color */
-    --border-radius: 30px; /* Reduce border radius for better fit */
-    margin-top: 16px; /* Adjust margin for spacing */
-    width: 100%;
-    max-width: 330px; /* Match the card width */
-    font-weight: bolder;
-  }
+    /* Style the login button */
+    ion-button {
+      --background: #F8C71E; /* Button background color */
+      --border-radius: 30px; /* Reduce border radius for better fit */
+      margin-top: 16px; /* Adjust margin for spacing */
+      width: 100%;
+      max-width: 330px; /* Match the card width */
+      font-weight: bolder;
+    color: #000000;
+      /* Change text color to white when pressed (active state) */
+      --color-activa5ted: #ffffff; /* Text color when button is pressed */
+    }
   
   /* Style the forgot password button */
   .forgetPassword {

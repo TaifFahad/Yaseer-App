@@ -1,38 +1,10 @@
-<!-- Menu on the left -->
-<ion-menu side="start" content-id="main-content" class="custom-menu">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-    
-  </ion-header>
-
-  <ion-content class="ion-padding" dir="rtl">
-    <!-- List of menu items -->
-    <ion-list>
-
-      <!-- Settings -->
-      <ion-item button routerLink="/settings">
-        <ion-icon name="settings-outline" slot="start"></ion-icon>
-        <ion-label>الإعدادات</ion-label>
-      </ion-item>
-
-      <!-- Log Out -->
-      <ion-item button button class="logout-button">
-        <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        <ion-label> تسجيل الخروج</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
 <!-- Main content -->
 <div class="ion-page" id="main-content">
   <!-- Header with Menu button -->
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+        <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
       </ion-buttons>
       <ion-title class="t1" slot="end">تنبيهات الطوارئ</ion-title>
     </ion-toolbar>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-right">الحضور والغياب</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="date-display ion-text-center" style="font-size: 18px; color: #555; margin: 10px 0;">
+    {{ arabicDate }}
+  </div>
+
+  <ion-card>
+    <ion-card-header class="ion-text-right">
+      <ion-card-title class="title-success">الحضور <ion-icon name="checkmark-circle-outline" color="success"></ion-icon></ion-card-title>
+      <ion-select
+        class="status-select custom-select"
+        placeholder="اختر"
+        interface="popover"
+        [(ngModel)]="selectedStatus"
+        (ionChange)="updateAllStatus()">
+        <ion-select-option value="ذهاب">ذهاب</ion-select-option>
+        <ion-select-option value="عودة">عودة</ion-select-option>
+      </ion-select>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let student of presentStudents">
+          <ion-avatar slot="start">
+            <img [src]="student.avatar">
+          </ion-avatar>
+          <ion-label class="ion-text-right">
+            <h2>{{ student.name }}</h2>
+            <p>{{ student.grade }}</p>
+          </ion-label>
+          <ion-note slot="end" color="success">{{ selectedStatus }}</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header class="ion-text-right">
+      <ion-card-title class="title-danger">الغياب <ion-icon name="close-circle-outline" color="danger"></ion-icon></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let student of absentStudents">
+          <ion-avatar slot="start">
+            <img [src]="student.avatar">
+          </ion-avatar>
+          <ion-label class="ion-text-right">
+            <h2>{{ student.name }}</h2>
+            <p>{{ student.grade }}</p>
+          </ion-label>
+          <ion-note slot="end" color="danger">غائب</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

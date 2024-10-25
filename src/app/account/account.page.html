@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">تعديل الملف الشخصي</ion-title> <!-- تم إضافة ion-text-center -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-container">
+    
+    <div class="profile-picture" (click)="selectProfilePicture()">
+      <ion-avatar class="profile-avatar"> <!-- تم تعديل الكلاس للتأكد من ضبط البوردر -->
+        <img src="assets/DriverPhoto.png" />
+        <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+      </ion-avatar>
+    </div>
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*"/>
+
+    <!-- الحقول المطلوبة -->
+    <ion-card dir="rtl">
+      <ion-card-content>
+        <!-- حقل الاسم -->
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">الاسم</ion-label>
+          <ion-input type="text" placeholder="محمد معتز"></ion-input>
+        </ion-item>
+
+        <!-- حقل رقم الهوية -->
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">رقم الهوية</ion-label>
+          <ion-input type="number" placeholder="2223404500"></ion-input>
+        </ion-item>
+
+        <!-- حقل رقم الجوال -->
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input type="tel" placeholder="05770097688"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" class="change-password-button" (click)="goToChangePassword()">
+      تغيير كلمة المرور
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button expand="block" class="save-changes-button">
+      حفظ التغييرات
+    </ion-button>
+  </div>
+</ion-content>

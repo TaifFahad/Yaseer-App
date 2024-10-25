@@ -2,7 +2,7 @@
 <ion-menu side="start" content-id="main-content" class="custom-menu">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title></ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -17,7 +17,7 @@
       </ion-item>
 
       <!-- Log Out -->
-      <ion-item button button class="logout-button">
+      <ion-item button button class="logout-button" (click)="logout()">
         <ion-icon name="log-out-outline" slot="start"></ion-icon>
         <ion-label> تسجيل الخروج</ion-label>
       </ion-item>
@@ -59,7 +59,7 @@
     </ion-button>
 
 <!-- Attendance card -->
-    <ion-button color="white" class="custom-button">
+    <ion-button color="white" class="custom-button" (click)=" goToAttendance()">
       <div class="custom-content">
         <img src="assets/image 14.jpg" alt="Card Image">
         <ion-text id="te">الحضور</ion-text>
