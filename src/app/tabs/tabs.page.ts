@@ -6,5 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage   {
+  
 
 }

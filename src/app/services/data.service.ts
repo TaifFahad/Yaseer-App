@@ -11,7 +11,7 @@ export interface account{
   phoneNumber: string;
   email: string;
   password: string;
-  relationship: string;
+  
 
 }
 @Injectable({
@@ -23,25 +23,25 @@ export class DataService {
 
 
   getAcc(): Observable<account[]>{
-    const accountRef = collection(this.firestore, '1');
+    const accountRef = collection(this.firestore, 'driver');
     return collectionData(accountRef, {idField: 'id'}) as Observable<account[]>;
   }
   getAccById(id: string): Observable<account> {
-    const accountRef = doc(this.firestore, '1/${id}');
+    const accountRef = doc(this.firestore, 'driver/${id}');
     return docData(accountRef, {idField: 'id'}) as Observable<account>;
   }
   addAcc(account: account) {
-    const accountRef = collection(this.firestore, '1');
+    const accountRef = collection(this.firestore, 'Driver');
     return addDoc(accountRef,account) ;
   }
   deleteAcc(account: account) {
-    const accountRef = doc(this.firestore, '1/${id}');
+    const accountRef = doc(this.firestore, 'driver/${id}');
     return deleteDoc(accountRef);
   }
   updateAcc(account: account) {
-    const accountRef = doc(this.firestore, '1/${id}');
+    const accountRef = doc(this.firestore, 'driver/${id}');
     return updateDoc(accountRef,{username:account.username, idNumber: account.idNumber, 
-      phoneNumber: account.phoneNumber, email: account.email, password: account.password, relationship: account.relationship
+      phoneNumber: account.phoneNumber, email: account.email, password: account.password
     });
   }
 }
