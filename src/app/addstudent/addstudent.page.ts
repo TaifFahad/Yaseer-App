@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit ,} from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataService } from '../services/data.service';
@@ -20,11 +20,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './addstudent.page.html',
   styleUrls: ['./addstudent.page.scss'],
 })
-export class AddstudentPage {
+export class AddstudentPage  {
   lat!: number;
   lng!: number;
   studentForm!: FormGroup;
   students: Student[] = [];
+
+  // Add parentId as a class property
+  parentId: string | null = null;
 
   // Profile image upload
   selectedImage: File | null = null;
@@ -35,16 +38,7 @@ export class AddstudentPage {
     private router: Router,
     private dataService: DataService,
     private fb: FormBuilder
-  ) 
-  {
-    // {
-    //   this.dataService.addChild().subscribe(res =>{
-    //     console.log(res);
-    //     this.students = res;
-    //   });
-    // }
-    // Initialize the form group
-    
+  ) {
     this.studentForm = this.fb.group({
       studentname: ['', [Validators.required, Validators.pattern('^[a-zA-Zأ-ي\s]*$')]], // Arabic and English letters
       studentID: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
@@ -53,12 +47,25 @@ export class AddstudentPage {
       address: ['', Validators.required],
       gender: ['', Validators.required],
       subscriptionType: ['', Validators.required],
-      profileImage: [null, Validators.required] , // Ensure this is included for form validation
-    latitude: ['', Validators.required],  // New field for latitude
-    longitude: ['', Validators.required], // New field for longitude
-});
-   
+      profileImage: [null, Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+    });
   }
+
+  // ngOnInit() {
+  //   this.dataService.getLastCreatedParentId().then(parentId => {
+  //     this.parentId = parentId;
+  //     console.log('Parent ID:', this.parentId);
+  //   }).catch(error => {
+  //     console.error('Error fetching parent ID:', error);
+  //   });
+  // }
+  
+  //... rest of the class
+
+
+  
   
   whereami() {
     this.geo.getCurrentPosition({
@@ -74,8 +81,8 @@ export class AddstudentPage {
       this.studentForm.get('longitude')?.setValue(this.lng);
 
       // Set a simple address in the form for now, or leave it to be handled by your map component
-      this.studentForm.get('address')?.setValue('موقع حالي'); // Placeholder; modify as needed
-
+      this.studentForm.get('address')?.setValue(`Latitude: ${this.lat}, Longitude: ${this.lng}`); // Example format
+     
       // Print latitude and longitude to the console
       console.log(`Latitude: ${this.lat}, Longitude: ${this.lng}`);
     })
@@ -125,41 +132,43 @@ export class AddstudentPage {
     if (!this.studentForm.valid || this.selectedImage === null) {
         console.error('Form is invalid.');
         this.studentForm.markAllAsTouched(); // Mark all controls as touched for error highlighting
-        console.log('Form Values:');
-        console.log('Name:', this.studentForm.get('studentname')?.value);
-        console.log('Student ID:', this.studentForm.get('studentID')?.value);
-        console.log('Birth Date:', this.studentForm.get('birthDate')?.value);
-        console.log('Student Class:', this.studentForm.get('studentClass')?.value);
-        console.log('Address:', this.studentForm.get('address')?.value);
-        console.log('Gender:', this.studentForm.get('gender')?.value);
-        console.log('Subscription Type:', this.studentForm.get('subscriptionType')?.value);
-        console.log('Profile Image URL:', this.imagePreview || 'No image selected');
-    
+
         return; // Prevent submission if the form is invalid
     }
     this.router.navigate(['/tabs']); // Redirect or handle success
 
-    // // Create a new student object using form data
-    // const newStudent: Student = {
-    //     name: this.studentForm.get('studentname')?.value,
-    //     studentID: this.studentForm.get('studentID')?.value,
-    //     birthDate: this.studentForm.get('birthDate')?.value,
-    //     studentClass: this.studentForm.get('studentClass')?.value,
-    //     address: this.studentForm.get('address')?.value,
-    //     gender: this.studentForm.get('gender')?.value,
-    //     subscriptionType: this.studentForm.get('subscriptionType')?.value,
-    //     profileImageUrl: this.imagePreview || ''
-    // };
+    // Create a new student object using form data
+    const newStudent: Student = {
+        name: this.studentForm.get('studentname')?.value,
+        studentID: this.studentForm.get('studentID')?.value,
+        birthDate: this.studentForm.get('birthDate')?.value,
+        studentClass: this.studentForm.get('studentClass')?.value,
+        address: this.studentForm.get('address')?.value,
+        gender: this.studentForm.get('gender')?.value,
+        subscriptionType: this.studentForm.get('subscriptionType')?.value,
+        profileImageUrl: this.imagePreview || ''
+    };
 
-    // // Assume parentId is retrieved dynamically (e.g., logged-in parent's ID)
-    // const parentId = 'a1HQGUuQv5pWoBUx2i1M'; // Replace this with dynamic parent ID
+//     // // Assume parentId is retrieved dynamically (e.g., logged-in parent's ID)
+//     // const parentId = 'a1HQGUuQv5pWoBUx2i1M'; // Replace this with dynamic parent ID
+//     this.dataService.addChildToLastCreatedParent(newStudent);
 
-    // try {
-    //     // Call the dataService to add a student under the parent
-    //     const res = await this.dataService.addChild(parentId, newStudent);
-    //     console.log('Student added successfully:', res);
-    //     this.router.navigate(['/tabs']); // Redirect or handle success
-    // } catch (error) {
-    //     console.error('Error adding student:', error);
-    }
+//     try {
+//         // Call the dataService to add a student under the parent
+//         const res = await this.dataService.addChild(parentId, newStudent);
+//         console.log('Student added successfully:', res);
+//         this.router.navigate(['/tabs']); // Redirect or handle success
+//     } catch (error) {
+//         console.error('Error adding student:', error);
+//     }
+// }}
+// Assuming newStudent is defined with student details
+try {
+  await this.dataService.addChildToLastCreatedParent(newStudent); // Call the method to add child
+  console.log('Student added successfully to the last created parent');
+  this.router.navigate(['/tabs']); // Redirect or handle success
+} catch (error) {
+  console.error('Error adding student:', error);
 }
+  
+  }}

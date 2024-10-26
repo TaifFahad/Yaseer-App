@@ -107,6 +107,7 @@ interface account{
   password: string;
   relationship: string;
 }
+
 @Component({
   selector: 'app-newaccount',
   templateUrl: './newaccount.page.html',
@@ -136,7 +137,7 @@ export class NewaccountPage implements OnInit {
   ngOnInit(): void {
     
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('/^[a-zA-Zأ-ي\s]*$/;')]], // Only alphabets
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], // Only alphabets
       idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit phone 'number'
       email: ['', [Validators.required, Validators.email]], // Email validation
@@ -163,7 +164,7 @@ async register() {
     const user = await this.authService.register({ username, idNumber, phoneNumber, email, password });
     await loading.dismiss();
     if (user) {
-      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+      this.router.navigateByUrl('/addstudent', { replaceUrl: true });
     }
   } catch (error: any) { // Use 'any' to specify the type of error
     await loading.dismiss();
