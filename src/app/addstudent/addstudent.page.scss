@@ -170,7 +170,9 @@ ion-segment-button::part(indicator-background) {
 .required-star {
     color: red; /* Color for required fields */
 }
-
+.message{
+  color: red; 
+}
 .image-preview {
     margin-top: 10px;
     text-align: center; /* Center the image and text */

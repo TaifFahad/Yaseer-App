@@ -119,6 +119,9 @@
   <ion-button *ngIf="!imagePreview" fill="clear" class="add-photo-button" (click)="chooseImage()">
     <ion-icon name="add-circle-outline"></ion-icon>
   </ion-button>
+  <div *ngIf="message" class="message">
+    {{ message }}
+  </div>
         <!-- Validation Note -->
   <ion-note *ngIf="studentForm.get('profileImage')?.invalid && (studentForm.get('profileImage')?.dirty || studentForm.get('profileImage')?.touched)" color="danger">
     <small>يجب تحميل صورة صحيحة بتنسيق JPEG أو PNG</small>

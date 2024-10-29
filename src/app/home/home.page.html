@@ -1,3 +1,106 @@
+<!----
+<ion-menu side="start" content-id="main-content" class="custom-menu">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" dir="rtl">
+    <!-- List of menu items --
+    <ion-list>
+      
+      <!-- Account --
+      <ion-item button routerLink="/account">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label>معلومات الطالب</ion-label>
+      </ion-item>
+
+      <!-- Settings --
+      <ion-item button routerLink="/settings">
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+        <ion-label>الإعدادات</ion-label>
+      </ion-item>
+
+      <!-- Log Out --
+      <ion-item button button class="logout-button">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label> تسجيل الخروج</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Main content --
+<div class="ion-page" id="main-content">
+  <!-- Header with Menu button --
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Page content --
+  <ion-content [fullscreen]="true" dir="rtl" class="white-background">
+    <ion-row class="custom">
+      <ion-col size="7">
+        <ion-row>
+          <ion-text class="t1">مرحباً</ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text class="t2">{{ students.length > 0 ? students[0].name : 'ولي امر الطالب' }}</ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text class="t3">نتمنى لك يوماً سعيداً</ion-text>
+        </ion-row>
+      </ion-col>
+
+          <!-- Profile Picture --
+    <ion-thumbnail slot="start" class="round-image" style="position: absolute; top: 20px; left: 20px;">
+      <img [src]="student?.profileImageUrl || 'assets/default-profile.png'" alt="{{ student?.name }}">
+    </ion-thumbnail>
+  </ion-row>
+</ion-content>
+    <!-- <ion-list  class="col2">
+      <ion-item *ngFor="let student of students">
+    <ion-thumbnail slot="start" class="round-image">
+          <img [src]="student.profileImageUrl || 'assets/default-profile.png'" alt="{{ student.name }}">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ student.name }}</h2>
+          <p>الهوية: {{ student.studentID }}</p>
+          <p>الصف: {{ student.studentClass }}</p>
+        </ion-label> 
+      </ion-item>
+    </ion-list> -->
+  <!-- </ion-row> -->
+
+    <!-- Notification card--
+    <ion-button color="white" class="custom-button" (click)="navigateToNotification()">
+      <div class="custom-content">
+        <img src="assets/image.jpg" alt="Card Image">
+        <ion-text id="te">الإشعارات</ion-text>
+      </div>
+    </ion-button>
+
+    <!-- Tracking card --
+    <ion-button color="white" class="custom-button">
+      <div class="custom-content">
+        <img src="assets/image 13.jpg" alt="Card Image">
+        <ion-text id="te">تتبع الحافلة</ion-text>
+      </div>
+    </ion-button>
+
+    <!-- Scheduling card --
+    <ion-button color="white" class="custom-button" (click)=" goToAttendance()" >
+      <div class="custom-content">
+        <img src="assets/image 14.jpg" alt="Card Image">
+        <ion-text id="te">جدولة المواعيد</ion-text>
+      </div>
+    </ion-button> 
+  </ion-content>-->
 <!-- Menu on the left -->
 <ion-menu side="start" content-id="main-content" class="custom-menu">
   <ion-header>
@@ -7,23 +110,19 @@
   </ion-header>
 
   <ion-content class="ion-padding" dir="rtl">
-    <!-- List of menu items -->
     <ion-list>
-      
       <!-- Account -->
       <ion-item button routerLink="/account">
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         <ion-label>معلومات الطالب</ion-label>
       </ion-item>
-
       <!-- Settings -->
       <ion-item button routerLink="/settings">
         <ion-icon name="settings-outline" slot="start"></ion-icon>
         <ion-label>الإعدادات</ion-label>
       </ion-item>
-
       <!-- Log Out -->
-      <ion-item button button class="logout-button">
+      <ion-item button class="logout-button">
         <ion-icon name="log-out-outline" slot="start"></ion-icon>
         <ion-label> تسجيل الخروج</ion-label>
       </ion-item>
@@ -44,17 +143,31 @@
 
   <!-- Page content -->
   <ion-content [fullscreen]="true" dir="rtl" class="white-background">
-    <ion-row class="coustom">
-      <ion-col class="col1" size="7">
-        <ion-row><ion-text class="t1">مرحباً</ion-text></ion-row>
-        <ion-row><ion-text class="t2">ولي امر الطالب</ion-text></ion-row>
-        <ion-row><ion-text class="t3">نتمنى لك يوماً سعيداً</ion-text></ion-row>
+    <ion-row class="custom">
+      <ion-col size="7">
+        <ion-row>
+          <ion-text class="t1">مرحباً</ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text class="t2">
+            {{ students.length > 0 ? 'ولي امر الطالب ' + students[0].name : 'ولي امر الطالب' }}
+          </ion-text>
+        </ion-row>
+        <ion-row>
+          <ion-text class="t3">نتمنى لك يوماً سعيداً</ion-text>
+        </ion-row>
       </ion-col>
 
-      <ion-col class="col2" size="5">
-        <img src="assets/Read.JPG" alt="My Image" class="rounded-image">
+      <!-- Profile Picture -->
+      <ion-col size="5">
+        <ion-item *ngFor="let student of students">
+          <ion-thumbnail slot="start" class="round-image">
+            <img [src]="student.profileImageUrl || 'assets/default-profile.png'" alt="{{ student.name }}">
+          </ion-thumbnail>
+        </ion-item>
       </ion-col>
-    </ion-row>
+    </ion-row> 
+    
 
     <!-- Notification card -->
     <ion-button color="white" class="custom-button" (click)="navigateToNotification()">
@@ -73,10 +186,11 @@
     </ion-button>
 
     <!-- Scheduling card -->
-    <ion-button color="white" class="custom-button" (click)=" goToAttendance()">
+    <ion-button color="white" class="custom-button" (click)="goToAttendance()">
       <div class="custom-content">
         <img src="assets/image 14.jpg" alt="Card Image">
         <ion-text id="te">جدولة المواعيد</ion-text>
       </div>
     </ion-button>
   </ion-content>
+</div>

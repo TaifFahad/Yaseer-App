@@ -302,5 +302,11 @@ async addChildToLastCreatedParent(childData: Student): Promise<void> {
       throw new Error('Failed to add child to last created parent');
   }
 }
+async getStudentsByParentId(parentId: string): Promise<Student[]> {
+  const childRef = collection(this.firestore, `1/${parentId}/children`);
+  const querySnapshot = await getDocs(childRef);
+  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Student[];
+}
+
 
 }
