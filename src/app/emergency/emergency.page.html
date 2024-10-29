@@ -1,0 +1,44 @@
+<!-- Main content -->
+<div class="ion-page" id="main-content">
+  <!-- Header with Menu button -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="t1" slot="end">تنبيهات الطوارئ</ion-title>
+    </ion-toolbar>
+  </ion-header>
+    <ion-content [fullscreen]="true" dir="rtl" class="white-background">
+
+      <!-- Image centered -->
+      <div class="image-container">
+        <img src="assets/message.png" alt="My Image" class="background-image">
+      </div>
+    
+      <!-- Overlay text below the image -->
+      <div class="overlay-text">لا يوجد اشعارات طوارئ حاليا</div>
+    
+      <!-- Buttons positioned at the bottom -->
+      <div class="button-container">
+        <ion-button expand="block" type="submit"(click)=" sendEmergencyNotification()">
+          ارسال اشعار طوارئ
+        </ion-button>
+    
+        <ion-button expand="block" type="button" (click)="goToHomePage()">
+          العودة للصفحة الرئيسية
+        </ion-button>
+      </div>
+    
+    </ion-content>
+    
+    
+    
+  
+    
+
+
+
+
+  
+

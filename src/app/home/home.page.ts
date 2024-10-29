@@ -14,10 +14,13 @@ export class HomePage  {
 
   
   navigateToNotification() {
-    this.router.navigate(['/login']); // Navigate to the 'notification' route
+    this.router.navigate(['']); // Navigate to the 'notification' route
   }
-  goToLogin() {
+  logout(){
     this.router.navigate(['/login']);
-  }
 
+}
+goToAttendance(){
+  this.router.navigate(['/attendence'])
+}
 }

@@ -11,24 +11,27 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
-      // {
-      //   path: 'communication',
-      //   loadChildren: () => import('../communication/communication.module').then( m => m.CommunicationPageModule)
-      // },
+      {
+        path: 'communication',
+        loadChildren: () => import('../communication/communication.module').then( m => m.CommunicationPageModule)
+      },
       
-     // {
-      //   path: 'messages',
-      //   loadChildren: () => import('../messages/messages.module').then(m => m.MessagesPageModule)
-      // },
+  
       // {
-      //   path: 'account',
-      //   loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
-      // },
+        {
+          path: 'account',
+          loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+        },
       {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'emergency',
+        loadChildren: () => import('../emergency/emergency.module').then( m => m.EmergencyPageModule),
+        
+      },
     ]
   }
 ];

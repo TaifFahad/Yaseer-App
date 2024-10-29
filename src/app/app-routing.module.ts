@@ -38,6 +38,22 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
+  {
+    path: 'communication',
+    loadChildren: () => import('./communication/communication.module').then( m => m.CommunicationPageModule)
+  },
+  {
+    path: 'emergency',
+    loadChildren: () => import('./emergency/emergency.module').then( m => m.EmergencyPageModule)
+  },
+  {
+    path: 'attendence',
+    loadChildren: () => import('./attendence/attendence.module').then( m => m.AttendencePageModule)
+  },
 ];
 
 @NgModule({

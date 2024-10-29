@@ -52,19 +52,6 @@ export class AddstudentPage  {
       longitude: ['', Validators.required],
     });
   }
-
-  // ngOnInit() {
-  //   this.dataService.getLastCreatedParentId().then(parentId => {
-  //     this.parentId = parentId;
-  //     console.log('Parent ID:', this.parentId);
-  //   }).catch(error => {
-  //     console.error('Error fetching parent ID:', error);
-  //   });
-  // }
-  
-  //... rest of the class
-
-
   
   
   whereami() {
@@ -149,20 +136,7 @@ export class AddstudentPage  {
         profileImageUrl: this.imagePreview || ''
     };
 
-//     // // Assume parentId is retrieved dynamically (e.g., logged-in parent's ID)
-//     // const parentId = 'a1HQGUuQv5pWoBUx2i1M'; // Replace this with dynamic parent ID
-//     this.dataService.addChildToLastCreatedParent(newStudent);
 
-//     try {
-//         // Call the dataService to add a student under the parent
-//         const res = await this.dataService.addChild(parentId, newStudent);
-//         console.log('Student added successfully:', res);
-//         this.router.navigate(['/tabs']); // Redirect or handle success
-//     } catch (error) {
-//         console.error('Error adding student:', error);
-//     }
-// }}
-// Assuming newStudent is defined with student details
 try {
   await this.dataService.addChildToLastCreatedParent(newStudent); // Call the method to add child
   console.log('Student added successfully to the last created parent');

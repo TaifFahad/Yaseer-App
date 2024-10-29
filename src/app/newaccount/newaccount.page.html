@@ -135,7 +135,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()" >
   <ion-item fill="solid" class="ion-margin-bottom" >
     <ion-label position="stacked">اسم المستخدم <span class="required-star">*</span></ion-label>
-    <ion-input formControlName="username" type="text" required></ion-input>
+    <ion-input formControlName="username" type="text" required placeholder="ادخل اسم المستخدم"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
       اسم المستخدم يجب أن يحتوي على أحرف فقط.
     </ion-note>
@@ -144,7 +144,7 @@
   <!-- ID Number Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">رقم الهوية <span class="required-star">*</span></ion-label>
-    <ion-input formControlName="idNumber" type="text" required></ion-input>
+    <ion-input formControlName="idNumber" type="text" required placeholder="ادخل رقم الهوية"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('idNumber')?.invalid && (registerForm.get('idNumber')?.dirty || registerForm.get('idNumber')?.touched)">
       رقم الهوية يجب أن يتكون من 10 أرقام.
     </ion-note>
