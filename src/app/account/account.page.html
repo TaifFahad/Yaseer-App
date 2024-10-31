@@ -1,9 +1,10 @@
+<!----
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">تعديل الملف الشخصي</ion-title> <!-- تم إضافة ion-text-center -->
+    <ion-title class="ion-text-center">تعديل الملف الشخصي</ion-title> <!-- تم إضافة ion-text-center --
   </ion-toolbar>
 </ion-header>
 
@@ -11,32 +12,85 @@
   <div class="profile-container">
     
     <div class="profile-picture" (click)="selectProfilePicture()">
-      <ion-avatar class="profile-avatar"> <!-- تم تعديل الكلاس للتأكد من ضبط البوردر -->
+      <ion-avatar class="profile-avatar"> <!-- تم تعديل الكلاس للتأكد من ضبط البوردر --
         <img src="assets/userPic.png" />
         <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
       </ion-avatar>
     </div>
     <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*"/>
 
-    <!-- الحقول المطلوبة -->
+    <!-- الحقول المطلوبة --
     <ion-card dir="rtl">
       <ion-card-content>
-        <!-- حقل الاسم -->
+        <!-- حقل الاسم --
         <ion-item fill="solid" class="ion-margin-bottom">
           <ion-label position="stacked">الاسم</ion-label>
           <ion-input type="text"></ion-input>
         </ion-item>
 
-        <!-- حقل رقم الهوية -->
+        <!-- حقل رقم الهوية --
         <ion-item fill="solid" class="ion-margin-bottom">
           <ion-label position="stacked">رقم الهوية</ion-label>
           <ion-input type="number" placeholder="2223404500"></ion-input>
         </ion-item>
 
-        <!-- حقل رقم الجوال -->
+        <!-- حقل رقم الجوال --
         <ion-item fill="solid" class="ion-margin-bottom">
           <ion-label position="stacked">رقم الهاتف</ion-label>
           <ion-input type="tel" placeholder="05770097688"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+
+    <ion-button expand="block" class="change-password-button" (click)="goToChangePassword()">
+      تغيير كلمة المرور
+      <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button expand="block" class="save-changes-button">
+      حفظ التغييرات
+    </ion-button>
+  </div>
+</ion-content>-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">تعديل الملف الشخصي</ion-title>
+
+     
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="profile-container">
+    <div class="profile-picture" (click)="selectProfilePicture()" *ngFor="let student of students">
+      <ion-avatar class="profile-avatar">
+        <img [src]="student.profileImageUrl|| 'assets/default-profile.png'" alt="{{ student.name }}">
+        <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+      </ion-avatar>
+    </div>
+    
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*"/>
+
+    <ion-card dir="rtl">
+      <ion-card-content>
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">الاسم</ion-label>
+          <ion-input type="text" [(ngModel)]="parentInfo.username"></ion-input>
+        </ion-item>
+
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">رقم الهوية</ion-label>
+          <ion-input type="number" [(ngModel)]="parentInfo.idNumber"></ion-input>
+        </ion-item>
+
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input type="tel" [(ngModel)]="parentInfo.phoneNumber"></ion-input>
         </ion-item>
       </ion-card-content>
     </ion-card>

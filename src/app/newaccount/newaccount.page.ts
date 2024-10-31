@@ -114,7 +114,8 @@ interface account{
   styleUrls: ['./newaccount.page.scss'],
 })
 export class NewaccountPage implements OnInit {
-  
+  isSubmitting = false; // Define and initialize isSubmitting property
+
   registerForm!: FormGroup;
   accounts: account[] = [];
   constructor(
@@ -137,7 +138,7 @@ export class NewaccountPage implements OnInit {
   ngOnInit(): void {
     
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], // Only alphabets
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Zأ-ي\\s]*$')]], // Only alphabets
       idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit phone 'number'
       email: ['', [Validators.required, Validators.email]], // Email validation
@@ -154,24 +155,49 @@ export class NewaccountPage implements OnInit {
     return password === confirmPassword ? null : { notMatch: true };
   }
 
+// async register() {
+
+//     const loading = await this.loadingController.create({ message: 'Registering...' });
+//     await loading.present();
+  
+//     const { username, idNumber, phoneNumber, email, password } = this.registerForm.value;
+  
+//     try {
+//       const user = await this.authService.register({ username, idNumber, phoneNumber, email, password });
+//       if (user) {
+//         this.router.navigateByUrl('/addstudent', { replaceUrl: true });
+//       }
+//     } catch (error: any) {
+//       const errorMessage = error.message || 'Registration failed. Please try again.';
+//       this.showAlert('Registration failed', errorMessage);
+//     } finally {
+//       await loading.dismiss(); // Ensure dismiss is called in all cases
+//     }
+//   }
 async register() {
-  const loading = await this.loadingController.create({ message: 'Registering...' });
+  // Add isSubmitting to prevent multiple submissions
+  if (this.isSubmitting) return;
+  this.isSubmitting = true;
+
+  const loading = await this.loadingController.create({ message: 'جاري التحميل' });
   await loading.present();
 
   const { username, idNumber, phoneNumber, email, password } = this.registerForm.value;
 
   try {
     const user = await this.authService.register({ username, idNumber, phoneNumber, email, password });
-    await loading.dismiss();
     if (user) {
-      this.router.navigateByUrl('/addstudent', { replaceUrl: true });
+      await this.router.navigateByUrl('/addstudent', { replaceUrl: true });
     }
-  } catch (error: any) { // Use 'any' to specify the type of error
-    await loading.dismiss();
-    const errorMessage = error.message || 'Registration failed. Please try again.'; // Provide a default message
+  } catch (error: any) {
+    const errorMessage = error.message || 'Registration failed. Please try again.';
     this.showAlert('Registration failed', errorMessage);
+  } finally {
+    this.isSubmitting = false; // Reset flag after registration attempt
+    await loading.dismiss(); // Ensure loading is dismissed in all cases
   }
 }
+
 
 
   // Alert for registration errors
@@ -183,29 +209,29 @@ async register() {
     });
     await alert.present();
   }
-async addAccount(){
-  const newAccount: account = {
-    username: this.registerForm.get('username')?.value,
-    idNumber: this.registerForm.get('idNumber')?.value,
-    phoneNumber: this.registerForm.get('phoneNumber')?.value,
-    email: this.registerForm.get('email')?.value,
-    password: this.registerForm.get('password')?.value, // Consider hashing before storing
-    relationship: this.registerForm.get('relationship')?.value,
-  };
-  if (!newAccount.idNumber) {
-    console.error('ID number is required.');
-    return; // Prevent adding if idnumber is missing
-  }
+// async addAccount(){
+//   const newAccount: account = {
+//     username: this.registerForm.get('username')?.value,
+//     idNumber: this.registerForm.get('idNumber')?.value,
+//     phoneNumber: this.registerForm.get('phoneNumber')?.value,
+//     email: this.registerForm.get('email')?.value,
+//     password: this.registerForm.get('password')?.value, // Consider hashing before storing
+//     relationship: this.registerForm.get('relationship')?.value,
+//   };
+//   if (!newAccount.idNumber) {
+//     console.error('ID number is required.');
+//     return; // Prevent adding if idnumber is missing
+//   }
 
-  try {
-    const res = await this.dataService.addAcc(newAccount);
-    console.log('Account added successfully:', res); // Handle success response if needed
+//   try {
+//     const res = await this.dataService.addAcc(newAccount);
+//     console.log('Account added successfully:', res); // Handle success response if needed
     
-  } catch (error) {
-    console.error('Error adding account:', error);
-    // Handle errors appropriately (e.g., display error message to the user)
-  }
-}
+//   } catch (error) {
+//     console.error('Error adding account:', error);
+//     // Handle errors appropriately (e.g., display error message to the user)
+//   }
+// }
 
   // Navigate to login page
   goToLogin() {

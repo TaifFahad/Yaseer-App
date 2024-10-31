@@ -153,7 +153,7 @@
   <!-- Phone Number Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">رقم الهاتف<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="phoneNumber" type="text" required></ion-input>
+    <ion-input formControlName="phoneNumber" type="text" required placeholder="ادخل رقم الهاتف"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)">
       رقم الهاتف يجب أن يتكون من 10 أرقام.
     </ion-note>
@@ -162,7 +162,7 @@
   <!-- Email Input -->
 <ion-item fill="solid" class="ion-margin-bottom">
 <ion-label position="stacked">البريد الإلكتروني<span class="required-star">*</span></ion-label>
-<ion-input formControlName="email" type="email" required></ion-input>
+<ion-input formControlName="email" type="email" required placeholder="ادخل البريد الالكتروني"></ion-input>
 <ion-note color="danger" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
   البريد الإلكتروني غير صالح. يرجى إدخال بريد إلكتروني صحيح.
 </ion-note>
@@ -171,7 +171,7 @@
   <!-- Password Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">كلمة المرور<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="password" type="password" required></ion-input>
+    <ion-input formControlName="password" type="password" required placeholder="ادخل كلمة المرور"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
       كلمة المرور يجب أن تحتوي على 8 أحرف وأرقام على الأقل.
     </ion-note>
@@ -180,7 +180,7 @@
   <!-- Confirm Password Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">تأكيد كلمة المرور<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="confirmPassword" type="password" required></ion-input>
+    <ion-input formControlName="confirmPassword" type="password" required placeholder="ادخل كلمة المرور"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
       كلمة المرور وتأكيدها يجب أن تكون متطابقتين.
     </ion-note>
@@ -188,8 +188,8 @@
 
   <!-- Relationship Dropdown -->
   <ion-item fill="solid" class="ion-margin-bottom">
-    <ion-label position="stacked">صلة القرابة<span class="required-star">*</span></ion-label>
-    <ion-select   dir="ltr" formControlName="relationship" required>
+    <ion-label position="stacked">صلة القرابة<span class="required-star" >*</span></ion-label>
+    <ion-select   placeholder="اختر" dir="ltr" formControlName="relationship" required>
       <ion-select-option value="father">أب</ion-select-option>
       <ion-select-option value="mother">أم</ion-select-option>
       <ion-select-option value="sibling">أخ/أخت</ion-select-option>
@@ -201,7 +201,7 @@
   </ion-item>
 
   <!-- Submit Button -->
-  <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" (click)="addAccount()">
+  <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" (click)="register()">
     تسجيل 
   </ion-button>
 

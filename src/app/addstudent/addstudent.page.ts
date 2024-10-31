@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { DataService } from '../services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingController } from '@ionic/angular'; // Import LoadingController
 
 interface Student {
   id?: string;
@@ -36,7 +37,8 @@ export class AddstudentPage  {
     private geo: Geolocation, 
     private router: Router,
     private dataService: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loadingController: LoadingController 
   ) {
     this.studentForm = this.fb.group({
       studentname: ['', [Validators.required, Validators.pattern('^[a-zA-Zأ-ي\\s]*$')]],
@@ -116,10 +118,16 @@ export class AddstudentPage  {
   // Form submission
   async goToAddStudent() {
     if (!this.studentForm.valid || this.selectedImage === null) {
-        console.error('Form is invalid.');
-        this.studentForm.markAllAsTouched();
-        return;
+      console.error('Form is invalid.');
+      this.studentForm.markAllAsTouched();
+      return;
     }
+
+    const loading = await this.loadingController.create({
+      message: 'جاري التحميل', // Loading message
+    });
+    await loading.present(); // Show the loading indicator
+
 
     // Create a new student object using form data
     const newStudent: Student = {

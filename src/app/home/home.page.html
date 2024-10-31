@@ -106,6 +106,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
+      
     </ion-toolbar>
   </ion-header>
 
@@ -123,7 +124,7 @@
       </ion-item>
       <!-- Log Out -->
       <ion-item button class="logout-button">
-        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-icon name="log-out-outline" slot="start" onclick="logout()"></ion-icon>
         <ion-label> تسجيل الخروج</ion-label>
       </ion-item>
     </ion-list>
@@ -138,6 +139,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
+  
     </ion-toolbar>
   </ion-header>
 
@@ -147,9 +149,11 @@
       <ion-col size="7">
         <ion-row>
           <ion-text class="t1">مرحباً</ion-text>
+          
         </ion-row>
         <ion-row>
           <ion-text class="t2">
+            
             {{ students.length > 0 ? 'ولي امر الطالب ' + students[0].name : 'ولي امر الطالب' }}
           </ion-text>
         </ion-row>
@@ -162,6 +166,7 @@
       <ion-col size="5">
         <ion-item *ngFor="let student of students">
           <ion-thumbnail slot="start" class="round-image">
+            
             <img [src]="student.profileImageUrl || 'assets/default-profile.png'" alt="{{ student.name }}">
           </ion-thumbnail>
         </ion-item>

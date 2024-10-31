@@ -220,7 +220,7 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const loading = await this.loadingController.create({ message: 'Logging in...' });
+    const loading = await this.loadingController.create({ message: 'تسجيل الدخول' });
     await loading.present();
     
     const user = await this.authService.login(this.credentials.value);
