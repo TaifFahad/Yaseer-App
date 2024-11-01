@@ -1,110 +1,106 @@
 ion-content {
-    --background: #ffffff; /* تعيين خلفية المحتوى للون الأبيض */
-  }
-  
-  ion-toolbar {
-    --background: #ffffff; /* تعيين خلفية التول بار للون الأبيض */
-    text-align: center; 
-    
-  }
-  
-  /* تنسيق لصفحة الملف الشخصي */
-  .profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  ion-title {
-    text-align: center;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    color: #000000; /* لون النص */
-    
-  }
-  
-  .profile-picture {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .profile-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #000; /* تعيين البوردر ليحيط بالصورة بالكامل */
-    position: relative;
-  }
-  
-  .camera-icon {
-    font-size: 24px;
-    margin-top: -30px;
-    background-color: #fff;
-    padding: 5px;
-    border-radius: 50%;
-    color: #000000;
-    border: 1px solid #ccc;
-  }
-  
-  ion-avatar {
-    width: 120px;
-    height: 120px;
-  }
-  
-  ion-list {
-    --background: #ffffff; /* خلفية بيضاء للقائمة */
-    width: 100%;
-    max-width: 400px;
-    margin-top: 20px;
-  }
-  
-  ion-item {
-    --background: #ffffffb1; /* خلفية بيضاء للعناصر */
-    text-align: right; /* محاذاة النص إلى اليمين */
-    justify-content: right;
-  }
-  
-  ion-label {
-    text-align: right; /* محاذاة النص إلى اليمين */
-    width: 100%;
-    color: #000; /* لون النص أسود */
-  }
-  
-    /* Style the login button */
-    ion-button {
-        --background: #F8C71E; /* Button background color */
-        --border-radius: 30px; /* Reduce border radius for better fit */
-        margin-top: 16px; /* Adjust margin for spacing */
-        width: 100%;
-        max-width: 330px; /* Match the card width */
-        font-weight: bolder;
-      color: #000000;
-      margin-right: 5%;
-        /* Change text color to white when pressed (active state) */
-        --color-activa5ted: #ffffff; /* Text color when button is pressed */
-      }
-    
+  --background: #ffffff;
+}
 
-  ion-card {
-    width: 100%;
-    max-width: 330px; /* Adjusted to better fit iPhone screen */
-    padding: 16px;
-    padding-right: 5%; /* Reduce padding to make space */
-    --background: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-  }
+ion-toolbar {
+  --background: #ffffff;
+  text-align: center; 
+}
 
-  ion-item {
-    margin-bottom: 22px; /* Slightly reduce margin */
-    padding: auto;
-    --background: #ffffff;
-    color: #000000;
-    font-weight: bolder;
-  }
-  ion-input {
-    color: rgb(171, 170, 170);
-  }
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+ion-title {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  position: relative;
+}
+
+.camera-icon {
+  font-size: 24px;
+  margin-top: -30px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  color: #000000;
+  border: 1px solid #ccc;
+}
+
+ion-avatar {
+  width: 120px;
+  height: 120px;
+}
+
+ion-list {
+  --background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+ion-item {
+  --background: #ffffffb1;
+  text-align: right;
+  justify-content: right;
+}
+
+ion-label {
+  text-align: right;
+  width: 100%;
+  color: #000;
+}
+
+ion-button {
+  --background: #F8C71E;
+  --border-radius: 30px;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 330px;
+  font-weight: bolder;
+  color: #000000;
+  margin-right: 5%;
+  --color-activa5ted: #ffffff;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 330px;
+  padding: 16px;
+  padding-right: 5%;
+  --background: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+ion-item {
+  margin-bottom: 22px;
+  padding: auto;
+  --background: #ffffff;
+  color: #000000;
+  font-weight: bolder;
+}
+
+ion-input {
+  color: rgb(171, 170, 170);
+}

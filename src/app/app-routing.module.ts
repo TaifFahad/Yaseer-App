@@ -54,6 +54,18 @@ const routes: Routes = [
     path: 'attendence',
     loadChildren: () => import('./attendence/attendence.module').then( m => m.AttendencePageModule)
   },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },
+  {
+    path: 'verifi',
+    loadChildren: () => import('./verifi/verifi.module').then( m => m.VerifiPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
 ];
 
 @NgModule({

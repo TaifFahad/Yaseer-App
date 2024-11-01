@@ -245,4 +245,8 @@ export class LoginPage implements OnInit {
   goToSignUp() {
     this.router.navigate(['/newaccount']);
   }
+    // Navigate to Forget Password page
+    gotoforgetpassword() {
+      this.router.navigate(['/forget-password']); // Redirect to forget-password page
+    }
 }

@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- الصورة واسم ولي الأمر -->
   <div class="profile-section">
     <ion-avatar class="custom-avatar">
       <img src="assets/userPic.png" alt="صورة ولي الأمر">
@@ -15,7 +14,6 @@
     <p class="parent-name">سائق الباص</p>
   </div>
 
-  <!-- الرسائل المرسلة -->
   <div class="messages-section">
     <div *ngFor="let message of messages" class="message">
       <p>{{ message.text }}</p>
@@ -24,7 +22,6 @@
   </div>
 </ion-content>
 
-<!-- صندوق إدخال الرسالة -->
 <ion-footer class="ion-no-border message-footer">
   <ion-toolbar>
     <div class="message-box">
@@ -40,6 +37,4 @@
         </ion-button>
       </ion-buttons>
     </div>
- 
-
-
+</ion-footer>
