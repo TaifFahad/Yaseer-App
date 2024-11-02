@@ -63,22 +63,46 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { Firestore, setDoc, doc, query, getDocs, collection, where } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private firestore: Firestore) {}
 
-async register({ username, idNumber, phoneNumber, email, password }: { username: string; idNumber: string; phoneNumber: string; email: string; password: string; }) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-    return userCredential; // Return userCredential instead of user
-  } catch (e) {
-    console.error('Registration error:', e);
-    return null; // Log error for debugging
+
+  async register({ username, idNumber, phoneNumber, email, password, profileImageUrl }: 
+    { username: string; idNumber: string; phoneNumber: string; email: string; password: string; profileImageUrl: string; }) {
+    try {
+      // Create user with Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+  
+      // Get the UID of the newly created user
+      const userId = userCredential.user.uid; 
+  
+      // Prepare user data to save in Firestore
+      const userData = {
+        username,
+        idNumber,
+        phoneNumber,
+        email,
+        password,
+        profileImageUrl, // Ensure profileImageUrl is included
+        createdAt: new Date(),
+      };
+  
+      // Save additional user data in Firestore
+      await setDoc(doc(this.firestore, 'Driver', userId), userData);
+  
+      return userCredential; // Return the userCredential for further use if needed
+    } catch (e) {
+      console.error('Registration error:', e);
+      return null; // Log error for debugging
+    }
   }
-}
+  
+
 
   async login({ email, password }: { email: string; password: string; }): Promise<any> {
     try {
@@ -93,4 +117,9 @@ async register({ username, idNumber, phoneNumber, email, password }: { username:
   logout() {
     // Implement logout functionality if needed
   }
+    // Add this method to get the current user's ID
+    getCurrentUserId(): string | null {
+      const user = this.auth.currentUser; // Get the current user
+      return user ? user.uid : null; // Return the user's UID or null if not logged in
+    }
 }

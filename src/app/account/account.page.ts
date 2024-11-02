@@ -1,46 +1,97 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { AuthService } from '../services/auth.service';
+import { LoadingController } from '@ionic/angular'; // Import LoadingController
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
-})
-export class AccountPage  {
-  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef; // إضافة علامة ! لتجنب الخطأ
-  profilePicture: string = 'assets/driverpiq.jpg'; // المسار الافتراضي للصورة
+})export class AccountPage implements OnInit {
 
-  user = {
-    name: 'عبدالله',
-    idNumber: '2223404500',
-    phoneNumber: '05770097688',
+  driverInfo: { 
+    username: string; 
+    idNumber: string; 
+    phoneNumber: string; 
+    profileImageUrl: string 
+  } = {
+    username: '',        // Default empty value
+    idNumber: '',        // Default empty value
+    phoneNumber: '',     // Default empty value
+    profileImageUrl: ''  // Default placeholder
   };
+  fileInput: ElementRef | undefined;
+  profilePicture: any;
 
-  constructor(private router: Router) {}
-
-  // دالة تفتح نافذة اختيار الصورة
-  selectProfilePicture() {
-    this.fileInput.nativeElement.click();
+  @ViewChild('fileInput', { static: false }) 
+  set fileInputRef(element: ElementRef) {
+    this.fileInput = element;
   }
 
-  // دالة للتعامل مع الصورة المختارة
+  constructor(
+    private router: Router,
+    private loadingController: LoadingController,
+    private authService: AuthService,
+    private firestore: Firestore
+  ) {}
+
+  ngOnInit() {
+    this.loadDriverData();
+  }
+
+  async loadDriverData() {
+    const loading = await this.loadingController.create({
+      message: 'جاري التحميل',
+    });
+    await loading.present();
+
+    const driverID = this.authService.getCurrentUserId();
+    if (driverID) {
+      try {
+        const driverDocRef = doc(this.firestore, 'Driver', driverID);
+        const driverDoc = await getDoc(driverDocRef);
+        if (driverDoc.exists()) {
+          const driverData = driverDoc.data();
+          this.driverInfo = {
+            username: driverData['username'] || '',
+            idNumber: driverData['idNumber'] || '',
+            phoneNumber: driverData['phoneNumber'] || '',
+            profileImageUrl: driverData['profileImageUrl'] || 'assets/default-profile.png',
+          };
+        } else {
+          console.error('Driver document does not exist');
+        }
+      } catch (error) {
+        console.error('Error fetching driver data:', error);
+      }
+    }
+    await loading.dismiss();
+  }
+
+  selectProfilePicture() {
+    this.fileInput?.nativeElement.click();
+  }
+
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.profilePicture = e.target.result; // تعيين الصورة المختارة
+        this.profilePicture = e.target.result;
       };
       reader.readAsDataURL(file);
     }
   }
 
   goToChangePassword() {
-    this.router.navigate(['/change-password']); // توجيه المستخدم لصفحة تغيير كلمة المرور
+    this.router.navigate(['/change-password']);
   }
 
   saveChanges() {
-    // حفظ التغييرات
+    if (this.driverInfo) {
+      console.log("Changes saved:", this.driverInfo);
+    }
   }
 }

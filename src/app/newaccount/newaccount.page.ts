@@ -6,15 +6,17 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
 
-interface account{
+export interface account {
   id?: string;
   username: string;
   idNumber: string;
   phoneNumber: string;
   email: string;
   password: string;
-
+  profileImageUrl: string; // Ensure this property is included
 }
+
+
 
 @Component({
   selector: 'app-newaccount',
@@ -22,9 +24,13 @@ interface account{
   styleUrls: ['./newaccount.page.scss'],
 })
 export class NewaccountPage implements OnInit {
-  
+    isSubmitting = false; // Define and initialize isSubmitting property
+
   registerForm!: FormGroup;
   accounts: account[] = [];
+  selectedImage: File | null = null;
+  imagePreview: string | null = null;
+  message: string | null = null; // Make su
   constructor(
     private fb: FormBuilder,
     private loadingController: LoadingController,
@@ -45,12 +51,13 @@ export class NewaccountPage implements OnInit {
   ngOnInit(): void {
     
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], // Only alphabets
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Zأ-ي\\s]*$')]], // Only alphabets
       idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit numeric ID
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // 10-digit phone 'number'
       email: ['', [Validators.required, Validators.email]], // Email validation
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchPassword.bind(this)]],
+      profileImage: [null, Validators.required],
         });
   }
 
@@ -61,25 +68,34 @@ export class NewaccountPage implements OnInit {
     return password === confirmPassword ? null : { notMatch: true };
   }
 
-async register() {
-  const loading = await this.loadingController.create({ message: 'Registering...' });
-  await loading.present();
 
-  const { username, idNumber, phoneNumber, email, password } = this.registerForm.value;
-
-  try {
-    const user = await this.authService.register({ username, idNumber, phoneNumber, email, password });
-    await loading.dismiss();
-    if (user) {
-      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    async register() {
+      if (this.isSubmitting) return; // Prevent further submissions if already submitting
+      this.isSubmitting = true; // Set submitting flag
+    
+      const loading = await this.loadingController.create({ message: 'جاري التسجيل' });
+      await loading.present();
+    
+      const { username, idNumber, phoneNumber, email, password } = this.registerForm.value;
+      const profileImageUrl = this.imagePreview || ''; // Use image preview or empty string
+    
+      try {
+        // Pass profileImageUrl in the registration parameters
+        const user = await this.authService.register({ username, idNumber, phoneNumber, email, password, profileImageUrl });
+        await loading.dismiss();
+        if (user) {
+          this.router.navigateByUrl('/tabs', { replaceUrl: true });
+        }
+      } catch (error: any) {
+        await loading.dismiss();
+        const errorMessage = error.message || 'Registration failed. Please try again.';
+        this.showAlert('Registration failed', errorMessage);
+      } finally {
+        this.isSubmitting = false; // Reset flag after processing
+      }
     }
-  } catch (error: any) { // Use 'any' to specify the type of error
-    await loading.dismiss();
-    const errorMessage = error.message || 'Registration failed. Please try again.'; // Provide a default message
-    this.showAlert('Registration failed', errorMessage);
-  }
-}
-
+    
+  
 
   // Alert for registration errors
   async showAlert(header: string, message: string) {
@@ -97,6 +113,7 @@ async addAccount(){
     phoneNumber: this.registerForm.get('phoneNumber')?.value,
     email: this.registerForm.get('email')?.value,
     password: this.registerForm.get('password')?.value, // Consider hashing before storing
+         profileImageUrl: this.imagePreview || ''
      };
   if (!newAccount.idNumber) {
     console.error('ID number is required.');
@@ -116,6 +133,45 @@ async addAccount(){
   // Navigate to login page
   goToLogin() {
     this.router.navigate(['/login']);
+  }
+    // Choose image handler
+    chooseImage() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (event: any) => {
+        this.onImageChange(event);
+      };
+      input.click();
+    }
+      // Image upload handler with size validation
+  onImageChange(event: any) {
+    const file = event.target.files[0];
+    const maxSizeInBytes = 1048487; // 1 MB limit in bytes
+
+    if (file) {
+      // Check if file size exceeds the maximum allowed size
+      if (file.size > maxSizeInBytes) {
+        console.error('The selected image is too large. Please choose an image under 1 MB.');
+        this.message = 'يجب اختيار صورة حجمها اقل من 1 ميجابايت'; // Set message for image size error
+        return;
+     
+
+      }
+      
+      this.selectedImage = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+        this.registerForm.get('profileImage')?.setValue(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  removeImage() {
+    this.selectedImage = null;
+    this.imagePreview = null;
+    this.registerForm.get('profileImage')?.setValue(null);
   }
 
 }
