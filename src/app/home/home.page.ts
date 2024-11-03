@@ -39,5 +39,8 @@ export class HomePage {
   logout(){
     this.router.navigate(['/login'])
   }
+  goToTracking(){
+    this.router.navigate(['/tracking'])
+  }
 }
 

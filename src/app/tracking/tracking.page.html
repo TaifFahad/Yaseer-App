@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="gray">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
+    </ion-buttons>
+    <ion-title>نظام تحديد المواقع </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- خريطة Google Maps كخلفية -->
+  <div id="map" style="width: 100%; height: 70vh;"></div>
+
+  <!-- شريط الأدوات أسفل الخريطة -->
+  <ion-card class="route-info">
+    <ion-item lines="none">
+      <ion-label>
+        <h2>المدرسة الابتدائية الثانية والثمانون...</h2>
+        <p>أسرع مسار حركة المرور عادية</p>
+      </ion-label>
+    </ion-item>
+    <ion-button expand="block" (click)="startTracking()">بدء</ion-button>
+  </ion-card>
+</ion-content>

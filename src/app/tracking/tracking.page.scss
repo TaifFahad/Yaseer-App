@@ -1,0 +1,49 @@
+ion-toolbar{
+    --background: aliceblue;
+
+}
+ion-title{
+    color: black;
+    text-align: right;
+    font-weight: bolder;
+}
+      /* تخصيص مظهر Google Maps */
+#map {
+    height: 70vh;
+}
+
+/* تصميم شريط المعلومات أسفل الخريطة */
+.route-info {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    height: 20vh;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 15px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    align-items: center; /* لتوسيط المحتوى أفقيًا */
+    text-align: center;
+}
+
+ion-item {
+    align-items: center; /* لتوسيط المحتوى أفقيًا */
+    text-align: center;
+}
+
+/* Style the login button */
+ion-button {
+    --background: #F8C71E; /* Button background color */
+    --border-radius: 30px; /* Reduce border radius for better fit */
+    margin-top: 16px; /* Adjust margin for spacing */
+    width: 100%;
+    max-width: 200px; /* Match the card width */
+    font-weight: bolder;
+    color: #000000;
+    margin: 0 auto; /* Center horizontally */
+    /* Change text color to white when pressed (active state) */
+    --color-active: #ffffff; /* Text color when button is pressed */
+    display: block; /* Make button a block element to center it */
+}
