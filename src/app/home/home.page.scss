@@ -52,15 +52,31 @@ ion-content {
   .t3{
     font-size: 18px;
     margin-right: 60px;
-    color:#000;
+   
   }
 .col2{
    display:flex;
    justify-content: center;
     align-items: center;
     margin-top: 30px;
+
    
 }
+
+.round-image {
+  position: relative; /* Ensure the position is relative for the child element */
+  overflow: hidden; /* Ensure that overflow is hidden to keep the image within bounds */
+  width: 100px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  border-radius: 50%; /* This will make the container round */
+}
+
+.profile-img {
+  width: 100%; /* Make the image fill the container */
+  height: 100%; /* Ensure the image fills the height */
+  object-fit: cover; /* Ensure the image covers the entire area */
+}
+
 #te{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 15px;

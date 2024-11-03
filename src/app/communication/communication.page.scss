@@ -11,7 +11,11 @@ ion-content {
     justify-content: center;
     margin-top: 20px;
   }
-  
+  ion-header {
+    --background: #ffffff; /* تعيين خلفية التول بار للون الأبيض */
+    text-align: center; 
+    
+  }
   .custom-avatar {
     width: 100px;
     height: 100px;

@@ -6,13 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './forget-password.page.html',
   styleUrls: ['./forget-password.page.scss'],
 })
-export class ForgetPasswordPage implements OnInit {
+export class ForgetPasswordPage  {
 
   isPhoneSelected: boolean = false; // لتعقب ما إذا تم تحديد كارد الهاتف
 
   constructor(private router: Router) { }
 
-  ngOnInit() {}
+
   
   // دالة لتحديد كارد الهاتف وتفعيل الزر
   selectPhoneOption() {

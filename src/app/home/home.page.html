@@ -9,7 +9,6 @@
   <ion-content class="ion-padding" dir="rtl">
     <!-- List of menu items -->
     <ion-list>
-      
       <!-- Settings -->
       <ion-item button routerLink="/settings">
         <ion-icon name="settings-outline" slot="start"></ion-icon>
@@ -17,9 +16,9 @@
       </ion-item>
 
       <!-- Log Out -->
-      <ion-item button button class="logout-button" (click)="logout()">
+      <ion-item button class="logout-button" (click)="logout()">
         <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        <ion-label> تسجيل الخروج</ion-label>
+        <ion-label>تسجيل الخروج</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
@@ -38,40 +37,53 @@
 
   <!-- Page content -->
   <ion-content [fullscreen]="true" dir="rtl" class="white-background">
-
-    <ion-row class="coustom">
+    <ion-row class="custom">
       <ion-col class="col1" size="7">
-        <ion-row><ion-text class="t1">مرحبًا</ion-text></ion-row>
-        <ion-row><ion-text class="t3">نتمنى لك يوم سعيد</ion-text></ion-row>
+        <ion-row>
+          <ion-text class="t1">مرحبًا</ion-text>
+        </ion-row>
+        <div *ngIf="driverInfo">
+          <p class="t2">{{ driverInfo.username }}</p>
+        </div>
+        <ion-row>
+          <ion-text class="t3">نتمنى لك يوم سعيد</ion-text>
+        </ion-row>
       </ion-col>
 
       <ion-col class="col2" size="5">
-        <img src="assets/DriverPhoto.png" alt="My Image" class="rounded-image">
+        <div class="round-image">
+           
+        <img *ngIf="driverInfo && driverInfo.profileImageUrl; else placeholder" [src]="driverInfo.profileImageUrl" alt="Profile Image" />
+        
+        <ng-template #placeholder class=>
+          <img src="assets/LOGO.png" alt="Default Profile Image" /> <!-- Placeholder image -->
+        </ng-template>
+        </div>
       </ion-col>
     </ion-row>
 
      <!-- Optimazepath card -->
-    <ion-button color="white" class="custom-button" (click)=" goToTracking()">
+    <ion-button color="white" class="custom-button"(click)=" goToTracking()">
       <div class="custom-content">
-        <img src="assets/image 13.jpg" alt="Card Image">
+        <img src="assets/image 13.jpg" alt="Card Image" />
         <ion-text id="te">نظام تحديد المواقع</ion-text>
       </div>
     </ion-button>
 
-<!-- Attendance card -->
-    <ion-button color="white" class="custom-button" (click)=" goToAttendance()">
+    <!-- Attendance card -->
+    <ion-button color="white" class="custom-button" (click)="goToAttendance()">
       <div class="custom-content">
-        <img src="assets/image 14.jpg" alt="Card Image">
+        <img src="assets/image 14.jpg" alt="Card Image" />
         <ion-text id="te">الحضور</ion-text>
       </div>
     </ion-button>
-<!-- Emergency card -->
-<ion-button type="submit" color="white" class="custom-button" (click)="goToEmergency()">
-  <div class="custom-content">
-    <img src="assets/emrgency.png" alt="Card Image">
-    <ion-text id="te">الطوارئ</ion-text>
-  </div>
-</ion-button>
 
-
+    <!-- Emergency card -->
+    <ion-button type="submit" color="white" class="custom-button" (click)="goToEmergency()">
+      <div class="custom-content">
+        <img src="assets/emrgency.png" alt="Card Image" />
+        <ion-text id="te">الطوارئ</ion-text>
+      </div>
+    </ion-button>
   </ion-content>
+</div>

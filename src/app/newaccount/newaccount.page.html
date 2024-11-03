@@ -10,7 +10,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()" >
   <ion-item fill="solid" class="ion-margin-bottom" >
     <ion-label position="stacked">اسم المستخدم <span class="required-star">*</span></ion-label>
-    <ion-input formControlName="username" type="text" required></ion-input>
+    <ion-input formControlName="username" type="text" required placeholder="ادخل اسم المستخدم"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)">
       اسم المستخدم يجب أن يحتوي على أحرف فقط.
     </ion-note>
@@ -19,7 +19,7 @@
   <!-- ID Number Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">رقم الهوية <span class="required-star">*</span></ion-label>
-    <ion-input formControlName="idNumber" type="text" required></ion-input>
+    <ion-input formControlName="idNumber" type="text" required placeholder="ادخل رقم الهوية"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('idNumber')?.invalid && (registerForm.get('idNumber')?.dirty || registerForm.get('idNumber')?.touched)">
       رقم الهوية يجب أن يتكون من 10 أرقام.
     </ion-note>
@@ -28,7 +28,7 @@
   <!-- Phone Number Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">رقم الهاتف<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="phoneNumber" type="text" required></ion-input>
+    <ion-input formControlName="phoneNumber" type="text" required  placeholder="ادخل رقم الهاتف"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)">
       رقم الهاتف يجب أن يتكون من 10 أرقام.
     </ion-note>
@@ -37,7 +37,7 @@
   <!-- Email Input -->
 <ion-item fill="solid" class="ion-margin-bottom">
 <ion-label position="stacked">البريد الإلكتروني<span class="required-star">*</span></ion-label>
-<ion-input formControlName="email" type="email" required></ion-input>
+<ion-input formControlName="email" type="email" required placeholder="ادخل البريد الالكتروني"></ion-input>
 <ion-note color="danger" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
   البريد الإلكتروني غير صالح. يرجى إدخال بريد إلكتروني صحيح.
 </ion-note>
@@ -46,7 +46,7 @@
   <!-- Password Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">كلمة المرور<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="password" type="password" required></ion-input>
+    <ion-input formControlName="password" type="password" required  placeholder="ادخل كلمة المرور"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
       كلمة المرور يجب أن تحتوي على 8 أحرف وأرقام على الأقل.
     </ion-note>
@@ -55,16 +55,46 @@
   <!-- Confirm Password Input -->
   <ion-item fill="solid" class="ion-margin-bottom">
     <ion-label position="stacked">تأكيد كلمة المرور<span class="required-star">*</span></ion-label>
-    <ion-input formControlName="confirmPassword" type="password" required></ion-input>
+    <ion-input formControlName="confirmPassword" type="password" required placeholder="ادخل كلمة المرور"></ion-input>
     <ion-note color="danger" *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
       كلمة المرور وتأكيدها يجب أن تكون متطابقتين.
     </ion-note>
   </ion-item>
 
+      <!-- Profile Image Upload-->
+      <div class="profile-img-container">
+        <ion-label class="names" position="stacked">صورة  <span class="required-star">*</span></ion-label>
+             <!-- Image Preview -->
+          <div *ngIf="imagePreview" class="image-preview">
+         <img [src]="imagePreview" alt="Uploaded Image" class="uploaded-image"  />
+         <p>تم تحميل الصورة بنجاح!</p>
+           <!-- Delete Button -->
+    <ion-button color="danger" (click)="removeImage()">
+      حذف الصورة
+    </ion-button>
+        </div>
+
+      <!-- Add Photo Button (Hidden After Image Upload) -->
+  <ion-button *ngIf="!imagePreview" fill="clear" class="add-photo-button" (click)="chooseImage()">
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-button>
+  <div *ngIf="message" class="message">
+    {{ message }}
+  </div>
+        <!-- Validation Note -->
+  <ion-note *ngIf="registerForm.get('profileImage')?.invalid && (registerForm.get('profileImage')?.dirty || registerForm.get('profileImage')?.touched)" color="danger">
+    <small>يجب تحميل صورة صحيحة بتنسيق JPEG أو PNG</small>
+  </ion-note>
+</div>
+  
+  
+ 
+
+
 
 
   <!-- Submit Button -->
-  <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" (click)="addAccount()">
+  <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" (click)="register()">
     تسجيل 
   </ion-button>
 
