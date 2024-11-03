@@ -1,64 +1,84 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-right">الحضور والغياب</ion-title>
+    <ion-title class="ion-text-right">جدولة الرحلة</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="date-display ion-text-center" style="font-size: 18px; color: #555; margin: 10px 0;">
-    {{ arabicDate }}
-  </div>
+<ion-content dir="rtl">
 
-  <ion-card>
+
+  <ion-card class="type">
     <ion-card-header class="ion-text-right">
-      <ion-card-title class="title-success">الحضور <ion-icon name="checkmark-circle-outline" color="success"></ion-icon></ion-card-title>
-      <ion-select
-        class="status-select custom-select"
-        placeholder="اختر"
-        interface="popover"
-        [(ngModel)]="selectedStatus"
-        (ionChange)="updateAllStatus()">
-        <ion-select-option value="ذهاب">ذهاب</ion-select-option>
-        <ion-select-option value="عودة">عودة</ion-select-option>
-      </ion-select>
+      <ion-card-title class="title-success">نوع الرحلة للغد </ion-card-title>
+  
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let student of presentStudents">
-          <ion-avatar slot="start">
-            <img [src]="student.avatar">
-          </ion-avatar>
-          <ion-label  class="ion-text-right">
-            <h2>{{ student.name }}</h2>
-            <p>{{ student.grade }}</p>
-          </ion-label>
-          <ion-note slot="end" color="success">{{ selectedStatus }}</ion-note>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card>
-    <ion-card-header class="ion-text-right">
-      <ion-card-title class="title-danger">الغياب <ion-icon name="close-circle-outline" color="danger"></ion-icon></ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let student of absentStudents">
-          <ion-avatar slot="start">
-            <img [src]="student.avatar">
-          </ion-avatar>
-          <ion-label class="ion-text-right">
-            <h2>{{ student.name }}</h2>
-            <p>{{ student.grade }}</p>
-          </ion-label>
-          <ion-note slot="end" color="danger">غائب</ion-note>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
+      <ion-segment [(ngModel)]="subscriptionType" required>
+        <ion-segment-button value="both">
+          <ion-label>ذهاب و اياب</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="morningRide">
+          <ion-label>ذهاب فقط</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="noonRide">
+          <ion-label>اياب فقط</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      
+      <ion-note *ngIf="!subscriptionType" color="danger">
+        <small>يجب الاختيار</small>
+      </ion-note>
+      
+   
+    </ion-card-content> 
   </ion-card>
-</ion-content>
+  
+  <ion-card class="info">
+    <ion-card-header class="ion-text-right">
+      <ion-card-title class="title-danger">
+
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div *ngIf="students && students.length > 0">
+        <div *ngFor="let student of students" class="student-info-container">
+          <ion-thumbnail slot="end" class="round-image">
+            <img [src]="student.profileImageUrl || 'assets/default-profile.png'" alt="{{ student.name }}">
+          </ion-thumbnail>
+  
+          <div class="student-details">
+            <h2 class="student-name">{{ student.name }}</h2>
+            <p class="student-class">الصف: {{ student.studentClass }}</p>
+          </div>
+        </div>
+      </div>
+      <ion-card class="custom-card">
+        
+          <ion-card-content>
+            <h2 >حضور يوم الغد</h2>
+            <div class="date-display ion-text-center" style="font-size: 16px; color: #060606; margin-left: 50%; margin-bottom: 10%;">
+              {{ arabicDate }}
+            </div>
+            <ion-list>
+              <div (click)="selectAttendance('attended')" 
+                   [ngClass]="{'custom-radio attended-radio': true, 'selected': attendanceStatus === 'attended'}">
+                <ion-label class="attended-label">حاضر</ion-label>
+              </div>
+              <div (click)="selectAttendance('absent')" 
+                   [ngClass]="{'custom-radio absent-radio': true, 'selected': attendanceStatus === 'absent'}">
+                <ion-label class="absent-label">غائب</ion-label>
+              </div>
+            </ion-list>
+            
+    
+        </ion-card-content>
+      </ion-card>
+  
+
+  

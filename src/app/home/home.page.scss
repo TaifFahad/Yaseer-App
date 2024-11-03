@@ -27,6 +27,18 @@ ion-content {
     height: 150px; /* Adjust the height as needed */
     margin-bottom: 50px;
  }
+ .custom-menu {
+  background-color: white !important; /* Set background to white */
+}
+
+.custom-menu ion-header {
+  background-color: white; /* Optional: Make header background white */
+}
+
+.custom-menu ion-content {
+  background-color: white; /* Optional: Make content background white */
+}
+
  
 .col1{
     margin-top: 60px;

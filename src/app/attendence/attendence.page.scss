@@ -30,14 +30,22 @@ ion-content {
   --background: #f9f9f9;
   padding: 20px;
 
-  ion-card {
-    --background: #ffffff;
+ .type{
+    --background: #fff7dc;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ffd600;
   }
 
+  .info{
+    --background: #fff7dc;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ffd600;
+    height: 50%;
+  }
   ion-card-header {
     color: #ffd600;
     text-align: right;
@@ -120,3 +128,142 @@ ion-item{
 }
 
 
+/* Ion segment styles */
+ion-segment-button::part(indicator-background) {
+  background: #F8C71E;
+}
+
+/* Material Design styles */
+ion-segment-button.md::part(native) {
+  color: #000;
+}
+
+.segment-button-checked.md::part(native) {
+  color:  #fcde73;
+}
+
+ion-segment-button.md::part(indicator-background) {
+  height: 4px;
+}
+
+/* iOS styles */
+ion-segment-button.ios::part(native) {
+  color: #070707;
+  font-size: large;
+}
+
+
+
+ion-segment-button.ios::part(indicator-background) {
+  border-radius: 40px;
+}
+.names{
+  color: #000000; /* Font color */
+  font-weight: bold; /* Bold font */
+  font-size:100% ;
+}.student-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+.round-image  {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 15px; /* Add space between image and text */
+}
+
+.round-image img{
+  border-radius: 50%;
+}
+
+
+.student-details {
+  text-align: right;
+  flex: 1;
+}
+
+.student-name {
+  font-size: 1.4em; /* Larger font size */
+  font-weight: bold; /* Bold text */
+  color: black;
+  margin: 7%;
+}
+
+.student-class {
+  font-size: 1em; /* Bigger font for class */
+  color: black;
+  margin: 0;
+  margin: 7%;
+}
+.custom-card {
+  --background: #fff7dc;
+    border-radius: 12px;
+    margin-right: -0.5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ffd754;
+    width: 100%;
+}
+/* Base styling for custom radio button */
+.custom-radio {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 24px; /* Set to desired size */
+  height: 24px; /* Set to desired size */
+  border: 2px solid var(--ion-color-medium);
+  margin-right: 10px;
+  margin: 5%;
+  position: relative;
+  
+}
+
+.custom-radio::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  
+}
+
+/* Styles for selected state */
+.selected.custom-radio.attended-radio::after {
+  background-color: green;
+  border-color: green;
+
+
+}
+
+.selected.custom-radio.absent-radio::after {
+  background-color: red;
+  border-color: red;
+
+}
+
+.attended-label, .absent-label {
+  font-weight: bolder;
+  margin-right: 20px;
+  color: #000000;
+}
+
+/* Ion-list background style */
+ion-list {
+  background: #fff7dc;; /* Change the background color of ion-list */
+}
+
+
+
+h2{
+  color: #060606;
+  font-size: 20px;
+}

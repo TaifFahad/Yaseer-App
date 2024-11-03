@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
   }
 
   goToAttendance() {
-    this.router.navigate(['/attendance']);
+    this.router.navigate(['/attendence']);
   }
 
   async loadStudents() {
