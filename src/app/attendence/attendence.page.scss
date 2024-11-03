@@ -44,7 +44,7 @@ ion-content {
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ffd600;
-    height: 50%;
+    height: 60%;
   }
   ion-card-header {
     color: #ffd600;
@@ -238,8 +238,8 @@ ion-segment-button.ios::part(indicator-background) {
 
 /* Styles for selected state */
 .selected.custom-radio.attended-radio::after {
-  background-color: green;
-  border-color: green;
+  background-color: rgb(19, 173, 19);
+  border-color:  rgb(19, 173, 19);
 
 
 }
@@ -261,7 +261,14 @@ ion-list {
   background: #fff7dc;; /* Change the background color of ion-list */
 }
 
-
+ion-button {
+  --background: #F8C71E; /* Button color */
+  --border-radius: 30px; /* Button shape */
+  margin-top: 16px; /* Spacing */
+  width: 100%; /* Full width */
+  max-width: 330px; /* Match card width */
+  font-weight: bold; /* Button font */
+}
 
 h2{
   color: #060606;

@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDocs, setDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
 import { LoadingController } from '@ionic/angular'; // Import LoadingController
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ interface Student {
   grade: string;
   avatar: string; // Add the avatar property
 }
+
 
 @Component({
   selector: 'app-attendence',
@@ -24,12 +25,13 @@ export class AttendencePage implements OnInit {
   subscriptionType: any;
   arabicDate!: string;
   attendanceStatus: string = 'attended'; // Default value can be 'attended' or 'absent'
-
+  idNumber: string = ''; // Assuming this is populated from somewhere
   constructor(
     private firestore: Firestore,
     private router: Router,
     private authService: AuthService,
-    private loadingController: LoadingController // Inject LoadingController
+    private loadingController: LoadingController ,// Inject LoadingController
+    
   ) {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -40,9 +42,7 @@ export class AttendencePage implements OnInit {
       day: 'numeric',
     });
   }
-  selectAttendance(status: string) {
-    this.attendanceStatus = status;
-  }
+
 
   async ngOnInit() {
     await this.loadStudents();
@@ -98,5 +98,29 @@ export class AttendencePage implements OnInit {
       await loading.dismiss(); // Dismiss the loading indicator
     }
   }
-  
+
+
+  // // Update Firestore with the subscription type and attendance status
+  // updateAttendance() {
+  //   const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+  //   const docRef = doc(this.firestore, `nextDay-attendance/${this.idNumber}`);
+    
+  //   setDoc(docRef, {
+  //     subscriptionType: this.subscriptionType,
+  //     attendanceStatus: this.attendanceStatus,
+  //     lastUpdated: today // Store the date of change
+  //   }, { merge: true }); // Use merge to avoid overwriting other fields
+  // }
+  //   // Method to update the subscription type when selected
+  //   updateSubscription(type: string) {
+  //     this.subscriptionType = type; // Update the local subscription type
+  //     this.updateAttendance(); // Call the method to update Firestore
+  //   }
+
+  // // Method to update attendance status
+  // selectAttendance(status: string) {
+  //   this.attendanceStatus = status;
+  //   this.updateAttendance(); // Call the method to update Firestore
+  // }
 }
+

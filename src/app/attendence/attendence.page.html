@@ -9,15 +9,12 @@
 
 <ion-content dir="rtl">
 
-
   <ion-card class="type">
     <ion-card-header class="ion-text-right">
       <ion-card-title class="title-success">نوع الرحلة للغد </ion-card-title>
-  
     </ion-card-header>
 
     <ion-card-content>
-
       <ion-segment [(ngModel)]="subscriptionType" required>
         <ion-segment-button value="both">
           <ion-label>ذهاب و اياب</ion-label>
@@ -33,16 +30,12 @@
       <ion-note *ngIf="!subscriptionType" color="danger">
         <small>يجب الاختيار</small>
       </ion-note>
-      
-   
     </ion-card-content> 
   </ion-card>
   
   <ion-card class="info">
     <ion-card-header class="ion-text-right">
-      <ion-card-title class="title-danger">
-
-      </ion-card-title>
+      <ion-card-title class="title-danger"></ion-card-title>
     </ion-card-header>
     
     <ion-card-content>
@@ -58,27 +51,31 @@
           </div>
         </div>
       </div>
+      
       <ion-card class="custom-card">
-        
-          <ion-card-content>
-            <h2 >حضور يوم الغد</h2>
-            <div class="date-display ion-text-center" style="font-size: 16px; color: #060606; margin-left: 50%; margin-bottom: 10%;">
-              {{ arabicDate }}
+        <ion-card-content>
+          <h2>حضور يوم الغد</h2>
+          <div class="date-display ion-text-center" style="font-size: 16px; color: #060606; margin-left: 50%; margin-bottom: 10%;">
+            {{ arabicDate }}
+          </div>
+          <ion-list>
+            <div (click)="selectAttendance('attended')" 
+                 [ngClass]="{'custom-radio attended-radio': true, 'selected': attendanceStatus === 'attended'}">
+              <ion-label class="attended-label">حاضر</ion-label>
             </div>
-            <ion-list>
-              <div (click)="selectAttendance('attended')" 
-                   [ngClass]="{'custom-radio attended-radio': true, 'selected': attendanceStatus === 'attended'}">
-                <ion-label class="attended-label">حاضر</ion-label>
-              </div>
-              <div (click)="selectAttendance('absent')" 
-                   [ngClass]="{'custom-radio absent-radio': true, 'selected': attendanceStatus === 'absent'}">
-                <ion-label class="absent-label">غائب</ion-label>
-              </div>
-            </ion-list>
-            
-    
+            <div (click)="selectAttendance('absent')" 
+                 [ngClass]="{'custom-radio absent-radio': true, 'selected': attendanceStatus === 'absent'}">
+              <ion-label class="absent-label">غائب</ion-label>
+            </div>
+          </ion-list>
+      <!-- Submit Button -->
+      <ion-button expand="block" >تسجيل</ion-button>
+  
         </ion-card-content>
       </ion-card>
-  
 
-  
+      <!-- Submit Button -->
+     </ion-card-content>
+  </ion-card>
+
+</ion-content>
