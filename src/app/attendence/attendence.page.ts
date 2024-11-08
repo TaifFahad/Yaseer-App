@@ -101,37 +101,61 @@ export class AttendencePage implements OnInit {
       alert('Please select the subscription type');
       return;
     }
-
+  
     if (!this.attendanceStatus) {
       alert('Please select the attendance status');
       return;
     }
-
+  
     // Get the current parentId
     const parentId = this.authService.getCurrentUserId();
     if (!parentId) {
       alert('No parent ID found. Please log in again.');
       return;
     }
-
+  
+    // Fetch the first student's data automatically
+    const firstStudent = this.students[0]; // Retrieve the first student in the array (or apply logic to select the correct student)
+  
+    if (!firstStudent) {
+      alert('No student found for this parent.');
+      return;
+    }
+  
+    const selectedStudentId = firstStudent.id;
+    const studentName = firstStudent.name;
+  
+    // Fetch the student name if needed from the 'children' collection (optional step)
+    // const studentRef = doc(this.firestore, `1/${parentId}/children/${selectedStudentId}`);
+    // const studentDoc = await getDoc(studentRef);
+    // const studentName = studentDoc.data()?.name; // Assuming name is stored here
+    
+    if (!studentName) {
+      alert('Student name not found.');
+      return;
+    }
+  
     const nextDayAttendanceRef = collection(this.firestore, `1/${parentId}/nextDay-attendance`);
-
-    // Prepare the data to be saved, including timestamp
+  
+    // Prepare the data to be saved, including the student's name
     const attendanceData = {
       subscriptionType: this.subscriptionType,
       attendanceStatus: this.attendanceStatus,
       date: new Date().toISOString(), // Save current date and time
       parentId: parentId,
+      studentId: selectedStudentId, // Add the student ID here
+      studentName: studentName, // Add student name here
     };
+  
+    // Save the attendance data to Firestore
+    const newDocRef = doc(nextDayAttendanceRef);
     try {
-      // Save the attendance data to Firestore
-      const newDocRef = doc(nextDayAttendanceRef);
       await setDoc(newDocRef, attendanceData);
       console.log('Attendance saved successfully:', attendanceData);
-    
+  
       // Optionally, reset the form or provide a success message
       this.tripForm.reset();
-    
+  
       // Show success message with toast (RTL)
       const successToast = await this.toastController.create({
         message: 'تم تحديث رحلة الطالب', // Success message
@@ -139,13 +163,11 @@ export class AttendencePage implements OnInit {
         position: 'top', // Position of the toast
         color: 'success', // Color of the toast
         cssClass: 'rtl-toast', // Custom class for RTL
-      
       });
       await successToast.present();
-    
     } catch (error) {
       console.error('Error saving attendance:', error);
-    
+  
       // Show error message with toast (RTL)
       const errorToast = await this.toastController.create({
         message: 'حدث خطأ, حاول مرة اخرى', // Error message
@@ -153,11 +175,11 @@ export class AttendencePage implements OnInit {
         position: 'bottom',
         color: 'danger', // Color indicating error
         cssClass: 'rtl-toast', // Custom class for RTL
-        
       });
       await errorToast.present();
     }
-  }    
+  }
+  
 
   // Check if 24 hours have passed since the last attendance status and reset if necessary
   async checkAttendanceStatus() {
