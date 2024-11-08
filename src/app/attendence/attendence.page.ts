@@ -1,37 +1,39 @@
-import { Component,OnInit } from '@angular/core';
-import { Firestore, collection, doc, getDocs, setDoc } from '@angular/fire/firestore';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Firestore, collection, doc, getDocs, setDoc, getDoc } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
-import { LoadingController } from '@ionic/angular'; // Import LoadingController
+import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 interface Student {
   name: string;
   grade: string;
-  avatar: string; // Add the avatar property
+  avatar: string;
 }
-
 
 @Component({
   selector: 'app-attendence',
-  templateUrl: './attendence.page.html', // Ensure the path is correct
-  styleUrls: ['./attendence.page.scss'] // Ensure the path is correct
+  templateUrl: './attendence.page.html',
+  styleUrls: ['./attendence.page.scss'],
 })
 export class AttendencePage implements OnInit {
- 
- // subscriptionType = any; // Default value
+  @ViewChild('tripForm') tripForm!: NgForm;  // Reference the form with ngForm
+
   students: any[] = [];
   parentId: string | null = null;
   isLoading: boolean = true;
   subscriptionType: any;
   arabicDate!: string;
   attendanceStatus: string = 'attended'; // Default value can be 'attended' or 'absent'
-  idNumber: string = ''; // Assuming this is populated from somewhere
+  idNumber: string = '';
+
   constructor(
     private firestore: Firestore,
     private router: Router,
     private authService: AuthService,
-    private loadingController: LoadingController ,// Inject LoadingController
-    
+    private loadingController: LoadingController,
+    private toastController: ToastController
   ) {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -43,33 +45,28 @@ export class AttendencePage implements OnInit {
     });
   }
 
-
   async ngOnInit() {
     await this.loadStudents();
-    
+    await this.checkAttendanceStatus();
   }
-
-  // arabicDate: string = new Date().toLocaleDateString('ar-EG');
-
- 
 
   async loadStudents() {
     const loading = await this.loadingController.create({
-      message: 'جاري التحميل', // Message displayed in the loading spinner
+      message: 'جاري التحميل',
     });
-    await loading.present(); // Show the loading indicator
-  
-    this.isLoading = true; // Start loading
+    await loading.present();
+
+    this.isLoading = true;
     const parentId = this.authService.getCurrentUserId();
     console.log("Current Parent ID:", parentId);
-  
+
     if (parentId) {
       try {
         const childRef = collection(this.firestore, `1/${parentId}/children`);
         const childDocs = await getDocs(childRef);
-  
+
         console.log('Fetched child documents:', childDocs.docs);
-  
+
         if (childDocs.empty) {
           console.warn('No children found for this parent ID:', parentId);
           this.students = [];
@@ -78,49 +75,121 @@ export class AttendencePage implements OnInit {
             id: doc.id,
             ...doc.data(),
           }));
-  
+
           console.log('Loaded Students:', this.students);
-  
-          // Set subscriptionType based on fetched data for the first student, if needed
+
           if (this.students.length > 0) {
             this.subscriptionType = this.students[0].subscriptionType || 'both';
           }
         }
       } catch (error) {
-        console.error('Error loading students:', error); // Log any errors
+        console.error('Error loading students:', error);
       } finally {
-        this.isLoading = false; // Always dismiss loading
-        await loading.dismiss(); // Dismiss the loading indicator
+        this.isLoading = false;
+        await loading.dismiss();
       }
     } else {
       console.warn('No parent ID found.');
-      this.isLoading = false; // Dismiss loading if no parent ID
-      await loading.dismiss(); // Dismiss the loading indicator
+      this.isLoading = false;
+      await loading.dismiss();
     }
   }
 
+  // Handles form submission and saves the data to Firestore
+  async onSubmit() {
+    if (!this.subscriptionType) {
+      alert('Please select the subscription type');
+      return;
+    }
 
-  // // Update Firestore with the subscription type and attendance status
-  // updateAttendance() {
-  //   const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
-  //   const docRef = doc(this.firestore, `nextDay-attendance/${this.idNumber}`);
+    if (!this.attendanceStatus) {
+      alert('Please select the attendance status');
+      return;
+    }
+
+    // Get the current parentId
+    const parentId = this.authService.getCurrentUserId();
+    if (!parentId) {
+      alert('No parent ID found. Please log in again.');
+      return;
+    }
+
+    const nextDayAttendanceRef = collection(this.firestore, `1/${parentId}/nextDay-attendance`);
+
+    // Prepare the data to be saved, including timestamp
+    const attendanceData = {
+      subscriptionType: this.subscriptionType,
+      attendanceStatus: this.attendanceStatus,
+      date: new Date().toISOString(), // Save current date and time
+      parentId: parentId,
+    };
+    try {
+      // Save the attendance data to Firestore
+      const newDocRef = doc(nextDayAttendanceRef);
+      await setDoc(newDocRef, attendanceData);
+      console.log('Attendance saved successfully:', attendanceData);
     
-  //   setDoc(docRef, {
-  //     subscriptionType: this.subscriptionType,
-  //     attendanceStatus: this.attendanceStatus,
-  //     lastUpdated: today // Store the date of change
-  //   }, { merge: true }); // Use merge to avoid overwriting other fields
-  // }
-  //   // Method to update the subscription type when selected
-  //   updateSubscription(type: string) {
-  //     this.subscriptionType = type; // Update the local subscription type
-  //     this.updateAttendance(); // Call the method to update Firestore
-  //   }
+      // Optionally, reset the form or provide a success message
+      this.tripForm.reset();
+    
+      // Show success message with toast (RTL)
+      const successToast = await this.toastController.create({
+        message: 'تم تحديث رحلة الطالب', // Success message
+        duration: 3000, // Duration for which the toast will be visible
+        position: 'top', // Position of the toast
+        color: 'success', // Color of the toast
+        cssClass: 'rtl-toast', // Custom class for RTL
+      
+      });
+      await successToast.present();
+    
+    } catch (error) {
+      console.error('Error saving attendance:', error);
+    
+      // Show error message with toast (RTL)
+      const errorToast = await this.toastController.create({
+        message: 'حدث خطأ, حاول مرة اخرى', // Error message
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger', // Color indicating error
+        cssClass: 'rtl-toast', // Custom class for RTL
+        
+      });
+      await errorToast.present();
+    }
+  }    
 
-  // // Method to update attendance status
-  // selectAttendance(status: string) {
-  //   this.attendanceStatus = status;
-  //   this.updateAttendance(); // Call the method to update Firestore
-  // }
+  // Check if 24 hours have passed since the last attendance status and reset if necessary
+  async checkAttendanceStatus() {
+    const parentId = this.authService.getCurrentUserId();
+    if (!parentId) {
+      console.warn('No parent ID found.');
+      return;
+    }
+// Using `nextDay-attendance` without the parent ID would mix all attendance records, making it difficult to distinguish between records for different parents.
+
+     const nextDayAttendanceRef = collection(this.firestore, `1/${parentId}/nextDay-attendance`);
+      try {
+      const lastAttendanceDoc = await getDocs(nextDayAttendanceRef);
+      if (!lastAttendanceDoc.empty) {
+        const lastAttendance = lastAttendanceDoc.docs[lastAttendanceDoc.docs.length - 1].data();
+        const lastAttendanceDate = new Date(lastAttendance['date']);
+        const currentDate = new Date();
+        const timeDifference = currentDate.getTime() - lastAttendanceDate.getTime();
+
+        // If 24 hours have passed, reset the attendance status
+        if (timeDifference >= 24 * 60 * 60 * 1000) {
+          this.attendanceStatus = 'attended'; // Default status
+          console.log('Attendance status reset to default after 24 hours.');
+        }
+      }
+    } catch (error) {
+      console.error('Error checking attendance status:', error);
+    }
+  }
+
+  // Updates the attendance status when clicked
+  selectAttendance(status: string) {
+    this.attendanceStatus = status;
+  }
 }
-

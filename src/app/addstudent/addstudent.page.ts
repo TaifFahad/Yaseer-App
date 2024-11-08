@@ -115,38 +115,43 @@ export class AddstudentPage  {
     this.studentForm.get('profileImage')?.setValue(null);
   }
 
-  // Form submission
   async goToAddStudent() {
     if (!this.studentForm.valid || this.selectedImage === null) {
       console.error('Form is invalid.');
       this.studentForm.markAllAsTouched();
       return;
     }
-
+  
+    // Create the loading indicator
     const loading = await this.loadingController.create({
       message: 'جاري التحميل', // Loading message
     });
     await loading.present(); // Show the loading indicator
-
-
-    // Create a new student object using form data
+  
+    // Create the new student object
     const newStudent: Student = {
-        name: this.studentForm.get('studentname')?.value,
-        studentID: this.studentForm.get('studentID')?.value,
-        birthDate: this.studentForm.get('birthDate')?.value,
-        studentClass: this.studentForm.get('studentClass')?.value,
-        address: this.studentForm.get('address')?.value,
-        gender: this.studentForm.get('gender')?.value,
-        subscriptionType: this.studentForm.get('subscriptionType')?.value,
-        profileImageUrl: this.imagePreview || ''
+      name: this.studentForm.get('studentname')?.value,
+      studentID: this.studentForm.get('studentID')?.value,
+      birthDate: this.studentForm.get('birthDate')?.value,
+      studentClass: this.studentForm.get('studentClass')?.value,
+      address: this.studentForm.get('address')?.value,
+      gender: this.studentForm.get('gender')?.value,
+      subscriptionType: this.studentForm.get('subscriptionType')?.value,
+      profileImageUrl: this.imagePreview || ''
     };
-
+  
     try {
+      // Execute the async function to add the student
       await this.dataService.addChildToLastCreatedParent(newStudent);
       console.log('Student added successfully to the last created parent');
+      
+      // Dismiss the loading indicator and navigate to the next page
+      await loading.dismiss();
       this.router.navigate(['/tabs']);
     } catch (error) {
       console.error('Error adding student:', error);
+      await loading.dismiss(); // Ensure loading indicator is dismissed on error
     }
   }
+  
 }

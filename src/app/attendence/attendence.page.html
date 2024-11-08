@@ -15,21 +15,24 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-segment [(ngModel)]="subscriptionType" required>
-        <ion-segment-button value="both">
-          <ion-label>ذهاب و اياب</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="morningRide">
-          <ion-label>ذهاب فقط</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="noonRide">
-          <ion-label>اياب فقط</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-      
-      <ion-note *ngIf="!subscriptionType" color="danger">
-        <small>يجب الاختيار</small>
-      </ion-note>
+      <!-- Form starts here -->
+      <form #tripForm="ngForm" (ngSubmit)="onSubmit()">
+        <ion-segment [(ngModel)]="subscriptionType" name="subscriptionType" required>
+          <ion-segment-button value="both">
+            <ion-label>ذهاب و اياب</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="morningRide">
+            <ion-label>ذهاب فقط</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="noonRide">
+            <ion-label>اياب فقط</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        
+        <ion-note *ngIf="!subscriptionType" color="danger">
+          <small>يجب الاختيار</small>
+        </ion-note>
+      </form>
     </ion-card-content> 
   </ion-card>
   
@@ -59,23 +62,25 @@
             {{ arabicDate }}
           </div>
           <ion-list>
+            <!-- Updated to store selected attendance in the form -->
             <div (click)="selectAttendance('attended')" 
-                 [ngClass]="{'custom-radio attended-radio': true, 'selected': attendanceStatus === 'attended'}">
+                 [ngClass]="{'custom-radio attended-radio': attendanceStatus === 'attended', 'selected': attendanceStatus === 'attended'}">
               <ion-label class="attended-label">حاضر</ion-label>
             </div>
             <div (click)="selectAttendance('absent')" 
-                 [ngClass]="{'custom-radio absent-radio': true, 'selected': attendanceStatus === 'absent'}">
+                 [ngClass]="{'custom-radio absent-radio': attendanceStatus === 'absent', 'selected': attendanceStatus === 'absent'}">
               <ion-label class="absent-label">غائب</ion-label>
             </div>
           </ion-list>
-      <!-- Submit Button -->
-      <ion-button expand="block" >تسجيل</ion-button>
-  
+
+          <!-- Submit Button inside the form -->
+          <ion-button expand="block" (click)="onSubmit()">
+            تسجيل
+          </ion-button>
         </ion-card-content>
       </ion-card>
 
-      <!-- Submit Button -->
-     </ion-card-content>
+    </ion-card-content>
   </ion-card>
 
 </ion-content>

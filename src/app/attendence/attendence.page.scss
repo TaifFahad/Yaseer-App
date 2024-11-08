@@ -31,7 +31,7 @@ ion-content {
   padding: 20px;
 
  .type{
-    --background: #fff7dc;
+    --background: #fdfdfd;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@ ion-content {
   }
 
   .info{
-    --background: #fff7dc;
+    --background: #fdfdfd;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -54,7 +54,7 @@ ion-content {
   }
 
   ion-item {
-    --background: #fafafa;
+    --background: #fdfdfd;
     border-bottom: 1px solid #eee;
     --padding-start: 16px;
     --padding-end: 16px;
@@ -104,7 +104,7 @@ ion-content {
 }
 
 .attendance-section {
-  --background: #fff9e6;
+  --background: #fdfdfd;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 15px;
@@ -121,10 +121,10 @@ ion-back-button {
   color: #333;
 }
 ion-list{
-background:#fafafa;
+background:#fdfdfd;
 }
 ion-item{
-  --background: #fafafa;
+  --background: #fdfdfd;
 }
 
 
@@ -199,7 +199,7 @@ ion-segment-button.ios::part(indicator-background) {
   margin: 7%;
 }
 .custom-card {
-  --background: #fff7dc;
+  --background: #fdfdfd;
     border-radius: 12px;
     margin-right: -0.5%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -258,7 +258,7 @@ ion-segment-button.ios::part(indicator-background) {
 
 /* Ion-list background style */
 ion-list {
-  background: #fff7dc;; /* Change the background color of ion-list */
+  background: #fdfdfd;; /* Change the background color of ion-list */
 }
 
 ion-button {
@@ -273,4 +273,9 @@ ion-button {
 h2{
   color: #060606;
   font-size: 20px;
+}
+/* Custom class for RTL toast messages */
+.rtl-toast {
+  text-align: right !important; /* Align the text to the right */
+  direction: rtl; /* Set the text direction to RTL */
 }
