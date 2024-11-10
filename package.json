@@ -34,6 +34,8 @@
     "@ionic/angular": "^8.0.0",
     "@ionic/core": "^8.3.2",
     "cordova-plugin-geolocation": "^5.0.0",
+    "cordova-plugin-nativegeocoder": "^3.5.1",
+    "date-fns-tz": "^3.2.0",
     "ionicons": "^7.0.0",
     "pouchdb": "^9.0.0",
     "rxjs": "^6.6.7",

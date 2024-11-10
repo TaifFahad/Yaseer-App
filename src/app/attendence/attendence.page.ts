@@ -141,7 +141,8 @@ export class AttendencePage implements OnInit {
     const attendanceData = {
       subscriptionType: this.subscriptionType,
       attendanceStatus: this.attendanceStatus,
-      date: new Date().toISOString(), // Save current date and time
+      date: new Date().toLocaleString('en-US'), // Save current date and time in local time
+      // Save current date and time
       parentId: parentId,
       studentId: selectedStudentId, // Add the student ID here
       studentName: studentName, // Add student name here

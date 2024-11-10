@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   }
 
   navigateToNotification() {
-    this.router.navigate(['']);
+    this.router.navigate(['/emergency']);
   }
 
   logout() {

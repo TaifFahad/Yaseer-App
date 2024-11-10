@@ -21,6 +21,10 @@ ion-item {
   height: 100%; /* Full height of the menu */
   justify-content: space-between; /* Space items between each other */
 }
+ion-back-button{
+  color:#F8C71E;
+ 
+}
 
 /* Style for the logout button to be red and positioned at the bottom */
 .logout-button {
@@ -65,7 +69,7 @@ ion-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30%; /* Adjust based on vertical positioning */
+    margin-top: 2%; /* Adjust based on vertical positioning */
   }
 
   .background-image {
@@ -109,4 +113,37 @@ ion-item {
 
 
 
-  
+    ion-item {
+      direction: rtl; /* For Arabic text direction */
+    }
+    
+    ion-label {
+      text-align: right; /* Align text to the right for Arabic */
+    }
+    
+    ion-content {
+      direction: rtl; /* Set the general direction to RTL */
+    }
+    
+    .white-background {
+      background-color: #fff; /* Ensure background is white for better readability */
+    }
+    
+    .no-messages {
+      text-align: center;
+      font-size: 1.2em;
+      color: #888;
+    }
+    
+    .image-container {
+      text-align: center;
+    }
+    
+    ion-card-content {
+      text-align: right; /* For Arabic text */
+    }
+    
+    ion-card-header {
+      text-align: right;
+    }
+    

@@ -9,36 +9,46 @@
       <ion-title class="t1" slot="end">تنبيهات الطوارئ</ion-title>
     </ion-toolbar>
   </ion-header>
-    <ion-content [fullscreen]="true" dir="rtl" class="white-background">
 
-      <!-- Image centered -->
-      <div class="image-container">
+  <!-- Content section -->
+  <ion-content [fullscreen]="true" dir="rtl" class="white-background">
+       <!-- Image centered -->
+       <div class="image-container">
         <img src="assets/message.png" alt="My Image" class="background-image">
       </div>
+    <!-- Display if there are messages -->
+    <ng-container *ngIf="emergencyMessages.length > 0; else noMessages">
+   
     
-      <!-- Overlay text below the image -->
-      <div class="overlay-text">لا يوجد اشعارات طوارئ حاليا</div>
-    
-      <!-- Buttons positioned at the bottom -->
-      <div class="button-container">
-        <ion-button expand="block" type="submit"(click)=" sendEmergencyNotification()">
-          ارسال اشعار طوارئ
-        </ion-button>
-    
-        <ion-button expand="block" type="button" (click)="goToHomePage()">
-          العودة للصفحة الرئيسية
-        </ion-button>
+      <!-- List of emergency messages -->
+      <ion-list>
+        <ion-item *ngFor="let message of emergencyMessages">
+          <ion-label>
+            <h2>{{ message.title }}</h2>
+            <small>{{ message.timestamp.toDate() | date:'short' }}</small>
+         
+            <p>{{ message.message }}</p>
+              <!-- Check language for the location part -->
+            <!-- <p>{{ message.location ? (isArabic(message.message) ? 'الموقع: ' : 'Location: ') + message.location.latitude + ', ' + message.location.longitude : '' }}</p> -->
+             <p>{{ message.address }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- Display user address after geocoding -->
+      <div *ngIf="userAddress">
+        <p>العنوان: {{ userAddress }}</p>
       </div>
-    
-    </ion-content>
-    
-    
-    
-  
-    
+      <!-- Return to Home Page button -->
+      <!-- <ion-button expand="block" type="button" (click)="goToHomePage()">
+        العودة للصفحة الرئيسية
+      </ion-button> -->
+    </ng-container>
 
-
-
-
-  
-
+    <!-- Template for no messages -->
+    <ng-template #noMessages>
+      <p class="no-messages">لا توجد رسائل طوارئ حالياً.</p>
+    </ng-template>
+    
+  </ion-content>
+</div>

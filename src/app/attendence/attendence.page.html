@@ -62,16 +62,16 @@
             {{ arabicDate }}
           </div>
           <ion-list>
-            <!-- Updated to store selected attendance in the form -->
             <div (click)="selectAttendance('attended')" 
-                 [ngClass]="{'custom-radio attended-radio': attendanceStatus === 'attended', 'selected': attendanceStatus === 'attended'}">
+                 [ngClass]="{'custom-radio attended-radio': true, 'selected': attendanceStatus === 'attended'}">
               <ion-label class="attended-label">حاضر</ion-label>
             </div>
             <div (click)="selectAttendance('absent')" 
-                 [ngClass]="{'custom-radio absent-radio': attendanceStatus === 'absent', 'selected': attendanceStatus === 'absent'}">
+                 [ngClass]="{'custom-radio absent-radio': true, 'selected': attendanceStatus === 'absent'}">
               <ion-label class="absent-label">غائب</ion-label>
             </div>
           </ion-list>
+          
 
           <!-- Submit Button inside the form -->
           <ion-button expand="block" (click)="onSubmit()">
