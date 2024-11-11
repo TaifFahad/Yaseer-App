@@ -61,17 +61,19 @@ export class DataService {
   }
   async getDriverData() {
     const driverID = this.authService.getCurrentUserId();
+    console.log("Fetching data for Driver ID:", driverID); // Log the Driver ID
     if (!driverID) return null; // Return null if there's no user ID
-
+  
     const driverDocRef = doc(this.firestore, 'Driver', driverID);
     const driverDoc = await getDoc(driverDocRef);
-
+  
     if (driverDoc.exists()) {
+      console.log("Driver data found:", driverDoc.data()); // Log the fetched data
       return driverDoc.data(); // Return the driver data
     } else {
       console.error('No such document!');
       return null; // Return null if no document found
     }
-
-    }  }
+  }
+   }
 

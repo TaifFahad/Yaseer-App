@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Back button, uses the ion-back-button component -->
+      <ion-back-button defaultHref="/tabs" text=""> </ion-back-button> <!-- Adjust the defaultHref as per your app's routing -->
+    </ion-buttons>
+    <!-- <ion-title>Next Day Attendance</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content dir="rtl">
+  <!-- Display notifications -->
+  <ion-card class="notification-card">
+    <ion-card-header>
+      <ion-card-title>تحديثات حضور الغد</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="date-display ion-text-center">
+        {{ arabicDate }}
+      </div>
+
+      <ion-list *ngIf="notifications.length > 0">
+        <ion-item *ngFor="let notification of notifications">
+          <ion-label>{{ notification }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <!-- Display a message when there are no notifications -->
+      <ion-text *ngIf="notifications.length === 0">
+        <p>لا يوجد تحديث لحالة حضور أي طالب ليوم غد</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- More Info button -->
+  <ion-button expand="block" (click)="toggleMoreInfo()" class="more-info-button">
+    {{ showMoreInfo ? 'إخفاء ' : 'التفاصيل' }}
+  </ion-button>
+
+  <!-- Detailed information, visible when showMoreInfo is true -->
+  <ion-card *ngIf="showMoreInfo">
+    <ion-card-content>
+   
+      <!-- Loop through each parent's children and display them in different lists -->
+      <ion-list *ngFor="let parent of parentsWithUpdates">
+        <ion-item-group *ngFor="let child of parent.children">
+          <ion-item>
+            <ion-label>
+              <h2>{{ child.name }}</h2>
+              <p>حالة الحضور: {{ child.attendanceStatus === 'present' ? 'حاضر' : 'غائب' }}</p>
+              <p>نوع الرحلة: 
+                {{ child.subscriptionType === 'both' ? 'ذهاب و اياب' : 
+                   child.subscriptionType === 'morningRide' ? 'ذهاب فقط' : 
+                   child.subscriptionType === 'noonRide' ? 'اياب فقط' : child.subscriptionType }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

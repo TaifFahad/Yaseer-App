@@ -1,0 +1,79 @@
+/* Style for the notification card */
+.notification-card {
+    margin: 15px;
+    background-color: #f4f4f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notification-card ion-card-header {
+    // background-color: #ffd600;
+    color: white;
+  }
+  
+  .notification-card ion-card-content {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Style for the More Info button */
+  .more-info-button {
+    --background: #F8C71E; /* Button background color */
+    --border-radius: 30px; /* Reduce border radius for better fit */
+    margin-top: 16px; /* Adjust margin for spacing */
+    width: 100%;
+    margin-right: 10%;
+    max-width: 330px; /* Match the card width */
+    font-weight: bolder;
+  color: #000000;
+    /* Change text color to white when pressed (active state) */
+    --color-activa5ted: #ffffff; /* Text color when button is pressed */
+  
+  }
+  
+  /* Center the date display text */
+  .date-display {
+    font-size: 16px;
+    color: #060606;
+    margin-bottom: 10%;
+    margin-left: 50%;
+  }
+  
+  /* Style for the list items */
+  ion-item-group {
+    margin-bottom: 10px;
+  }
+  
+  ion-item {
+    border-radius: 8px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-label h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  ion-label p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Adjustments for RTL (Right to Left) layout */
+  ion-item {
+    direction: rtl;
+    --border-radius: 30px;
+  }
+  
+  ion-label {
+    text-align: right;
+  }
+  
+  ion-card {
+    direction: rtl;
+  }
+  ion-back-button {
+    color: #ffd600;
+  }

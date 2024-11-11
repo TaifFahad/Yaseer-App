@@ -52,12 +52,11 @@
 
       <ion-col class="col2" size="5">
         <div class="round-image">
-           
-        <img *ngIf="driverInfo && driverInfo.profileImageUrl; else placeholder" [src]="driverInfo.profileImageUrl" alt="Profile Image" />
-        
-        <ng-template #placeholder class=>
-          <img src="assets/LOGO.png" alt="Default Profile Image" /> <!-- Placeholder image -->
-        </ng-template>
+          <img *ngIf="driverInfo && driverInfo.profileImageUrl; else placeholder" [src]="driverInfo.profileImageUrl" alt="Profile Image" class="profile-img" />
+          
+          <ng-template #placeholder>
+            <img src="assets/LOGO.png" alt="Default Profile Image" class="profile-img" /> <!-- Placeholder image -->
+          </ng-template>
         </div>
       </ion-col>
     </ion-row>
@@ -85,5 +84,6 @@
         <ion-text id="te">الطوارئ</ion-text>
       </div>
     </ion-button>
+    
   </ion-content>
 </div>
