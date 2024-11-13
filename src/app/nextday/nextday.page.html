@@ -4,7 +4,7 @@
       <!-- Back button, uses the ion-back-button component -->
       <ion-back-button defaultHref="/tabs" text=""> </ion-back-button> <!-- Adjust the defaultHref as per your app's routing -->
     </ion-buttons>
-    <!-- <ion-title>Next Day Attendance</ion-title> -->
+    <ion-title class="t1" slot="end"> حضور الغد</ion-title> 
   </ion-toolbar>
 </ion-header>
 
@@ -31,13 +31,11 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- More Info button -->
-  <ion-button expand="block" (click)="toggleMoreInfo()" class="more-info-button">
-    {{ showMoreInfo ? 'إخفاء ' : 'التفاصيل' }}
-  </ion-button>
+
+  
 
   <!-- Detailed information, visible when showMoreInfo is true -->
-  <ion-card *ngIf="showMoreInfo">
+  <ion-card *ngIf="showMoreInfo" class="showMoreInfo">
     <ion-card-content>
    
       <!-- Loop through each parent's children and display them in different lists -->
@@ -56,7 +54,13 @@
           </ion-item>
         </ion-item-group>
       </ion-list>
+      <p>لا يوجد تحديث لحالة حضور أي طالب ليوم غد</p>
+  
     </ion-card-content>
   </ion-card>
 
+  <!-- More Info button -->
+  <ion-button expand="block" (click)="toggleMoreInfo()" class="more-info-button" [disabled]="notifications.length === 0">
+    {{ showMoreInfo ? 'إخفاء ' : 'التفاصيل' }}
+  </ion-button>
 </ion-content>

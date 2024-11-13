@@ -109,4 +109,15 @@ ion-item {
 
 
 
-  
+  /* Header title style */
+.t1 {
+  font-size: 25px;
+  font-weight: bold;
+  color: #F8C71E; /* Set title color to yellow */
+  text-align: right;
+}
+
+/* Back button color */
+ion-back-button {
+  color: #F8C71E !important; /* Set back button color to yellow */
+}

@@ -4,7 +4,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
+        <ion-back-button defaultHref="/tabs/home" text="" style="color: #F8C71E;"></ion-back-button>
       </ion-buttons>
       <ion-title class="t1" slot="end">تنبيهات الطوارئ</ion-title>
     </ion-toolbar>
@@ -16,18 +16,18 @@
         <img src="assets/message.png" alt="My Image" class="background-image">
       </div>
     
-      <!-- Overlay text below the image -->
+      <!-- Overlay text below the image 
       <div class="overlay-text">لا يوجد اشعارات طوارئ حاليا</div>
-    
+    -->
       <!-- Buttons positioned at the bottom -->
       <div class="button-container">
         <ion-button expand="block" type="submit"(click)=" sendEmergencyNotification()">
           ارسال اشعار طوارئ
         </ion-button>
     
-        <ion-button expand="block" type="button" (click)="goToHomePage()">
+        <!-- <ion-button expand="block" type="button" (click)="goToHomePage()">
           العودة للصفحة الرئيسية
-        </ion-button>
+        </ion-button> -->
       </div>
     
     </ion-content>

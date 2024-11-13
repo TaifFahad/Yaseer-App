@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- الصورة واسم ولي الأمر -->
+  <!-- الصورة واسم ولي الأمر --
   <div class="profile-section">
     <ion-avatar class="custom-avatar">
       <img src="assets/Read.JPG" alt="صورة ولي الأمر">
@@ -15,7 +15,7 @@
     <p class="parent-name">ولي امر رائد الشهري</p>
   </div>
 
-  <!-- الرسائل المرسلة -->
+  <!-- الرسائل المرسلة --
   <div class="messages-section">
     <div *ngFor="let message of messages" class="message">
       <p>{{ message.text }}</p>
@@ -24,7 +24,7 @@
   </div>
 </ion-content>
 
-<!-- صندوق إدخال الرسالة -->
+<!-- صندوق إدخال الرسالة --
 <ion-footer class="ion-no-border message-footer">
   <ion-toolbar>
     <div class="message-box">
@@ -42,4 +42,48 @@
     </div>
  
 
+ -->
+ <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+ <ion-content class="ion-padding">
+  <!-- Profile Section -->
+  <div class="profile-section">
+   <ion-avatar class="custom-avatar">
+     <img [src]="profileImageUrl" alt="صورة ولي الأمر">
+   </ion-avatar>
+   <p class="parent-name">{{ parentName }}</p>
+ </div>
+
+
+ <!-- Messages Section -->
+ <div class="messages-section">
+   <div *ngFor="let message of messages" class="message">
+     <p>{{ message.text }}</p>
+     <small>{{ message.time }}</small>
+   </div>
+ </div>
+</ion-content>
+<!-- Message Footer -->
+<ion-footer class="ion-no-border message-footer">
+ <ion-toolbar>
+   <div class="message-box">
+     <ion-buttons slot="start">
+       <ion-button class="inside-icon" (click)="triggerFileInput()">
+         <ion-icon name="attach-outline"></ion-icon>
+       </ion-button>
+     </ion-buttons>
+     <ion-input placeholder="...اكتب رسالة" [(ngModel)]="newMessage" class="message-input" (ionInput)="checkInput()"></ion-input>
+     <ion-buttons slot="end">
+       <ion-button class="inside-icon" [disabled]="!canSendMessage" (click)="sendMessage()">
+         <ion-icon name="send-outline"></ion-icon>
+       </ion-button>
+     </ion-buttons>
+   </div>
+ </ion-toolbar>
+</ion-footer>

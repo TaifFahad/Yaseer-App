@@ -89,7 +89,7 @@ export class EmergencyPage implements OnInit {
   }
 
   // Save the emergency notification to Firestore
-  saveNotificationToDatabase(message: string, latitude: number, longitude: number, address: string) {
+  saveNotificationToDatabase(message: string, latitude: number, longitude: number, address: string ) {
     const notification = {
       title: 'حالة طارئة',
       message: message,

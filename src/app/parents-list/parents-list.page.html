@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Parents</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let parent of parents" (click)="openChatRoom(parent)">
+      <ion-label>
+        <h2>{{ parent.username }}</h2>
+        <p>{{ parent.email }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

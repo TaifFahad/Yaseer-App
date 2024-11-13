@@ -65,12 +65,20 @@ const routes: Routes = [
   {
     path: 'tracking',
     loadChildren: () => import('./tracking/tracking.module').then( m => m.TrackingPageModule)
-  },  {
+  },
+  {
     path: 'nextday',
     loadChildren: () => import('./nextday/nextday.module').then( m => m.NextdayPageModule)
-  }
+  },
 
 
+  {
+    path: 'communication/:parentId', // Route to communication page with parentId parameter
+    loadChildren: () => import('./communication/communication.module').then(m => m.CommunicationPageModule)
+    },  {
+    path: 'parents-list',
+    loadChildren: () => import('./parents-list/parents-list.module').then( m => m.ParentsListPageModule)
+  },
 
 
 ];

@@ -73,11 +73,11 @@ export class HomePage implements OnInit {
     this.router.navigate(['/tabs/emergency']); // Navigate to the 'emergency' route
 
   }
-  gotocommunicate(){
-    this.router.navigate(['/coummunication'])
-  }
+  // gotocommunicate(){
+  //   this.router.navigate(['/coummunication'])
+  // }
   goToAttendance(){
-    this.router.navigate(['/attendance'])
+    this.router.navigate(['/nextday'])
   }
   logout(){
     this.router.navigate(['/login'])

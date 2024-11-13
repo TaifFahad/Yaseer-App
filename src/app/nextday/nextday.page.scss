@@ -1,13 +1,27 @@
 /* Style for the notification card */
+
+:root {
+  --background: #f9f9f9;
+  
+}
+
+body {
+  --background: #f9f9f9;
+}
 .notification-card {
     margin: 15px;
-    background-color: #f4f4f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid #ffd600;
+    
   }
+  
   
   .notification-card ion-card-header {
     // background-color: #ffd600;
     color: white;
+  
   }
   
   .notification-card ion-card-content {
@@ -76,4 +90,19 @@
   }
   ion-back-button {
     color: #ffd600;
+  }
+
+.showMoreInfo{
+  margin: 15px;
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid #ffd600;
+}
+  /* Header title style */
+  .t1 {
+    font-size: 25px;
+    font-weight: bold;
+    color: #F8C71E; /* Set title color to yellow */
+    text-align: right;
   }

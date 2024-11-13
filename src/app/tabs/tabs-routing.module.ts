@@ -30,6 +30,11 @@ const routes: Routes = [
         
       },
       {
+        path: 'parentsList',  // Add route for parents-list page
+        loadChildren: () => import('../parents-list/parents-list.module').then(m => m.ParentsListPageModule)
+      },
+      
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
