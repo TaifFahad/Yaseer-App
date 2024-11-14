@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- الصورة واسم ولي الأمر --
   <div class="profile-section">
     <ion-avatar class="custom-avatar">
       <img src="assets/Read.JPG" alt="صورة ولي الأمر">
@@ -15,7 +14,6 @@
     <p class="parent-name">ولي امر رائد الشهري</p>
   </div>
 
-  <!-- الرسائل المرسلة --
   <div class="messages-section">
     <div *ngFor="let message of messages" class="message">
       <p>{{ message.text }}</p>
@@ -24,7 +22,6 @@
   </div>
 </ion-content>
 
-<!-- صندوق إدخال الرسالة --
 <ion-footer class="ion-no-border message-footer">
   <ion-toolbar>
     <div class="message-box">
@@ -43,7 +40,9 @@
  
 
  -->
- <ion-header>
+
+ 
+<!--  <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
@@ -52,7 +51,7 @@
 </ion-header>
 
  <ion-content class="ion-padding">
-  <!-- Profile Section -->
+  
   <div class="profile-section">
    <ion-avatar class="custom-avatar">
      <img [src]="profileImageUrl" alt="صورة ولي الأمر">
@@ -61,7 +60,7 @@
  </div>
 
 
- <!-- Messages Section -->
+
  <div class="messages-section">
    <div *ngFor="let message of messages" class="message">
      <p>{{ message.text }}</p>
@@ -69,7 +68,6 @@
    </div>
  </div>
 </ion-content>
-<!-- Message Footer -->
 <ion-footer class="ion-no-border message-footer">
  <ion-toolbar>
    <div class="message-box">
@@ -86,4 +84,134 @@
      </ion-buttons>
    </div>
  </ion-toolbar>
+</ion-footer> -->
+ <!-- the lopping code -->
+ 
+
+  <!-- the lopping code -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="profile-section" *ngIf="parents.length > 0">
+    <ion-avatar class="custom-avatar">
+      <img [src]="parents[0]?.profileImageUrl || 'assets/default-avatar.jpg'" alt="صورة ولي الأمر">
+    </ion-avatar>
+    <p class="parent-name">{{ parents[0]?.parentName }}</p>
+  </div>
+
+  <div class="messages-section" *ngIf="parents.length > 0">
+    <div *ngFor="let message of parents[0]?.messages" class="message">
+      <p>{{ message.text }}</p>
+      <small>{{ message.time }}</small>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border message-footer">
+  <ion-toolbar>
+    <div class="message-box">
+      <ion-buttons slot="start">
+        <ion-button class="inside-icon" (click)="triggerFileInput()">
+          <ion-icon name="attach-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-input 
+        placeholder="اكتب رسالة" 
+        [(ngModel)]="newMessage" 
+        class="message-input" 
+        (ionInput)="checkInput()">
+      </ion-input>
+      <ion-buttons slot="end">
+        <ion-button 
+          class="inside-icon" 
+          [disabled]="!canSendMessage" 
+          (click)="sendMessage(parents[0]?.parentId)">
+          <ion-icon name="send-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
 </ion-footer>
+
+<input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;"> 
+ -->
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Communication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Profile Section -->
+  <div *ngIf="parent.parentId" class="profile-section">
+    <ion-avatar class="custom-avatar">
+      <img [src]="parent.profileImageUrl || 'assets/default-avatar.jpg'" alt="Profile Image">
+    </ion-avatar>
+    <p class="parent-name">{{ parent.parentName || 'ولي أمر غير معروف' }}</p>
+  </div>
+
+  <!-- Messages Section -->
+  <div class="messages-section">
+    <ion-list>
+      <ion-item *ngFor="let message of parent.messages">
+        <ion-label>
+          <h3>{{ message.senderType === 'driver' ? 'السائق' : message.senderType === 'automated' ? 'النظام' : 'الولي' }}</h3>
+          <p>{{ message.text }}</p>
+          <small>{{ message.time }}</small>
+          <p *ngIf="message.attachmentUrl">Attachment: <a [href]="message.attachmentUrl" target="_blank">View</a></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Attendance Section -->
+  <div *ngIf="parent.parentId">
+    <ion-list>
+      <ion-item>
+        <ion-label>Attendance for {{ parent.parentName }}</ion-label>
+      </ion-item>
+      <!-- You can customize this section based on how the attendance is managed -->
+    </ion-list>
+  </div>
+</ion-content>
+
+<!-- Message Footer -->
+<ion-footer class="ion-no-border message-footer">
+  <ion-toolbar>
+    <div class="message-box">
+      <ion-buttons slot="start">
+        <ion-button class="inside-icon" (click)="triggerFileInput()">
+          <ion-icon name="attach-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-input 
+        placeholder="اكتب رسالة" 
+        [(ngModel)]="newMessage" 
+        class="message-input" 
+        (ionInput)="checkInput()">
+      </ion-input>
+      <ion-buttons slot="end">
+        <ion-button 
+          class="inside-icon" 
+          [disabled]="!canSendMessage" 
+          (click)="sendMessage(parent.parentId)">
+          <ion-icon name="send-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- File Input (Hidden) -->
+<input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
