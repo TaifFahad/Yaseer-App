@@ -7,24 +7,33 @@ body {
   --background: #f9f9f9;
 }
 
-ion-header {
-  ion-toolbar {
-    --background: #ffffff;
-    color: #ffd600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
 
-  ion-title {
-    font-weight: bold;
-    font-size: 22px;
-    color: #ffd600;
-    text-align: right;
-  }
+/* Apply styles to ion-toolbar */
+ion-toolbar {
+  --background: #ffffff;  /* Set background color */
+  display: flex;           /* Use flexbox layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center;     /* Center content vertically */
+  width: 100%;  
+             /* Ensure it spans the full width */
+}
+
+/* Apply styles to ion-title */
+ion-title {
+  font-weight: bold;
+  font-size: 22px;
+  color: #ffd600;
+  text-align: center;    /* Align text inside the title */
+  margin: 0;             /* Remove any default margin */
+  flex: 1;               /* Allow the title to take up available space */
+}
+
+
 
   ion-back-button {
     color: #ffd600;
   }
-}
+
 
 ion-content {
   --background: #f9f9f9;

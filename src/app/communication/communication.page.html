@@ -7,12 +7,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="profile-section">
+
+  
+  <div  class="profile-section">
     <ion-avatar class="custom-avatar">
-      <img src="assets/userPic.png" alt="صورة ولي الأمر">
+      <img [src]="driverImage || 'assets/userPic.png'" alt="صورة السائق">
     </ion-avatar>
-    <p class="parent-name">سائق الباص</p>
+    <p class="parent-name">{{ driverName || 'سائق الباص' }}</p>
   </div>
+  
 
   <div class="messages-section">
     <div *ngFor="let message of messages" class="message">
@@ -27,13 +30,13 @@
     <div class="message-box">
       <ion-buttons slot="start">
         <ion-button class="inside-icon" (click)="triggerFileInput()">
-          <ion-icon name="attach-outline"></ion-icon>
+          <ion-icon class="yellow-icon" name="attach-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
       <ion-input placeholder="...اكتب رسالة" [(ngModel)]="newMessage" class="message-input" (ionInput)="checkInput()"></ion-input>
       <ion-buttons slot="end">
         <ion-button class="inside-icon" [disabled]="!canSendMessage" (click)="sendMessage()">
-          <ion-icon name="send-outline"></ion-icon>
+          <ion-icon class="yellow-icon" name="send-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
     </div>

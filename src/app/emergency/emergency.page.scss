@@ -41,12 +41,20 @@ ion-content {
 }
 
 /* Title Styling */
-.t1 {
+.ion-text-center{
   font-size: 25px;
   font-weight: bold;
   color: #ffd600;
   text-align: right;
 }
+ion-title {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
 
 /* Image Styling */
 .image-container {

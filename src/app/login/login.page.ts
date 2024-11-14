@@ -195,7 +195,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;
-
+  passwordFieldType: string = 'password';
   constructor(
     private fb: FormBuilder,
     private loadingController: LoadingController,
@@ -248,5 +248,8 @@ export class LoginPage implements OnInit {
     // Navigate to Forget Password page
     gotoforgetpassword() {
       this.router.navigate(['/forget-password']); // Redirect to forget-password page
+    }
+    togglePasswordVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
     }
 }

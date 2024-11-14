@@ -143,6 +143,15 @@ export class AddstudentPage  {
     try {
       // Execute the async function to add the student
       await this.dataService.addChildToLastCreatedParent(newStudent);
+         // Save the name, lat, and lng to the 'cluster' collection
+    const clusterData = {
+      name: newStudent.name,
+      lat: this.lat,
+      lng: this.lng,
+    };
+    await this.dataService.saveToCluster(clusterData);
+
+    
       console.log('Student added successfully to the last created parent');
       
       // Dismiss the loading indicator and navigate to the next page

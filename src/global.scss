@@ -39,4 +39,18 @@ ion-toast {
     direction: rtl; /* Make sure the text is RTL */
     text-align: right; /* Align text to the right */
   }
-  
+  /* Center the title globally */
+ion-header,
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-title {
+  font-weight: bold;
+  font-size: 22px;
+  color: #ffd600;
+  text-align: center;
+  width: 100%;
+}

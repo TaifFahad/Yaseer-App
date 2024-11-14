@@ -158,9 +158,10 @@
 // }
 // }
 import { Injectable } from '@angular/core';
-import { collectionData, doc, docData, Firestore, collection, addDoc, deleteDoc, updateDoc, query, orderBy, limit, getDocs } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { collectionData, doc, docData, Firestore, collection, addDoc, deleteDoc, updateDoc, query, orderBy, limit, getDocs, getDoc ,DocumentData} from '@angular/fire/firestore';
+import { from, Observable } from 'rxjs';
 import { Timestamp } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 export interface Account {
   id?: string;
@@ -307,6 +308,10 @@ async getStudentsByParentId(parentId: string): Promise<Student[]> {
   const querySnapshot = await getDocs(childRef);
   return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Student[];
 }
-
+// New method to save the cluster data (name, lat, lng)
+async saveToCluster(clusterData: { name: string; lat: number; lng: number }) {
+  const clusterCollectionRef = collection(this.firestore, 'cluster'); // Use 'collection' function here
+  return addDoc(clusterCollectionRef, clusterData); // Use 'addDoc' function to add data
+}
 
 }

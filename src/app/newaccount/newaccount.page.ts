@@ -24,7 +24,8 @@ interface account{
 })
 export class NewaccountPage implements OnInit {
   isSubmitting = false; // Define and initialize isSubmitting property
-
+  passwordFieldType: string = 'password';
+  confirmPasswordFieldType: string = 'password';
   registerForm!: FormGroup;
   accounts: account[] = [];
   constructor(
@@ -106,5 +107,11 @@ async register() {
   goToLogin() {
     this.router.navigate(['/login']);
   }
-
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    } else if (field === 'confirmPassword') {
+      this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+    }
+  }
 }

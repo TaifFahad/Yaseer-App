@@ -103,3 +103,14 @@ ion-tab-bar {
 .message-footer ion-toolbar {
   --background: white !important;  /* Ensure background is white */
 }
+ion-back-button {
+  position: absolute; /* Positioning the back button */
+  top: 10px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  color: #F8C71E; /* Color of the back button */
+  z-index: 10; /* Ensure it stays above other elements */
+}
+/* Add this to the component's SCSS file */
+.yellow-icon {
+  color: #f8c818; /* Color of the back button */
+}
