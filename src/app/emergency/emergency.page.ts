@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, getDocs, Timestamp, query, where, onSnapshot } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http'; // Import HttpClient for API requests
 
 // Define the expected structure of the Geocoding API response
@@ -18,6 +18,8 @@ interface GeocodeResponse {
 })
 export class EmergencyPage implements OnInit {
 
+  emergencyMessages: any[] = []; // Array to hold retrieved messages
+  
   constructor(
     private alertController: AlertController, 
     private router: Router, 
@@ -26,8 +28,10 @@ export class EmergencyPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.fetchEmergencyMessages();
     window.addEventListener('emergencyAlert', this.handleEmergencyAlert);
   }
+  
 
   // Function to handle the emergency alert event
   handleEmergencyAlert(event: any) {
@@ -108,6 +112,47 @@ export class EmergencyPage implements OnInit {
       });
   }
 
+  // Fetch emergency notifications from Firestore
+  async fetchEmergencyMessages() {
+    try {
+      // Fetch messages from the last 24 hours
+      const currentTimestamp = Timestamp.now();
+      const twentyFourHoursAgo = new Timestamp(currentTimestamp.seconds - (24 * 60 * 60), currentTimestamp.nanoseconds);
+      const emergencyCollection = collection(this.firestore, 'emergency');
+      const q = query(emergencyCollection, where('timestamp', '>=', twentyFourHoursAgo));
+  
+      const querySnapshot = await getDocs(q);
+      let fetchedMessages = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+  
+      // Merge previously fetched messages with the new ones (if any)
+      this.emergencyMessages = [...this.emergencyMessages, ...fetchedMessages];
+  
+      console.log('Emergency messages from the last 24 hours:', this.emergencyMessages);
+  
+      // Set up real-time listener for updates
+      const realTimeQuery = query(emergencyCollection, where('timestamp', '>=', Timestamp.fromDate(new Date())));
+  
+      onSnapshot(realTimeQuery, (querySnapshot) => {
+        const realTimeMessages = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+  
+        // Merge new real-time messages with the existing ones
+        this.emergencyMessages = [...this.emergencyMessages, ...realTimeMessages];
+        console.log('Emergency messages updated:', this.emergencyMessages);
+      }, (error) => {
+        console.error('Error retrieving real-time emergency messages:', error);
+      });
+    } catch (error) {
+      console.error('Error retrieving emergency messages:', error);
+    }
+  }
+  
+  
   // Function to navigate back to the homepage
   goToHomePage() {
     this.router.navigate(['/tabs']);
