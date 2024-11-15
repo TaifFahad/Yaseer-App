@@ -142,17 +142,16 @@
 
 <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;"> 
  -->
-
  <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Communication</ion-title>
+    <ion-title>المحادثة</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" dir="rtl">
   <!-- Profile Section -->
   <div *ngIf="parent.parentId" class="profile-section">
     <ion-avatar class="custom-avatar">
@@ -164,24 +163,15 @@
   <!-- Messages Section -->
   <div class="messages-section">
     <ion-list>
-      <ion-item *ngFor="let message of parent.messages">
+      <ion-item *ngFor="let message of parent.messages" class="message">
         <ion-label>
-          <h3>{{ message.senderType === 'driver' ? 'السائق' : message.senderType === 'automated' ? 'النظام' : 'الولي' }}</h3>
+          
+          <h3>{{ message.senderType === 'driver' ? 'السائق' : message.senderType === 'automated' ? 'النظام' : 'السائق' }}</h3>
           <p>{{ message.text }}</p>
-          <small>{{ message.time }}</small>
           <p *ngIf="message.attachmentUrl">Attachment: <a [href]="message.attachmentUrl" target="_blank">View</a></p>
         </ion-label>
+        <small class="message-time">{{ message.time }}</small>
       </ion-item>
-    </ion-list>
-  </div>
-
-  <!-- Attendance Section -->
-  <div *ngIf="parent.parentId">
-    <ion-list>
-      <ion-item>
-        <ion-label>Attendance for {{ parent.parentName }}</ion-label>
-      </ion-item>
-      <!-- You can customize this section based on how the attendance is managed -->
     </ion-list>
   </div>
 </ion-content>

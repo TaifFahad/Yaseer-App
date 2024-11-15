@@ -1,0 +1,30 @@
+
+ion-item {
+    --background: #f9f9f9; /* Light background color for items */
+    --border-radius: 10px; /* Rounded corners for items */
+    margin: 10px 0; /* Space between items */
+    padding: 10px; /* Padding inside each item */
+  }
+  
+  ion-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Round avatar images */
+    overflow: hidden;
+  }
+  
+  ion-label h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  ion-label p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  ion-icon {
+    color: #fce699; /* Chat icon color */
+    font-size: 24px;
+  }
+  

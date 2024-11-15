@@ -1,16 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Parents</ion-title>
+    <ion-title>اولياء الأمور</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  dir="rtl">
   <ion-list>
-    <ion-item *ngFor="let parent of parents" (click)="openChatRoom(parent)">
+    <ion-item *ngFor="let parent of parents" (click)="openChatRoom(parent)" lines="none">
+      <!-- Profile Picture -->
+      <ion-avatar slot="start">
+        <img [src]="parent.profileImageUrl || 'assets/default-avatar.jpg'" alt="{{ parent.username }}'s profile">
+      </ion-avatar>
+
+      <!-- Parent Information -->
       <ion-label>
         <h2>{{ parent.username }}</h2>
         <p>{{ parent.email }}</p>
       </ion-label>
+
+      <!-- Icon for indication -->
+      <ion-icon name="chatbubbles" slot="end"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>
