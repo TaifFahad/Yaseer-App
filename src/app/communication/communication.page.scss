@@ -65,6 +65,34 @@ ion-header {
   margin-bottom: 5px;
   text-align: left; /* Time aligned left */
 }
+/* Custom CSS for message bubbles */
+.driver-message {
+  background-color: #d3d3d3 !important; /* Gray background for driver */
+  color: black; /* Black text */
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 80%; /* Make the bubble not too wide */
+  margin-left: auto; /* Align to the right for driver */
+  margin-right: 10px; /* Space between the bubble and the edge */
+}
+
+.parent-message {
+  background-color: #f6fd8c !important; /* Blue background for parent */
+  color: white; /* White text */
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 80%; /* Make the bubble not too wide */
+  margin-right: auto; /* Align to the left for parent */
+  margin-left: 10px; /* Space between the bubble and the edge */
+}
+
+.message-time {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 5px;
+}
 
 .message small {
   color: black;
