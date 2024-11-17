@@ -2,7 +2,9 @@
 ion-content {
   --background: white;
 }
-
+ion-back-button{
+   color:#F8C71E;
+}
 /* تصحيح وضع الصورة الرمزية والاسم في المنتصف */
 .profile-section {
   display: flex;
@@ -18,6 +20,7 @@ ion-header {
 }
 
 /* Custom CSS for message bubbles */
+// background-color: #ffe176 !important;
 .driver-message {
   background-color: #f6fd8c !important; /* Blue background for driver/automated */
   color: white; /* White text */
@@ -146,4 +149,8 @@ ion-tab-bar {
 /* تعيين خلفية بيضاء لصندوق الرسالة */
 .message-footer ion-toolbar {
   --background: white !important;  /* تأكيد أن الخلفية بيضاء */
+}
+.yellow{
+   
+      color:#F8C71E;
 }
