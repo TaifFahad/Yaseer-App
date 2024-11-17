@@ -1,9 +1,9 @@
-/* Set a white background for all elements */
+/* تعيين خلفية بيضاء لجميع العناصر */
 ion-content {
   --background: white;
 }
 
-/* Center the avatar and name */
+/* تصحيح وضع الصورة الرمزية والاسم في المنتصف */
 .profile-section {
   display: flex;
   flex-direction: column;
@@ -12,10 +12,40 @@ ion-content {
   margin-top: 20px;
 }
 
-ion-toolbar {
-  --background: #ffffff; /* Set toolbar background to white */
-  text-align: center;
+ion-header {
+  --background: #ffffff; /* تعيين خلفية التول بار للون الأبيض */
+  text-align: center; 
 }
+
+/* Custom CSS for message bubbles */
+.driver-message {
+  background-color: #f6fd8c !important; /* Blue background for driver/automated */
+  color: white; /* White text */
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 80%; /* Make the bubble not too wide */
+  margin-left: auto; /* Align to the right for driver/automated */
+  margin-right: 10px; /* Space between the bubble and the edge */
+}
+
+.parent-message {
+  background-color: #d3d3d3 !important; /* Light gray background for parent */
+  color: black; /* Black text */
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 80%; /* Make the bubble not too wide */
+  margin-right: auto; /* Align to the left for parent */
+  margin-left: 10px; /* Space between the bubble and the edge */
+}
+
+.message-time {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 5px;
+}
+
 
 .custom-avatar {
   width: 100px;
@@ -32,18 +62,18 @@ ion-toolbar {
   margin: 0;
 }
 
-/* Message styling */
+/* تصميم الرسائل */
 .messages-section {
   padding: 15px;
 }
 
 .message {
-  background-color: #f0f0f0;
+  background-color: #f9f9f9; /* light background for message */
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .message p {
@@ -52,13 +82,27 @@ ion-toolbar {
   color: black;
 }
 
+.message h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 5px 0;
+}
+
+.message small.message-time {
+  font-size: 10px;
+  color: #888;
+  margin-bottom: 5px;
+  text-align: left; /* Time aligned left */
+}
+
 .message small {
   color: black;
   font-size: 10px;
   text-align: right;
 }
 
-/* Message input box */
+/* صندوق إدخال الرسالة */
 .message-box {
   display: flex;
   align-items: center;
@@ -90,27 +134,16 @@ ion-footer {
 }
 
 ion-tab-bar {
-  --background: white; /* Ensure tab bar background is white */
-  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Replace black line with a light gray line */
-  box-shadow: none; /* Remove any shadow that may be added */
+  --background: white; /* تأكد من أن خلفية شريط القائمة بيضاء */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* استبدال الخط الأسود بخط رمادي شفاف */
+  box-shadow: none; /* إزالة أي ظل قد يكون مضافاً */
 }
 
 .active-message-icon {
   color: black;
 }
 
-/* Set white background for message box */
+/* تعيين خلفية بيضاء لصندوق الرسالة */
 .message-footer ion-toolbar {
-  --background: white !important;  /* Ensure background is white */
-}
-ion-back-button {
-  position: absolute; /* Positioning the back button */
-  top: 10px; /* Adjust as needed */
-  left: 20px; /* Adjust as needed */
-  color: #F8C71E; /* Color of the back button */
-  z-index: 10; /* Ensure it stays above other elements */
-}
-/* Add this to the component's SCSS file */
-.yellow-icon {
-  color: #f8c818; /* Color of the back button */
+  --background: white !important;  /* تأكيد أن الخلفية بيضاء */
 }
