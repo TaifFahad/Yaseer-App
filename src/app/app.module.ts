@@ -11,7 +11,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsModule } from '@angular/google-maps';;
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -21,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
   provideFirebaseApp(() => initializeApp(environment.firebase)),
   provideAuth(() => getAuth()),
   provideFirestore(() => getFirestore()), 
-  provideStorage(() => getStorage())],
+  provideStorage(() => getStorage()),
+],
   bootstrap: [AppComponent],
    
 })

@@ -1,49 +1,113 @@
-ion-toolbar{
+ion-toolbar {
     --background: aliceblue;
-
 }
-ion-title{
+
+ion-title {
     color: black;
     text-align: right;
     font-weight: bolder;
 }
-      /* تخصيص مظهر Google Maps */
-#map {
-    height: 70vh;
+
+.audio-icon {
+    position: absolute;
+    top: 63%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
 }
 
-/* تصميم شريط المعلومات أسفل الخريطة */
+.audio-icon ion-icon {
+    font-size: 24px;
+    color: #007aff;
+}
+/* CSS للخريطة */
+#map {
+    height: calc(100vh - 20vh);
+    /* جعل الخريطة تشمل المساحة العلوية فقط */
+    width: 100%;
+    position: relative;
+    background-color: #f0f0f0;
+    /* خلفية افتراضية */
+}
+
+/* الكارد الأول */
 .route-info {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     width: 90%;
-    height: 20vh;
+    height: 15vh;
     margin: 0 auto;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 15px;
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* لتوسيط المحتوى أفقيًا */
-    text-align: center;
+    justify-content: space-between;
+    text-align: right;
+
 }
 
-ion-item {
-    align-items: center; /* لتوسيط المحتوى أفقيًا */
-    text-align: center;
+
+/* النصوص داخل الكارد */
+.route-info h2,p {
+    
+    font-size: 14px;
+    color: #333;
+    text-align: right;
+    direction: rtl;
+    white-space: normal;
+    line-height: 2;
+}
+/* الكارد الثاني (مصغر) */
+.route-info.minimized {
+    height: 15vh;
+    /* حجم أصغر للكارد */
+    padding: 10px;
+    background-color: #f9f9f9;
+    /* لون خلفية مختلف قليلاً */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
-/* Style the login button */
-ion-button {
-    --background: #F8C71E; /* Button background color */
-    --border-radius: 30px; /* Reduce border radius for better fit */
-    margin-top: 16px; /* Adjust margin for spacing */
-    width: 100%;
-    max-width: 200px; /* Match the card width */
-    font-weight: bolder;
-    color: #000000;
-    margin: 0 auto; /* Center horizontally */
-    /* Change text color to white when pressed (active state) */
-    --color-active: #ffffff; /* Text color when button is pressed */
-    display: block; /* Make button a block element to center it */
+.route-info.minimized p {
+    margin-bottom:  0;
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+    text-align: right;
+    direction: rtl;
+    white-space: normal;
+    line-height: 1.5;
+
+}
+
+
+/* زر الخروج */
+.exit-button {
+    --background: #ffdddd;
+    --color: #f00;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid #f00;
+    border-radius: 8px;
+    margin-right: auto;
+    margin-left: 0;
+    display: block;
+    cursor: pointer;
+    width: 50%;
 }
