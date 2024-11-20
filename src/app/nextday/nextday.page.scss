@@ -101,8 +101,10 @@ body {
 }
   /* Header title style */
   .t1 {
-    font-size: 25px;
-    font-weight: bold;
-    color: #F8C71E; /* Set title color to yellow */
-    text-align: right;
+      text-align: center;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+    
   }

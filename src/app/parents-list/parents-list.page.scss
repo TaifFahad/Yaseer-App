@@ -5,7 +5,13 @@ ion-item {
     margin: 10px 0; /* Space between items */
     padding: 10px; /* Padding inside each item */
   }
-  
+  ion-title {
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+  }
   ion-avatar {
     width: 50px;
     height: 50px;
