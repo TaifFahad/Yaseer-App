@@ -229,7 +229,7 @@ export class LoginPage implements OnInit {
     if (user) {
       this.router.navigateByUrl('/tabs', { replaceUrl: true });
     } else {
-      this.showAlert('Login failed', 'Please try again');
+      this.showAlert('تسجيل الدخول فشل', 'حاول مرة اخرى' );
     }
   }
 
@@ -237,8 +237,14 @@ export class LoginPage implements OnInit {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK'],
+      buttons: ['تم'],
+      
+
     });
+        
+          alert.style.direction = 'rtl';
+          alert.style.textAlign = 'right'; // Align text to the right for RTL
+  
     await alert.present();
   }
 
