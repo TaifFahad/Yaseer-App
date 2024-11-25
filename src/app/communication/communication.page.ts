@@ -695,23 +695,27 @@ export class CommunicationPage implements OnInit, OnDestroy {
   setupParentAttendanceListener(parentId: string) {
     const attendanceRef = collection(this.firestore, `1/${parentId}/attendanceAI`);
     this.lastAttendanceRecordId = localStorage.getItem(`lastAttendanceRecordId_${parentId}`);
-    this.lastMessageType = (localStorage.getItem(`lastMessageType_${parentId}`) as "toSchool" | "toHome") || "toHome";
+    this.lastMessageType = (localStorage.getItem(`lastMessageType_${parentId}`) as "toSchool" | "toHome") || "toSchool";
 
     this.attendanceUnsubscribe = onSnapshot(attendanceRef, async (snapshot) => {
+      console.log('Snapshot detected:', snapshot.docs.length);
       if (!snapshot.empty) {
         const latestRecord = snapshot.docs[snapshot.docs.length - 1];
         const recordId = latestRecord.id;
 
         if (recordId !== this.lastAttendanceRecordId) {
+          console.log('New attendance record detected. ID:', recordId);
           this.lastAttendanceRecordId = recordId;
           localStorage.setItem(`lastAttendanceRecordId_${parentId}`, recordId);
 
-          if (this.lastMessageType === "toHome") {
+          if (this.lastMessageType === "toSchool") {
             await this.sendAutomatedMessage(parentId, "طفلك دخل الباص بنجاح و هو في طريقه الى المدرسة الأن");
-            this.lastMessageType = "toSchool";
+            this.lastMessageType = "toHome";
+            console.log('Message sent for "toSchool"');
           } else {
             await this.sendAutomatedMessage(parentId, "طفلك في طريقه إلى المنزل");
-            this.lastMessageType = "toHome";
+            this.lastMessageType = "toSchool";
+            console.log('Message sent for "toHome"');
           }
 
           localStorage.setItem(`lastMessageType_${parentId}`, this.lastMessageType);
