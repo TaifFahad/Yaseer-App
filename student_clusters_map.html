@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bd5fba1a0b4c98dca06e7c4aac8a3801 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_bd5fba1a0b4c98dca06e7c4aac8a3801" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bd5fba1a0b4c98dca06e7c4aac8a3801 = L.map(
+                "map_bd5fba1a0b4c98dca06e7c4aac8a3801",
+                {
+                    center: [21.562154975, 39.169296037500004],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_02d0bdaeff38ee8e12046f882ea02218 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_02d0bdaeff38ee8e12046f882ea02218.addTo(map_bd5fba1a0b4c98dca06e7c4aac8a3801);
+        
+    
+            var marker_cluster_bc6b292f37f81de5b7aa9a222fe88637 = L.markerClusterGroup(
+                {}
+            );
+        
+    
+            var marker_7b07fea4b2d4f4a025bba9a42066961c = L.marker(
+                [21.5498, 39.1735],
+                {}
+            ).addTo(marker_cluster_bc6b292f37f81de5b7aa9a222fe88637);
+        
+    
+            var icon_0a3fc9e49771a1a678d1f59a2fdfabb3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_7b07fea4b2d4f4a025bba9a42066961c.setIcon(icon_0a3fc9e49771a1a678d1f59a2fdfabb3);
+        
+    
+        var popup_9ce4071ad87fe31c86648f0474998d74 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_29cf5e05b3462eaf91478c0b56dc262a = $(`<div id="html_29cf5e05b3462eaf91478c0b56dc262a" style="width: 100.0%; height: 100.0%;">رائد الشهري - Cluster 1</div>`)[0];
+                popup_9ce4071ad87fe31c86648f0474998d74.setContent(html_29cf5e05b3462eaf91478c0b56dc262a);
+            
+        
+
+        marker_7b07fea4b2d4f4a025bba9a42066961c.bindPopup(popup_9ce4071ad87fe31c86648f0474998d74)
+        ;
+
+        
+    
+    
+            var marker_c1e4d8c0dd48582ec318033ed884cbf7 = L.marker(
+                [21.55, 39.173],
+                {}
+            ).addTo(marker_cluster_bc6b292f37f81de5b7aa9a222fe88637);
+        
+    
+            var icon_1c7d34a0a30e30f38ce9934d8c15e4c7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_c1e4d8c0dd48582ec318033ed884cbf7.setIcon(icon_1c7d34a0a30e30f38ce9934d8c15e4c7);
+        
+    
+        var popup_7d90041d1975b9670ba2c75848dd7778 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_504620ec1b854819e46a3cd30aea7dff = $(`<div id="html_504620ec1b854819e46a3cd30aea7dff" style="width: 100.0%; height: 100.0%;">خالد الحربي - Cluster 1</div>`)[0];
+                popup_7d90041d1975b9670ba2c75848dd7778.setContent(html_504620ec1b854819e46a3cd30aea7dff);
+            
+        
+
+        marker_c1e4d8c0dd48582ec318033ed884cbf7.bindPopup(popup_7d90041d1975b9670ba2c75848dd7778)
+        ;
+
+        
+    
+    
+            var marker_590d96611373fd0d5a46791044f9cd94 = L.marker(
+                [21.548, 39.1705],
+                {}
+            ).addTo(marker_cluster_bc6b292f37f81de5b7aa9a222fe88637);
+        
+    
+            var icon_e6501d4b3ea6bd6608304a7b15111078 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_590d96611373fd0d5a46791044f9cd94.setIcon(icon_e6501d4b3ea6bd6608304a7b15111078);
+        
+    
+        var popup_667c1b49a8232c36ffd111f8495fc0d3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_04316bed4cab3fb0cedd7c535394bdbf = $(`<div id="html_04316bed4cab3fb0cedd7c535394bdbf" style="width: 100.0%; height: 100.0%;">امل العتيبي - Cluster 1</div>`)[0];
+                popup_667c1b49a8232c36ffd111f8495fc0d3.setContent(html_04316bed4cab3fb0cedd7c535394bdbf);
+            
+        
+
+        marker_590d96611373fd0d5a46791044f9cd94.bindPopup(popup_667c1b49a8232c36ffd111f8495fc0d3)
+        ;
+
+        
+    
+    
+            var marker_48e585937db2ea44c8bb25259eff4bc2 = L.marker(
+                [21.5455, 39.179],
+                {}
+            ).addTo(marker_cluster_bc6b292f37f81de5b7aa9a222fe88637);
+        
+    
+            var icon_1d81f394ebe89a258f543146e6c63fd3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_48e585937db2ea44c8bb25259eff4bc2.setIcon(icon_1d81f394ebe89a258f543146e6c63fd3);
+        
+    
+        var popup_ccd1024c71b480e1ed54765bb390670e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ea7600db059d9a25289b537f03f45e85 = $(`<div id="html_ea7600db059d9a25289b537f03f45e85" style="width: 100.0%; height: 100.0%;">ملك القرني - Cluster 1</div>`)[0];
+                popup_ccd1024c71b480e1ed54765bb390670e.setContent(html_ea7600db059d9a25289b537f03f45e85);
+            
+        
+
+        marker_48e585937db2ea44c8bb25259eff4bc2.bindPopup(popup_ccd1024c71b480e1ed54765bb390670e)
+        ;
+
+        
+    
+    
+            marker_cluster_bc6b292f37f81de5b7aa9a222fe88637.addTo(map_bd5fba1a0b4c98dca06e7c4aac8a3801);
+        
+    
+            var marker_cluster_e92fe388c6884829a3ff482b8ef47621 = L.markerClusterGroup(
+                {}
+            );
+        
+    
+            var marker_ff89c3f113c0290d2b5068b8e9d17ea2 = L.marker(
+                [21.6579398, 39.1265683],
+                {}
+            ).addTo(marker_cluster_e92fe388c6884829a3ff482b8ef47621);
+        
+    
+            var icon_ead69e5ae299c03ce1422d34341f6b47 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ff89c3f113c0290d2b5068b8e9d17ea2.setIcon(icon_ead69e5ae299c03ce1422d34341f6b47);
+        
+    
+        var popup_b07e72992cf62ab6b2e00d01c0ae0393 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bf3ddcb667f57b4bb0812fca9a001830 = $(`<div id="html_bf3ddcb667f57b4bb0812fca9a001830" style="width: 100.0%; height: 100.0%;">رائد الشهري - Cluster 2</div>`)[0];
+                popup_b07e72992cf62ab6b2e00d01c0ae0393.setContent(html_bf3ddcb667f57b4bb0812fca9a001830);
+            
+        
+
+        marker_ff89c3f113c0290d2b5068b8e9d17ea2.bindPopup(popup_b07e72992cf62ab6b2e00d01c0ae0393)
+        ;
+
+        
+    
+    
+            var marker_6e320da7186d5835aeae06afbc13dd26 = L.marker(
+                [21.547, 39.181],
+                {}
+            ).addTo(marker_cluster_e92fe388c6884829a3ff482b8ef47621);
+        
+    
+            var icon_5c4937fed3987e6a707f50d746d0c5e7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_6e320da7186d5835aeae06afbc13dd26.setIcon(icon_5c4937fed3987e6a707f50d746d0c5e7);
+        
+    
+        var popup_e7e150911a547f62984c6d66655942f4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_44e50e6b31587b849af93947411ad3a0 = $(`<div id="html_44e50e6b31587b849af93947411ad3a0" style="width: 100.0%; height: 100.0%;">لمى الزهراني - Cluster 2</div>`)[0];
+                popup_e7e150911a547f62984c6d66655942f4.setContent(html_44e50e6b31587b849af93947411ad3a0);
+            
+        
+
+        marker_6e320da7186d5835aeae06afbc13dd26.bindPopup(popup_e7e150911a547f62984c6d66655942f4)
+        ;
+
+        
+    
+    
+            var marker_7c8d8fcd5e57c10f849da2df668709e8 = L.marker(
+                [21.5525, 39.176],
+                {}
+            ).addTo(marker_cluster_e92fe388c6884829a3ff482b8ef47621);
+        
+    
+            var icon_09ec00af2fcbce5180df8941ddf7f16e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7c8d8fcd5e57c10f849da2df668709e8.setIcon(icon_09ec00af2fcbce5180df8941ddf7f16e);
+        
+    
+        var popup_46d0fc18e3aaadb8f1b8a8fa1f7a4a0d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8a88c79be1f3fddcf50b290b64199060 = $(`<div id="html_8a88c79be1f3fddcf50b290b64199060" style="width: 100.0%; height: 100.0%;">اروى القحطاني - Cluster 2</div>`)[0];
+                popup_46d0fc18e3aaadb8f1b8a8fa1f7a4a0d.setContent(html_8a88c79be1f3fddcf50b290b64199060);
+            
+        
+
+        marker_7c8d8fcd5e57c10f849da2df668709e8.bindPopup(popup_46d0fc18e3aaadb8f1b8a8fa1f7a4a0d)
+        ;
+
+        
+    
+    
+            var marker_2f48444ff4038680e78b292b04e2e249 = L.marker(
+                [21.5465, 39.1748],
+                {}
+            ).addTo(marker_cluster_e92fe388c6884829a3ff482b8ef47621);
+        
+    
+            var icon_93064c98c96ba43982c55645ea21910c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2f48444ff4038680e78b292b04e2e249.setIcon(icon_93064c98c96ba43982c55645ea21910c);
+        
+    
+        var popup_d867ea3bac0436ecbf6c2879fc420b26 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7a5fc649f548cb3e9580b8c920fc812f = $(`<div id="html_7a5fc649f548cb3e9580b8c920fc812f" style="width: 100.0%; height: 100.0%;">لينا الغامدي - Cluster 2</div>`)[0];
+                popup_d867ea3bac0436ecbf6c2879fc420b26.setContent(html_7a5fc649f548cb3e9580b8c920fc812f);
+            
+        
+
+        marker_2f48444ff4038680e78b292b04e2e249.bindPopup(popup_d867ea3bac0436ecbf6c2879fc420b26)
+        ;
+
+        
+    
+    
+            marker_cluster_e92fe388c6884829a3ff482b8ef47621.addTo(map_bd5fba1a0b4c98dca06e7c4aac8a3801);
+        
+    
+            var layer_control_7edb9e2f7964ec444012a5e76fdf7a32_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_02d0bdaeff38ee8e12046f882ea02218,
+                },
+                overlays :  {
+                    "Cluster 1" : marker_cluster_bc6b292f37f81de5b7aa9a222fe88637,
+                    "Cluster 2" : marker_cluster_e92fe388c6884829a3ff482b8ef47621,
+                },
+            };
+            let layer_control_7edb9e2f7964ec444012a5e76fdf7a32 = L.control.layers(
+                layer_control_7edb9e2f7964ec444012a5e76fdf7a32_layers.base_layers,
+                layer_control_7edb9e2f7964ec444012a5e76fdf7a32_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_bd5fba1a0b4c98dca06e7c4aac8a3801);
+
+        
+</script>
+</html>
