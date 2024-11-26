@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="showToolbar">
   <ion-toolbar color="gray">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/home" text="" style="color: #000000;"></ion-back-button>
@@ -6,15 +6,18 @@
     <ion-title>نظام تحديد المواقع</ion-title>
   </ion-toolbar>
 </ion-header>
+<!-- قسم التعليمات أعلى الصفحة -->
+<div *ngIf="routeCalculated && currentInstruction" class="route-instructions">
+  <p>{{ currentInstruction }}</p>
+</div>
 <ion-content fullscreen>
   <!-- خريطة Google Maps كخلفية -->
-  <div id="map" style="width: 100%; height: calc(100vh - 20vh);"></div> <!-- تقليل ارتفاع الخريطة لتشمل الكارد -->
+  <div id="map" style="width: 100%; height: 100vh;"></div> <!-- الخريطة تشمل الشاشة بالكامل -->
 
   <!-- أيقونة الصوت بجانب الشاشة -->
   <div class="audio-icon" (click)="toggleAudio()">
     <ion-icon [name]="audioPlaying ? 'volume-high' : 'volume-mute'"></ion-icon>
   </div>
-
   <!-- الكارد الأول -->
   <ion-card class="route-info" *ngIf="!routeCalculated">
     <ion-item lines="none">
@@ -26,15 +29,14 @@
     <ion-button expand="block" (click)="startTracking()">بدء</ion-button>
   </ion-card>
 
-  <!-- الكارد الثاني (أصغر حجماً) -->
-  <ion-card class="route-info minimized" *ngIf="routeCalculated">
+   <!-- كارد التفاصيل السفلي -->
+   <ion-card class="route-info minimized" *ngIf="routeCalculated">
     <div class="route-header">
       <ion-label>
-        <p>الوقت الإجمالي: {{estimatedTime}}</p>
+        <p>الوقت الإجمالي: {{estimatedTime}} دقيقة</p>
         <p>المسافة: {{distance}} كيلومتر</p>
       </ion-label>
       <ion-button class="exit-button" (click)="exitRoute()">خروج</ion-button>
     </div>
   </ion-card>
 </ion-content>
-

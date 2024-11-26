@@ -20,7 +20,11 @@ export class TrackingPage implements OnInit, AfterViewInit {
   directions: string = '';
   currentStepIndex: number = 0;
   stepInstructions: string[] = [];
+  currentInstruction: string = ''; // تعليمات الخطوة الحالية
   audioPlaying: boolean = false; // Declare audioPlaying to control audio state
+  showToolbar: boolean = true;
+  showMapButtons: boolean = true;
+
 
   constructor(private http: HttpClient ,private loadingController: LoadingController) {}
 
@@ -109,6 +113,8 @@ export class TrackingPage implements OnInit, AfterViewInit {
     
     // هنا تبدأ الرحلة
     this.startRoute();
+    this.showToolbar = false;
+    this.showMapButtons = false; 
   }
   startRoute() {
     // تحديد موقع البداية (مثال: إحداثيات المدرسة)
@@ -117,6 +123,7 @@ export class TrackingPage implements OnInit, AfterViewInit {
     // تكبير الخريطة على نقطة البداية
     this.map.setCenter(startLatLng);
     this.map.setZoom(40); // تغيير الرقم بناءً على مستوى التكبير الذي تريده
+    
   }
   
   
@@ -141,10 +148,13 @@ export class TrackingPage implements OnInit, AfterViewInit {
       if (status === 'OK') {
         this.directionsRenderer.setDirections(result);
   
-        // عرض التعليمات خطوة بخطوة للبث الصوتي
-        this.stepInstructions = result.routes[0].legs[0].steps.map(
-          (step: any) => step.instructions
-        );
+         // تنقية التعليمات
+      this.stepInstructions = result.routes[0].legs[0].steps.map((step: any) => {
+        const tempDiv = document.createElement('div'); // عنصر مؤقت
+        tempDiv.innerHTML = step.instructions; // تحويل التعليمات إلى HTML
+        return tempDiv.textContent || tempDiv.innerText || ''; // استخراج النص النقي
+      });
+        
   
         // طباعة التعليمات خطوة بخطوة في وحدة التحكم
         console.log('Step Instructions:', this.stepInstructions);
@@ -235,7 +245,6 @@ export class TrackingPage implements OnInit, AfterViewInit {
       }
     });
   }
-  
   addMarker(lat: number, lng: number, title: string, isSchool: boolean = false) {
     const marker = new google.maps.Marker({
       position: { lat, lng },
@@ -260,46 +269,24 @@ export class TrackingPage implements OnInit, AfterViewInit {
   }
   startLiveLocation() {
     if (navigator.geolocation) {
-        if (!this.liveMarker) {
-            // إنشاء ماركر الموقع الحالي باستخدام صورة الحافلة فقط
-            this.liveMarker = new google.maps.Marker({
-                position: { lat: 21.548888, lng: 39.177222 },
-                map: this.map,
-                icon: {
-                    url: 'assets/bus.png', // صورة الحافلة
-                    scaledSize: new google.maps.Size(30, 30),
-                },
-            });
-
-            // تعيين مركز الخريطة عند المدرسة
-            this.map.setCenter({ lat: 21.548888, lng: 39.177222 });
-        }
-
-        this.watchId = navigator.geolocation.watchPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-
-                // تحديث موقع الماركر بموقع الجهاز الحالي
-                if (this.liveMarker) {
-                    this.liveMarker.setPosition({ lat: latitude, lng: longitude });
-                }
-
-                // تحديث مركز الخريطة
-                this.map.setCenter({ lat: latitude, lng: longitude });
-            },
-            (error) => {
-                console.error('Error watching position:', error);
-            },
-            {
-                enableHighAccuracy: true, // تحسين الدقة
-                timeout: 5000, // تحديد مهلة قصيرة لتحديث البيانات
-                maximumAge: 0, // عدم استخدام بيانات قديمة
-            }
-        );
+      if (!this.liveMarker) {
+        this.liveMarker = new google.maps.Marker({
+          position: { lat: 21.548888, lng: 39.177222 },
+          map: this.map,
+          icon: {
+            url: 'assets/bus.png',
+            scaledSize: new google.maps.Size(30, 30),
+          },
+        });
+  
+        // تكبير الخريطة بشكل فوري
+        this.map.setCenter({ lat: 21.548888, lng: 39.177222 });
+        this.map.setZoom(17); // مستوى التكبير
+      }
     } else {
-        console.error('Geolocation is not supported by this browser.');
+      console.error('Geolocation is not supported by this browser.');
     }
-}
+  }
 
   stopLiveLocation() {
     if (this.watchId) {
@@ -327,18 +314,19 @@ export class TrackingPage implements OnInit, AfterViewInit {
     }
   }
   
-  // Read step-by-step instructions
   readStepInstructions() {
     if (this.currentStepIndex < this.stepInstructions.length) {
       const step = this.stepInstructions[this.currentStepIndex];
-      this.playAudioDirections(step, 'ar-SA'); // Play audio in Arabic
-  
+      this.currentInstruction = step; // تحديث التعليمات الحالية
+      this.playAudioDirections(step, 'ar-SA'); // تشغيل الصوت بالعربية
+
       this.currentStepIndex++;
       setTimeout(() => {
-        this.readStepInstructions(); // Move to the next step
-      }, 5000); // Wait for 5 seconds before reading the next step
+        this.readStepInstructions(); // الانتقال إلى الخطوة التالية
+      }, 5000); // انتظار 5 ثوانٍ قبل قراءة الخطوة التالية
     } else {
-      this.audioPlaying = false; // Stop audio after all steps are read
+      this.audioPlaying = false; // إيقاف الصوت بعد قراءة كل الخطوات
+      this.currentInstruction = ''; // مسح التعليمات بعد الانتهاء
     }
   }
   
@@ -351,27 +339,20 @@ export class TrackingPage implements OnInit, AfterViewInit {
     window.speechSynthesis.speak(speech); // Play speech
   }
   
- // الخروج من التت
- exitRoute() {
-  // إعادة تعيين حالة الكارد
-  this.routeCalculated = false;
-
-  // إعادة تعيين التعليمات والخطوات
-  this.currentStepIndex = 0;
-  this.stepInstructions = [];
-  this.audioPlaying = false;
-  this.stopLiveLocation();
-
-  // إيقاف الصوت في حالة تشغيله
-  window.speechSynthesis.cancel();
-
-  // إعادة تعيين الخريطة (إزالة المسار الحالي إذا كان موجوداً)
-  if (this.directionsRenderer) {
-    this.directionsRenderer.setDirections({ routes: [] });
+  exitRoute() {
+    this.routeCalculated = false; // إعادة تعيين حالة عرض الكارد
+    this.showToolbar = true; // عرض التول بار مرة أخرى
+    window.speechSynthesis.cancel(); // إيقاف أي صوت إذا كان قيد التشغيل
+    this.stopLiveLocation(); // إيقاف تتبع الموقع (إن كانت موجودة لديك)
+    
+    // إعادة تعيين الخريطة أو أي حالة أخرى
+    if (this.directionsRenderer) {
+      this.directionsRenderer.setDirections({ routes: [] }); // إزالة المسار من الخريطة
+    }
+  
+    console.log('Exited tracking mode and reset the map.');
   }
 
-  console.log('Exited tracking mode and reset the map');
-}
 }
 
 

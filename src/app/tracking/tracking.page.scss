@@ -30,14 +30,14 @@ ion-title {
     color: #007aff;
 }
 /* CSS للخريطة */
-#map {
-    height: calc(100vh - 20vh);
-    /* جعل الخريطة تشمل المساحة العلوية فقط */
-    width: 100%;
-    position: relative;
-    background-color: #f0f0f0;
-    /* خلفية افتراضية */
-}
+// #map {
+//     height: calc(100vh - 20vh);
+//     /* جعل الخريطة تشمل المساحة العلوية فقط */
+//     width: 100%;
+//     position: relative;
+//     background-color: #f0f0f0;
+//     /* خلفية افتراضية */
+// }
 
 /* الكارد الأول */
 .route-info {
@@ -70,18 +70,18 @@ ion-title {
     white-space: normal;
     line-height: 2;
 }
-/* الكارد الثاني (مصغر) */
-.route-info.minimized {
-    height: 15vh;
-    /* حجم أصغر للكارد */
-    padding: 10px;
-    background-color: #f9f9f9;
-    /* لون خلفية مختلف قليلاً */
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+// /* الكارد الثاني (مصغر) */
+// .route-info.minimized {
+//     height: 15vh;
+//     /* حجم أصغر للكارد */
+//     padding: 10px;
+//     background-color: #f9f9f9;
+//     /* لون خلفية مختلف قليلاً */
+//     border-top-left-radius: 15px;
+//     border-top-right-radius: 15px;
+//     box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
     
-}
+// }
 
 .route-info.minimized p {
     margin-bottom:  0;
@@ -111,3 +111,46 @@ ion-title {
     cursor: pointer;
     width: 50%;
 }
+/* خريطة بحجم كامل */
+#map {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: #1e1e1e; /* لون غامق */
+  }
+  
+  /* قسم التعليمات */
+  .route-instructions {
+    position: absolute;
+    top: 10px; /* أعلى الشاشة مباشرة */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    background: #ffffff; /* خلفية غامقة */
+    color: #000000; /* النص بلون أبيض */
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+    font-size: 20px; /* خط كبير وواضح */
+    font-weight: bold;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5); /* ظلال لتحسين التصميم */
+  }
+  
+  /* الكارد السفلي */
+  .route-info.minimized {
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff; /* خلفية غامقة */
+    color: #000000; /* النص بلون أبيض */
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+ 
