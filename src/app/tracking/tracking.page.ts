@@ -20,7 +20,7 @@ export class TrackingPage implements OnInit, AfterViewInit {
   directions: string = '';
   currentStepIndex: number = 0;
   stepInstructions: string[] = [];
-  currentInstruction: string = ''; // تعليمات الخطوة الحالية
+  currentInstruction: string = ''; // cucurrent Instruction
   audioPlaying: boolean = false; // Declare audioPlaying to control audio state
   showToolbar: boolean = true;
   showMapButtons: boolean = true;
